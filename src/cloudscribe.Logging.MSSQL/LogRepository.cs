@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2015-12-27
+//	Last Modified:		    2015-12-29
 // 
 
 using cloudscribe.Logging.Web;
@@ -22,11 +22,7 @@ namespace cloudscribe.Logging.MSSQL
             IOptions<MSSQLConnectionOptions> connectionOptions)
         {
             if (connectionOptions == null) { throw new ArgumentNullException(nameof(connectionOptions)); }
-            //if (loggerFactory == null) { throw new ArgumentNullException(nameof(loggerFactory)); }
-
-            //logFactory = loggerFactory;
-            //log = loggerFactory.CreateLogger(typeof(GeoRepository).FullName);
-
+            
             readConnectionString = connectionOptions.Value.ReadConnectionString;
             writeConnectionString = connectionOptions.Value.WriteConnectionString;
 
@@ -82,7 +78,7 @@ namespace cloudscribe.Logging.MSSQL
                 while (reader.Read())
                 {
                     LogItem logitem = new LogItem();
-                    logitem.LoadFromReader(reader);
+                    LoadFromReader(logitem, reader);
                     logItems.Add(logitem);
                 }
             }
@@ -102,7 +98,7 @@ namespace cloudscribe.Logging.MSSQL
                 while (reader.Read())
                 {
                     LogItem logitem = new LogItem();
-                    logitem.LoadFromReader(reader);
+                    LoadFromReader(logitem, reader);
                     logItems.Add(logitem);
                 }
             }
@@ -132,6 +128,21 @@ namespace cloudscribe.Logging.MSSQL
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await dbSystemLog.DeleteByLevel(logLevel, cancellationToken);
+        }
+
+        private void LoadFromReader(LogItem logItem, DbDataReader reader)
+        {
+            logItem.Id = Convert.ToInt32(reader["ID"]);
+            logItem.LogDateUtc = Convert.ToDateTime(reader["LogDate"]);
+            logItem.IpAddress = reader["IpAddress"].ToString();
+            logItem.Culture = reader["Culture"].ToString();
+            logItem.Url = reader["Url"].ToString();
+            logItem.ShortUrl = reader["ShortUrl"].ToString();
+            logItem.Thread = reader["Thread"].ToString();
+            logItem.LogLevel = reader["LogLevel"].ToString();
+            logItem.Logger = reader["Logger"].ToString();
+            logItem.Message = reader["Message"].ToString();
+
         }
 
     }
