@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2015-12-27
+//	Last Modified:		    2016-01-01
 // 
 
-using cloudscribe.DbHelpers.pgsql;
+using cloudscribe.DbHelpers;
 using Npgsql;
 using System;
 using System.Data;
@@ -25,11 +25,15 @@ namespace cloudscribe.Logging.pgsql
             
             readConnectionString = dbReadConnectionString;
             writeConnectionString = dbWriteConnectionString;
+
+            // possibly will change this later to have NpgSqlFactory/DbProviderFactory injected
+            AdoHelper = new AdoHelper(Npgsql.NpgsqlFactory.Instance);
         }
 
         
         private string readConnectionString;
         private string writeConnectionString;
+        private AdoHelper AdoHelper;
 
         /// <summary>
         /// Inserts a row in the mp_SystemLog table. Returns new integer id.
