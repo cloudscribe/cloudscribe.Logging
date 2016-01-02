@@ -2,12 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2015-12-27
+//	Last Modified:		    2016-01-02
 // 
 
-using cloudscribe.DbHelpers.MySql;
+using cloudscribe.DbHelpers;
 using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Data.Common;
 using System.Text;
 using System.Threading;
@@ -23,11 +24,15 @@ namespace cloudscribe.Logging.MySql
         {
             readConnectionString = dbReadConnectionString;
             writeConnectionString = dbWriteConnectionString;
+
+            // possibly will change this later to have MySqlClientFactory/DbProviderFactory injected
+            AdoHelper = new AdoHelper(MySqlClientFactory.Instance);
         }
 
        
         private string readConnectionString;
         private string writeConnectionString;
+        private AdoHelper AdoHelper;
 
         /// <summary>
         /// Inserts a row in the mp_SystemLog table. Returns new integer id.
@@ -110,6 +115,7 @@ namespace cloudscribe.Logging.MySql
 
             int newID = Convert.ToInt32(AdoHelper.ExecuteScalar(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams).ToString());
 
@@ -137,6 +143,7 @@ namespace cloudscribe.Logging.MySql
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 null,
                 cancellationToken);
@@ -161,6 +168,7 @@ namespace cloudscribe.Logging.MySql
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams,
                 cancellationToken);
@@ -184,6 +192,7 @@ namespace cloudscribe.Logging.MySql
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams,
                 cancellationToken);
@@ -208,6 +217,7 @@ namespace cloudscribe.Logging.MySql
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams,
                 cancellationToken);
@@ -226,6 +236,7 @@ namespace cloudscribe.Logging.MySql
 
             object result = await AdoHelper.ExecuteScalarAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 null,
                 cancellationToken);
@@ -267,6 +278,7 @@ namespace cloudscribe.Logging.MySql
 
             return await AdoHelper.ExecuteReaderAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams,
                 cancellationToken);
@@ -307,6 +319,7 @@ namespace cloudscribe.Logging.MySql
 
             return await AdoHelper.ExecuteReaderAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 arParams,
                 cancellationToken);
