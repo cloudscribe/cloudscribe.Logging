@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2015-12-25
+//	Last Modified:		    2016-01-02
 // 
 
-using cloudscribe.DbHelpers.SqlCe;
+using cloudscribe.DbHelpers;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -21,10 +21,14 @@ namespace cloudscribe.Logging.SqlCe
             string dbConnectionString)
         {
             connectionString = dbConnectionString;
+
+            // possibly will change this later to have SqlCeProviderFactory/DbProviderFactory injected
+            AdoHelper = new SqlCeHelper(SqlCeProviderFactory.Instance);
         }
 
        
         private string connectionString;
+        private SqlCeHelper AdoHelper;
 
         /// <summary>
         /// Inserts a row in the mp_SystemLog table. Returns new integer id.
