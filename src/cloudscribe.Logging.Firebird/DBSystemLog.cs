@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2015-12-27
+//	Last Modified:		    2016-01-02
 // 
 
-using cloudscribe.DbHelpers.Firebird;
+using cloudscribe.DbHelpers;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Data;
@@ -27,9 +27,12 @@ namespace cloudscribe.Logging.Firebird
             
             readConnectionString = dbReadConnectionString;
             writeConnectionString = dbWriteConnectionString;
+
+            // possibly will change this later to have FirebirdClientFactory/DbProviderFactory injected
+            AdoHelper = new FirebirdHelper(FirebirdClientFactory.Instance);
         }
 
-       
+        private FirebirdHelper AdoHelper;
         private string readConnectionString;
         private string writeConnectionString;
 
@@ -91,6 +94,7 @@ namespace cloudscribe.Logging.Firebird
                 CommandType.StoredProcedure,
                 "EXECUTE PROCEDURE MP_SYSTEMLOG_INSERT ("
                 + AdoHelper.GetParamString(arParams.Length) + ")",
+                true,
                 arParams));
 
             return newID;
@@ -115,7 +119,9 @@ namespace cloudscribe.Logging.Firebird
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
+                true,
                 null,
                 cancellationToken);
 
@@ -137,7 +143,9 @@ namespace cloudscribe.Logging.Firebird
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
+                true,
                 arParams,
                 cancellationToken);
 
@@ -160,7 +168,9 @@ namespace cloudscribe.Logging.Firebird
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
+                true,
                 arParams,
                 cancellationToken);
 
@@ -183,7 +193,9 @@ namespace cloudscribe.Logging.Firebird
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
+                true,
                 arParams,
                 cancellationToken);
 
@@ -201,6 +213,7 @@ namespace cloudscribe.Logging.Firebird
 
             object result = await AdoHelper.ExecuteScalarAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 null,
                 cancellationToken);
@@ -236,6 +249,7 @@ namespace cloudscribe.Logging.Firebird
 
             return await AdoHelper.ExecuteReaderAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 null,
                 cancellationToken);
@@ -269,6 +283,7 @@ namespace cloudscribe.Logging.Firebird
 
             return await AdoHelper.ExecuteReaderAsync(
                 readConnectionString,
+                CommandType.Text,
                 sqlCommand.ToString(),
                 null,
                 cancellationToken);
