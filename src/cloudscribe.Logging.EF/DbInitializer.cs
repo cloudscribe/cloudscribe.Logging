@@ -21,11 +21,9 @@ namespace cloudscribe.Logging.EF
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<LoggingDbContext>();
-                bool didCreatedDb = await db.Database.EnsureCreatedAsync();
-                if(!didCreatedDb)
-                {
-                    await db.Database.MigrateAsync();
-                }
+                
+                await db.Database.MigrateAsync();
+                
                 
             }
         }
