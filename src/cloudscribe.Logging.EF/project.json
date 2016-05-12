@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta4",
   "title": "cloudscribe.Logging.EF",
   "description": "Entity Framework 7 implementation of cloudscribe ILogRepository",
   "authors": [ "Joe Audette" ],

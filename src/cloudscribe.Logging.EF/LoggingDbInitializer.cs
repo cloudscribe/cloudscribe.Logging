@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Logging.EF
 {
-    public static class DbInitializer
+    public static class LoggingDbInitializer
     {
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
         {

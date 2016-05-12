@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2016-01-02
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.DbHelpers;
@@ -152,17 +152,17 @@ namespace cloudscribe.Logging.SqlCe
         /// </summary>
         /// <param name="id"> id </param>
         /// <returns>bool</returns>
-        public bool Delete(int id)
+        public bool Delete(Guid id)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("DELETE FROM mp_SystemLog ");
             sqlCommand.Append("WHERE ");
-            sqlCommand.Append("ID = @ID ");
+            sqlCommand.Append("Id = @Id ");
             sqlCommand.Append(";");
 
             SqlCeParameter[] arParams = new SqlCeParameter[1];
 
-            arParams[0] = new SqlCeParameter("@ID", SqlDbType.Int);
+            arParams[0] = new SqlCeParameter("@Id", SqlDbType.UniqueIdentifier);
             arParams[0].Value = id;
 
             int rowsAffected = AdoHelper.ExecuteNonQuery(

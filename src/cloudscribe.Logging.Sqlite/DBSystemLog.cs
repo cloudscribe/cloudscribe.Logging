@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2016-01-01
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.DbHelpers;
@@ -146,18 +146,18 @@ namespace cloudscribe.Logging.Sqlite
         /// </summary>
         /// <param name="id"> id </param>
         /// <returns>bool</returns>
-        public bool Delete(int id)
+        public bool Delete(Guid id)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("DELETE FROM mp_SystemLog ");
             sqlCommand.Append("WHERE ");
-            sqlCommand.Append("ID = :ID ");
+            sqlCommand.Append("Id = :Id ");
             sqlCommand.Append(";");
 
             SqliteParameter[] arParams = new SqliteParameter[1];
 
-            arParams[0] = new SqliteParameter(":ID", DbType.Int32);
-            arParams[0].Value = id;
+            arParams[0] = new SqliteParameter(":Id", DbType.String);
+            arParams[0].Value = id.ToString();
 
             int rowsAffected = AdoHelper.ExecuteNonQuery(
                 connectionString,

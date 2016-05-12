@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2016-01-01
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.DbHelpers;
@@ -143,7 +143,7 @@ namespace cloudscribe.Logging.pgsql
         }
 
         
-        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
+        public async Task<bool> Delete(Guid id, CancellationToken cancellationToken)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("DELETE FROM mp_systemlog ");
@@ -153,8 +153,8 @@ namespace cloudscribe.Logging.pgsql
 
             NpgsqlParameter[] arParams = new NpgsqlParameter[1];
 
-            arParams[0] = new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Integer);
-            arParams[0].Value = id;
+            arParams[0] = new NpgsqlParameter("id", NpgsqlTypes.NpgsqlDbType.Char, 36);
+            arParams[0].Value = id.ToString();
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,

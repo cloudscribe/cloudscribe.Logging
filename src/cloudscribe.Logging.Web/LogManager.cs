@@ -2,13 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2016-01-03
+//	Last Modified:		    2016-05-12
 // 
 
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using System;
 
 namespace cloudscribe.Logging.Web
 {
@@ -43,14 +44,14 @@ namespace cloudscribe.Logging.Web
             return await logRepo.GetPageAscending(pageNumber, pageSize, CancellationToken);
         }
 
-        public async Task<bool> DeleteLogItem(int id)
+        public async Task DeleteLogItem(Guid id)
         {
-            return await logRepo.Delete(id, CancellationToken.None);
+            await logRepo.Delete(id, CancellationToken.None);
         }
 
-        public async Task<bool> DeleteAllLogItems()
+        public async Task DeleteAllLogItems()
         {
-            return await logRepo.DeleteAll(CancellationToken.None);
+            await logRepo.DeleteAll(CancellationToken.None);
         }
 
     }

@@ -37,9 +37,9 @@ namespace cloudscribe.Logging.Web
             int pageSize,
             CancellationToken cancellationToken);
 
-        Task<bool> DeleteAll(CancellationToken cancellationToken);
-        Task<bool> Delete(int logItemId, CancellationToken cancellationToken);
-        Task<bool> DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken);
-        Task<bool> DeleteByLevel(string logLevel, CancellationToken cancellationToken);
+        Task DeleteAll(CancellationToken cancellationToken);
+        Task Delete(Guid logItemId, CancellationToken cancellationToken);
+        Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken);
+        Task DeleteByLevel(string logLevel, CancellationToken cancellationToken);
     }
 }

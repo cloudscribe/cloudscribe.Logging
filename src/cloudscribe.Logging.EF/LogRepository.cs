@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2015-12-27
+// Last Modified:			2016-05-12
 // 
 
 using cloudscribe.Logging.Web;
@@ -70,8 +70,7 @@ namespace cloudscribe.Logging.EF
             if(logger == "Microsoft.Data.Entity.DbContext") { return; }
             // maybe should be even more aggresive here to filter out anything with "Entity"
 
-            LogItem logItem = new LogItem();
-            logItem.Id = 0;
+            var logItem = new LogItem();
             logItem.LogDateUtc = logDate;
             logItem.IpAddress = ipAddress;
             logItem.Culture = culture;
@@ -139,28 +138,30 @@ namespace cloudscribe.Logging.EF
 
         }
 
-        public async Task<bool> DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
         {
             dbContext.LogItems.RemoveAll();
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            return rowsAffected > 0;
+            //return rowsAffected > 0;
         }
 
-        public async Task<bool> Delete(int logItemId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Delete(
+            Guid logItemId, 
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = false;
+            //var result = false;
             var itemToRemove = await dbContext.LogItems.SingleOrDefaultAsync(x => x.Id.Equals(logItemId));
             if(itemToRemove != null)
             {
                 dbContext.LogItems.Remove(itemToRemove);
                 int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-                result = rowsAffected > 0;
+                //result = rowsAffected > 0;
             }
 
-            return result;
+            //return result;
         }
 
-        public async Task<bool> DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
         {
             var query = from l in dbContext.LogItems
                        where l.LogDateUtc < cutoffDateUtc
@@ -168,11 +169,11 @@ namespace cloudscribe.Logging.EF
 
             dbContext.LogItems.RemoveRange(query);
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            return rowsAffected > 0;
+            //return rowsAffected > 0;
             
         }
 
-        public async Task<bool> DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
         {
             var query = from l in dbContext.LogItems
                         where l.LogLevel == logLevel
@@ -180,7 +181,7 @@ namespace cloudscribe.Logging.EF
 
             dbContext.LogItems.RemoveRange(query);
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            return rowsAffected > 0;
+            //return rowsAffected > 0;
         }
 
 

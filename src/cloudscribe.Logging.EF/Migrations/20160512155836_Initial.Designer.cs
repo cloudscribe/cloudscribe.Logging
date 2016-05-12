@@ -8,7 +8,7 @@ using cloudscribe.Logging.EF;
 namespace cloudscribe.Logging.EF.Migrations
 {
     [DbContext(typeof(LoggingDbContext))]
-    [Migration("20151226183617_Initial")]
+    [Migration("20160512155836_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,13 +18,12 @@ namespace cloudscribe.Logging.EF.Migrations
                 .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("cloudscribe.Core.Models.Logging.LogItem", b =>
+            modelBuilder.Entity("cloudscribe.Logging.Web.LogItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("Relational:ColumnName", "ID")
-                        .HasAnnotation("Relational:GeneratedValueSql", "NEXT VALUE FOR LogIds")
-                        .HasAnnotation("SqlServer:ColumnType", "int");
+                        .HasAnnotation("SqlServer:ColumnType", "uniqueidentifier")
+                        .HasAnnotation("SqlServer:GeneratedValueSql", "newid()");
 
                     b.Property<string>("Culture")
                         .HasAnnotation("MaxLength", 10);
@@ -56,7 +55,7 @@ namespace cloudscribe.Logging.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "mp_SystemLog");
+                    b.HasAnnotation("Relational:TableName", "cs_SystemLog");
                 });
         }
     }

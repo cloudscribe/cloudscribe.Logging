@@ -2,13 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-12-23
-//	Last Modified:		    2015-12-26
+//	Last Modified:		    2016-05-12
 // 
 
 
 using cloudscribe.Core.Models;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace cloudscribe.Logging.Web.Controllers
@@ -66,9 +67,9 @@ namespace cloudscribe.Logging.Web.Controllers
         [Authorize(Policy = "SystemLogPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogItemDelete(int id)
+        public async Task<IActionResult> LogItemDelete(Guid id)
         {
-            bool result = await logManager.DeleteLogItem(id);
+            await logManager.DeleteLogItem(id);
 
             return RedirectToAction("Index");
         }
@@ -78,7 +79,7 @@ namespace cloudscribe.Logging.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogDeleteAll()
         {
-            bool result = await logManager.DeleteAllLogItems();
+            await logManager.DeleteAllLogItems();
 
             return RedirectToAction("Index");
         }

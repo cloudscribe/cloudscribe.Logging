@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2016-01-02
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.DbHelpers;
@@ -153,18 +153,18 @@ namespace cloudscribe.Logging.MySql
         }
 
         
-        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
+        public async Task<bool> Delete(Guid id, CancellationToken cancellationToken)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("DELETE FROM mp_SystemLog ");
             sqlCommand.Append("WHERE ");
-            sqlCommand.Append("ID = ?ID ");
+            sqlCommand.Append("Id = ?Id ");
             sqlCommand.Append(";");
 
             MySqlParameter[] arParams = new MySqlParameter[1];
 
-            arParams[0] = new MySqlParameter("?ID", MySqlDbType.Int32);
-            arParams[0].Value = id;
+            arParams[0] = new MySqlParameter("?Id", MySqlDbType.VarChar, 32);
+            arParams[0].Value = id.ToString();
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,

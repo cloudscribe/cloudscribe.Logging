@@ -129,17 +129,17 @@ namespace cloudscribe.Logging.Firebird
         }
 
         
-        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
+        public async Task<bool> Delete(Guid id, CancellationToken cancellationToken)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("DELETE FROM mp_SystemLog ");
             sqlCommand.Append("WHERE ");
-            sqlCommand.Append("ID = @ID ");
+            sqlCommand.Append("Id = @Id ");
             sqlCommand.Append(";");
             FbParameter[] arParams = new FbParameter[1];
 
-            arParams[0] = new FbParameter("@ID", FbDbType.Integer);
-            arParams[0].Value = id;
+            arParams[0] = new FbParameter("@Id", FbDbType.Char, 36);
+            arParams[0].Value = id.ToString();
 
             int rowsAffected = await AdoHelper.ExecuteNonQueryAsync(
                 writeConnectionString,

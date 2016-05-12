@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-07-23
-//	Last Modified:		    2016-01-03
+//	Last Modified:		    2016-05-12
 // 
 
 
@@ -99,7 +99,7 @@ namespace cloudscribe.Logging.MSSQL
         }
 
         
-        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
+        public async Task<bool> Delete(Guid id, CancellationToken cancellationToken)
         {
             SqlParameterHelper sph = new SqlParameterHelper(
                 logFactory,
@@ -107,7 +107,7 @@ namespace cloudscribe.Logging.MSSQL
                 "mp_SystemLog_Delete", 
                 1);
 
-            sph.DefineSqlParameter("@ID", SqlDbType.Int, ParameterDirection.Input, id);
+            sph.DefineSqlParameter("@Id", SqlDbType.UniqueIdentifier, ParameterDirection.Input, id);
             int rowsAffected = await sph.ExecuteNonQueryAsync(cancellationToken);
             return (rowsAffected > 0);
 

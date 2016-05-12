@@ -15,18 +15,15 @@ namespace cloudscribe.Logging.EF
     {
         public void Map(EntityTypeBuilder<LogItem> entity)
         {
-            entity.ToTable("mp_SystemLog");
+            entity.ToTable("cs_SystemLog");
             entity.HasKey(p => p.Id);
 
             entity.Property(p => p.Id)
-            .ForSqlServerHasColumnType("int")
+            .ForSqlServerHasColumnType("uniqueidentifier")
+            .ForSqlServerHasDefaultValueSql("newid()")
+               .IsRequired();
 
-            //.UseSqlServerIdentityColumn<int>()
-            .ValueGeneratedOnAdd()
-            .HasColumnName("ID")
-            .HasDefaultValueSql("NEXT VALUE FOR LogIds")
-            //.Metadata.SentinelValue = -1
-            ;
+            
 
             entity.Property(p => p.LogDateUtc)
             .HasColumnName("LogDate")

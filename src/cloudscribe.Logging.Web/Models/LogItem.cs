@@ -13,9 +13,11 @@ namespace cloudscribe.Logging.Web
     public class LogItem : ILogItem
     {
         public LogItem()
-        { }
+        {
+            Id = Guid.NewGuid();
+        }
 
-        public int Id { get; set; } = -1;
+        public Guid Id { get; set; }
         public DateTime LogDateUtc { get; set; } = DateTime.UtcNow;
 
         private string ipAddress = string.Empty;

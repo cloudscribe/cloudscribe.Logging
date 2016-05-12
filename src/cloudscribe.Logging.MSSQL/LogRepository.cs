@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2016-01-03
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.Logging.Web;
@@ -105,33 +105,34 @@ namespace cloudscribe.Logging.MSSQL
             return logItems;
         }
 
-        public async Task<bool> DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await dbSystemLog.DeleteAll(cancellationToken);
+            await dbSystemLog.DeleteAll(cancellationToken);
         }
 
-        public async Task<bool> Delete(int logItemId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Delete(Guid logItemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await dbSystemLog.Delete(logItemId, cancellationToken);
+            await dbSystemLog.Delete(logItemId, cancellationToken);
         }
 
-        public async Task<bool> DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
         { 
             cancellationToken.ThrowIfCancellationRequested();
-            return await dbSystemLog.DeleteOlderThan(cutoffDateUtc, cancellationToken);
+            await dbSystemLog.DeleteOlderThan(cutoffDateUtc, cancellationToken);
         }
 
-        public async Task<bool> DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await dbSystemLog.DeleteByLevel(logLevel, cancellationToken);
+            await dbSystemLog.DeleteByLevel(logLevel, cancellationToken);
         }
 
         private void LoadFromReader(LogItem logItem, DbDataReader reader)
         {
-            logItem.Id = Convert.ToInt32(reader["ID"]);
+            //logItem.Id = Convert.ToInt32(reader["ID"]);
+            logItem.Id = new Guid(reader["Id"].ToString());
             logItem.LogDateUtc = Convert.ToDateTime(reader["LogDate"]);
             logItem.IpAddress = reader["IpAddress"].ToString();
             logItem.Culture = reader["Culture"].ToString();

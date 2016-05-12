@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2015-12-29
+//	Last Modified:		    2016-05-12
 // 
 
 using cloudscribe.Logging.Web;
@@ -102,33 +102,34 @@ namespace cloudscribe.Logging.SqlCe
             return logItems;
         }
 
-        public async Task<bool> DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return dbSystemLog.DeleteAll();
+            dbSystemLog.DeleteAll();
         }
 
-        public async Task<bool> Delete(int logItemId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Delete(Guid logItemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return dbSystemLog.Delete(logItemId);
+            dbSystemLog.Delete(logItemId);
         }
 
-        public async Task<bool> DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return dbSystemLog.DeleteOlderThan(cutoffDateUtc);
+            dbSystemLog.DeleteOlderThan(cutoffDateUtc);
         }
 
-        public async Task<bool> DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return dbSystemLog.DeleteByLevel(logLevel);
+            dbSystemLog.DeleteByLevel(logLevel);
         }
 
         private void LoadFromReader(LogItem logItem, DbDataReader reader)
         {
-            logItem.Id = Convert.ToInt32(reader["ID"]);
+            //logItem.Id = Convert.ToInt32(reader["ID"]);
+            logItem.Id = new Guid(reader["Id"].ToString());
             logItem.LogDateUtc = Convert.ToDateTime(reader["LogDate"]);
             logItem.IpAddress = reader["IpAddress"].ToString();
             logItem.Culture = reader["Culture"].ToString();

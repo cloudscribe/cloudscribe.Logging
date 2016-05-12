@@ -11,10 +11,10 @@ namespace cloudscribe.Logging.EF.Migrations
             migrationBuilder.CreateSequence<int>(
                 name: "LogIds");
             migrationBuilder.CreateTable(
-                name: "mp_SystemLog",
+                name: "cs_SystemLog",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR LogIds"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newid()"),
                     Culture = table.Column<string>(nullable: true),
                     IpAddress = table.Column<string>(nullable: true),
                     LogDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getutcdate()"),
@@ -27,14 +27,14 @@ namespace cloudscribe.Logging.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LogItem", x => x.ID);
+                    table.PrimaryKey("PK_LogItem", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropSequence("LogIds");
-            migrationBuilder.DropTable("mp_SystemLog");
+            migrationBuilder.DropTable("cs_SystemLog");
         }
     }
 }
