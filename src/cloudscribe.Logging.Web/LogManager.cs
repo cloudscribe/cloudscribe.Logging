@@ -2,13 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2016-05-12
+//	Last Modified:		    2016-05-17
 // 
 
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace cloudscribe.Logging.Web

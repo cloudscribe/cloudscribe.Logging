@@ -1,6 +1,6 @@
 ﻿using cloudscribe.Logging.EF;
 using cloudscribe.Logging.Web;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -12,12 +12,10 @@ namespace Microsoft.Extensions.DependencyInjection
             string connectionString
             )
         {
-            services.AddEntityFramework()
-                        .AddSqlServer()
-                        .AddDbContext<LoggingDbContext>(options =>
-                        {
-                            options.UseSqlServer(connectionString);
-                        });
+            services.AddDbContext<LoggingDbContext>(options =>
+                {
+                    options.UseSqlServer(connectionString);
+                });
 
             services.TryAddScoped<ILogModelMapper, SqlServerLogModelMapper>();
             services.AddScoped<ILogRepository, LogRepository>();

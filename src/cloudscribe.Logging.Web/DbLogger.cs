@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2015-12-26
+//	Last Modified:		    2016-05-17
 // 
 
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Features;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -51,46 +51,39 @@ namespace cloudscribe.Logging.Web
             }
         }
 
-        
+
 
         #region ILogger
 
-        public void Log(
-            LogLevel logLevel, 
-            int eventId, 
-            object state, 
-            Exception exception, 
-            Func<object, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+            )
         {
             if (!IsEnabled(logLevel))
             {
                 return;
             }
-            var message = string.Empty;
-            var values = state as ILogValues;
-            if (formatter != null)
-            {
-                message = formatter(state, exception);
-            }
-            else if (values != null)
-            {
-                var builder = new StringBuilder();
-                FormatLogValues(
-                    builder,
-                    values,
-                    level: 1,
-                    bullet: false);
 
-                message = builder.ToString();
-                if (exception != null)
-                {
-                    message += Environment.NewLine + exception;
-                }
+            if (formatter == null)
+            {
+                throw new ArgumentNullException(nameof(formatter));
+            }
+
+            var message = formatter(state, exception);
+
+            if (exception != null)
+            {
+                message += Environment.NewLine + exception;
             }
             else
             {
-                message = LogFormatter.Formatter(state, exception);
+                message = exception.Message + " " + exception.StackTrace;
             }
+
             if (string.IsNullOrEmpty(message))
             {
                 return;
@@ -122,13 +115,86 @@ namespace cloudscribe.Logging.Web
                 logger,
                 message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
             }
-
-
         }
+
+        //public void Log(
+        //    LogLevel logLevel, 
+        //    int eventId, 
+        //    object state, 
+        //    Exception exception, 
+        //    Func<object, Exception, string> formatter)
+        //{
+        //    if (!IsEnabled(logLevel))
+        //    {
+        //        return;
+        //    }
+        //    var message = string.Empty;
+        //    var values = state as ILogValues;
+        //    if (formatter != null)
+        //    {
+        //        message = formatter(state, exception);
+        //    }
+        //    else if (values != null)
+        //    {
+        //        var builder = new StringBuilder();
+        //        FormatLogValues(
+        //            builder,
+        //            values,
+        //            level: 1,
+        //            bullet: false);
+
+        //        message = builder.ToString();
+        //        if (exception != null)
+        //        {
+        //            message += Environment.NewLine + exception;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        message = LogFormatter.Formatter(state, exception);
+        //    }
+        //    if (string.IsNullOrEmpty(message))
+        //    {
+        //        return;
+        //    }
+
+        //    contextAccessor = services.GetService<IHttpContextAccessor>();
+
+        //    string ipAddress = GetIpAddress();
+        //    string culture = CultureInfo.CurrentCulture.Name;
+        //    string url = GetRequestUrl();
+        //    string shortUrl = GetShortUrl(url);
+        //    string thread = System.Threading.Thread.CurrentThread.Name + " " + eventId.ToString();
+        //    string logLev = logLevel.ToString();
+        //    // an exception is expected here if the db has not yet been populated
+        //    // or if the db is not accessible
+        //    // we cannot allow logging to raise exceptions
+        //    // so we must swallow any exception here
+        //    // would be good if we could only swallow specific exceptions
+        //    try
+        //    {
+        //        logRepo.AddLogItem(
+        //        DateTime.UtcNow,
+        //        ipAddress,
+        //        culture,
+        //        url,
+        //        shortUrl,
+        //        thread,
+        //        logLev,
+        //        logger,
+        //        message);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
+        //    }
+
+
+        //}
 
         public bool IsEnabled(LogLevel logLevel)
         {
@@ -186,63 +252,71 @@ namespace cloudscribe.Logging.Web
             return string.Empty;
         }
 
-        private void FormatLogValues(StringBuilder builder, ILogValues logValues, int level, bool bullet)
-        {
-            var values = logValues.GetValues();
-            if (values == null)
-            {
-                return;
-            }
-            var isFirst = true;
-            foreach (var kvp in values)
-            {
-                builder.AppendLine();
-                if (bullet && isFirst)
-                {
-                    builder.Append(' ', level * _indentation - 1)
-                           .Append('-');
-                }
-                else
-                {
-                    builder.Append(' ', level * _indentation);
-                }
-                builder.Append(kvp.Key)
-                       .Append(": ");
+        //private void FormatLogValues(StringBuilder builder, ILogValues logValues, int level, bool bullet)
+        //{
+        //    var values = logValues.GetValues();
+        //    if (values == null)
+        //    {
+        //        return;
+        //    }
+        //    var isFirst = true;
+        //    foreach (var kvp in values)
+        //    {
+        //        builder.AppendLine();
+        //        if (bullet && isFirst)
+        //        {
+        //            builder.Append(' ', level * _indentation - 1)
+        //                   .Append('-');
+        //        }
+        //        else
+        //        {
+        //            builder.Append(' ', level * _indentation);
+        //        }
+        //        builder.Append(kvp.Key)
+        //               .Append(": ");
 
-                if (kvp.Value is IEnumerable && !(kvp.Value is string))
-                {
-                    foreach (var value in (IEnumerable)kvp.Value)
-                    {
-                        if (value is ILogValues)
-                        {
-                            FormatLogValues(
-                                builder,
-                                (ILogValues)value,
-                                level + 1,
-                                bullet: true);
-                        }
-                        else
-                        {
-                            builder.AppendLine()
-                                   .Append(' ', (level + 1) * _indentation)
-                                   .Append(value);
-                        }
-                    }
-                }
-                else if (kvp.Value is ILogValues)
-                {
-                    FormatLogValues(
-                        builder,
-                        (ILogValues)kvp.Value,
-                        level + 1,
-                        bullet: false);
-                }
-                else
-                {
-                    builder.Append(kvp.Value);
-                }
-                isFirst = false;
-            }
+        //        if (kvp.Value is IEnumerable && !(kvp.Value is string))
+        //        {
+        //            foreach (var value in (IEnumerable)kvp.Value)
+        //            {
+        //                if (value is ILogValues)
+        //                {
+        //                    FormatLogValues(
+        //                        builder,
+        //                        (ILogValues)value,
+        //                        level + 1,
+        //                        bullet: true);
+        //                }
+        //                else
+        //                {
+        //                    builder.AppendLine()
+        //                           .Append(' ', (level + 1) * _indentation)
+        //                           .Append(value);
+        //                }
+        //            }
+        //        }
+        //        else if (kvp.Value is ILogValues)
+        //        {
+        //            FormatLogValues(
+        //                builder,
+        //                (ILogValues)kvp.Value,
+        //                level + 1,
+        //                bullet: false);
+        //        }
+        //        else
+        //        {
+        //            builder.Append(kvp.Value);
+        //        }
+        //        isFirst = false;
+        //    }
+        //}
+
+        
+
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            //throw new NotImplementedException();
+            return new NoopDisposable();
         }
 
         private class NoopDisposable : IDisposable
