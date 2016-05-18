@@ -1,8 +1,8 @@
-using System;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using cloudscribe.Logging.EF;
 
 namespace cloudscribe.Logging.EF.Migrations
@@ -13,7 +13,7 @@ namespace cloudscribe.Logging.EF.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
                 .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -22,7 +22,7 @@ namespace cloudscribe.Logging.EF.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ColumnType", "uniqueidentifier")
-                        .HasAnnotation("SqlServer:GeneratedValueSql", "newid()");
+                        .HasAnnotation("SqlServer:DefaultValueSql", "newid()");
 
                     b.Property<string>("Culture")
                         .HasAnnotation("MaxLength", 10);
@@ -32,9 +32,9 @@ namespace cloudscribe.Logging.EF.Migrations
 
                     b.Property<DateTime>("LogDateUtc")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("Relational:ColumnName", "LogDate")
+                        .HasColumnName("LogDate")
                         .HasAnnotation("SqlServer:ColumnType", "datetime")
-                        .HasAnnotation("SqlServer:GeneratedValueSql", "getutcdate()");
+                        .HasAnnotation("SqlServer:DefaultValueSql", "getutcdate()");
 
                     b.Property<string>("LogLevel")
                         .HasAnnotation("MaxLength", 20);
@@ -54,7 +54,7 @@ namespace cloudscribe.Logging.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "cs_SystemLog");
+                    b.ToTable("cs_SystemLog");
                 });
         }
     }

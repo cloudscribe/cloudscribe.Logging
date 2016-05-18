@@ -1,29 +1,27 @@
 ﻿{
-  "version": "1.0.0-beta4",
-  "title": "cloudscribe.Logging.Firebird",
-  "description": "Implementation of ILogRepository repository for FirebirdSql",
-  "authors": [ "Joe Audette" ],
-  "owners": [ "Source Tree Solutions" ],
-  "tags": [ "cloudscribe", "logging", "firebird", "firebirdsql" ],
-  "projectUrl": "https://github.com/joeaudette/cloudscribe.Logging",
-  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
-  "copyright": "2015 Source Tree Solutions",
-  "iconUrl": "https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png",
-  "requireLicenseAcceptance": false,
-  "releaseNotes": "",
+    "version": "1.0.0-beta5",
+    "description": "Implementation of ILogRepository repository for FirebirdSql",
+    "authors": [ "Joe Audette" ],
+    "packOptions": {
+        "owners": [ "Source Tree Solutions" ],
+        "tags": [ "cloudscribe", "logging", "firebird", "firebirdsql" ],
+        "projectUrl": "https://github.com/joeaudette/cloudscribe.Logging",
+        "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+        "copyright": "2015 Source Tree Solutions",
+        "iconUrl": "https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png",
+        "requireLicenseAcceptance": false,
+        "releaseNotes": ""
+    },
 
-  "dependencies": {
-    "cloudscribe.Logging.Web": "1.0.0-*",
-    "cloudscribe.DbHelpers.Firebird": "1.0.0-*",
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final"
-  },
+    "dependencies": {
+        "NETStandard.Library": "1.5.0-rc2-24027",
+        "cloudscribe.Logging.Web": "1.0.0-*",
+        "cloudscribe.DbHelpers.Firebird": "1.0.0-*"
+    },
 
-
-  "frameworks": {
-    "net451": { }
-
-  }
+    "frameworks": {
+        "netstandard1.5": {
+            "imports": "dnxcore50"
+        }
+    }
 }
-

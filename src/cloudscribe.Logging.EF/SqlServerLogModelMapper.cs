@@ -6,8 +6,8 @@
 // 
 
 using cloudscribe.Logging.Web;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace cloudscribe.Logging.EF
 {

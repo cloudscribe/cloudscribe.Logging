@@ -2,12 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2016-05-12
+// Last Modified:			2016-05-17
 // 
 
 using cloudscribe.Logging.Web;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +19,13 @@ namespace cloudscribe.Logging.EF
     public class LogRepository : ILogRepository
     {
         public LogRepository(
-            IServiceProvider serviceProvider,
+            //IServiceProvider serviceProvider,
             DbContextOptions<LoggingDbContext> options
             )
         {
 
             dbContextOptions = options;
-            this.serviceProvider = serviceProvider;
+            //this.serviceProvider = serviceProvider;
             
         }
 
@@ -39,14 +39,14 @@ namespace cloudscribe.Logging.EF
             {
                 if(dbc == null)
                 {
-                    dbc = new LoggingDbContext(serviceProvider, dbContextOptions);
+                    dbc = new LoggingDbContext(dbContextOptions);
                 }
                 return dbc;
             }
         }
 
-        private DbContextOptions dbContextOptions;
-        private IServiceProvider serviceProvider;
+        private DbContextOptions<LoggingDbContext> dbContextOptions;
+        //private IServiceProvider serviceProvider;
         
         public void AddLogItem(
             DateTime logDate,
@@ -81,7 +81,7 @@ namespace cloudscribe.Logging.EF
             logItem.Logger = logger;
             logItem.Message = message;
 
-            using (var context = new LoggingDbContext(serviceProvider, dbContextOptions))
+            using (var context = new LoggingDbContext(dbContextOptions))
             {
                 context.Add(logItem);
                 context.SaveChanges();

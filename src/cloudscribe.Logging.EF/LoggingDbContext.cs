@@ -2,21 +2,28 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-10
-// Last Modified:			2015-12-26
+// Last Modified:			2016-05-07
 // 
 
 using System;
 using cloudscribe.Logging.Web;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace cloudscribe.Logging.EF
 {
     public class LoggingDbContext : DbContext
     {
+        //public LoggingDbContext() 
+        //    : base()
+        //{
+        //    ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        //}
+
+
         public LoggingDbContext(
-            IServiceProvider serviceProvider,
-            DbContextOptions options) : base(serviceProvider, options)
+           // IServiceProvider serviceProvider,
+            DbContextOptions<LoggingDbContext> options) : base(options)
         {
             // we don't want to track any logitems because we dont edit them
             // we add them delete them and view them

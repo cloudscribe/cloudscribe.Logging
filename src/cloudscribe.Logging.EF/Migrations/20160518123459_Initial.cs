@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.Data.Entity.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace cloudscribe.Logging.EF.Migrations
 {
@@ -10,6 +10,7 @@ namespace cloudscribe.Logging.EF.Migrations
         {
             migrationBuilder.CreateSequence<int>(
                 name: "LogIds");
+
             migrationBuilder.CreateTable(
                 name: "cs_SystemLog",
                 columns: table => new
@@ -27,14 +28,17 @@ namespace cloudscribe.Logging.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LogItem", x => x.Id);
+                    table.PrimaryKey("PK_cs_SystemLog", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropSequence("LogIds");
-            migrationBuilder.DropTable("cs_SystemLog");
+            migrationBuilder.DropSequence(
+                name: "LogIds");
+
+            migrationBuilder.DropTable(
+                name: "cs_SystemLog");
         }
     }
 }

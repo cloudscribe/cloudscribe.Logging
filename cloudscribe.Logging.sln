@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46FB9706-B599-4853-95FD-58E2D553C5F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{099E060E-15BC-40EC-8B0B-936F87B98925}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.Web", "src\cloudscribe.Logging.Web\cloudscribe.Logging.Web.xproj", "{4D19E89F-6C1C-4E43-9084-0D95CDFDD625}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.EF", "src\cloudscribe.Logging.EF\cloudscribe.Logging.EF.xproj", "{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.MSSQL", "src\cloudscribe.Logging.MSSQL\cloudscribe.Logging.MSSQL.xproj", "{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.pgsql", "src\cloudscribe.Logging.pgsql\cloudscribe.Logging.pgsql.xproj", "{89BA0743-71BE-4BCD-AC02-A3C93BC51C26}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.Sqlite", "src\cloudscribe.Logging.Sqlite\cloudscribe.Logging.Sqlite.xproj", "{5224A857-FB3E-4CAA-A255-100B7F744732}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.SqlCe", "src\cloudscribe.Logging.SqlCe\cloudscribe.Logging.SqlCe.xproj", "{1315020D-B809-4394-9BFD-2326E9717CE2}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.Firebird", "src\cloudscribe.Logging.Firebird\cloudscribe.Logging.Firebird.xproj", "{AA86B1B0-EB67-410F-821D-A9FFBAE250FE}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Logging.MySql", "src\cloudscribe.Logging.MySql\cloudscribe.Logging.MySql.xproj", "{7635CFDF-0514-4C12-8E84-3FA804925BFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D19E89F-6C1C-4E43-9084-0D95CDFDD625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D19E89F-6C1C-4E43-9084-0D95CDFDD625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D19E89F-6C1C-4E43-9084-0D95CDFDD625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D19E89F-6C1C-4E43-9084-0D95CDFDD625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89BA0743-71BE-4BCD-AC02-A3C93BC51C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89BA0743-71BE-4BCD-AC02-A3C93BC51C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89BA0743-71BE-4BCD-AC02-A3C93BC51C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89BA0743-71BE-4BCD-AC02-A3C93BC51C26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5224A857-FB3E-4CAA-A255-100B7F744732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5224A857-FB3E-4CAA-A255-100B7F744732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5224A857-FB3E-4CAA-A255-100B7F744732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5224A857-FB3E-4CAA-A255-100B7F744732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1315020D-B809-4394-9BFD-2326E9717CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1315020D-B809-4394-9BFD-2326E9717CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1315020D-B809-4394-9BFD-2326E9717CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1315020D-B809-4394-9BFD-2326E9717CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA86B1B0-EB67-410F-821D-A9FFBAE250FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA86B1B0-EB67-410F-821D-A9FFBAE250FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA86B1B0-EB67-410F-821D-A9FFBAE250FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA86B1B0-EB67-410F-821D-A9FFBAE250FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7635CFDF-0514-4C12-8E84-3FA804925BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7635CFDF-0514-4C12-8E84-3FA804925BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7635CFDF-0514-4C12-8E84-3FA804925BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7635CFDF-0514-4C12-8E84-3FA804925BFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D19E89F-6C1C-4E43-9084-0D95CDFDD625} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{2E90CF39-FC18-4D6A-B9A7-D6386FAFD076} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{22FDF96A-1A40-4EF5-BCEB-A8B7737B9EE0} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{89BA0743-71BE-4BCD-AC02-A3C93BC51C26} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{5224A857-FB3E-4CAA-A255-100B7F744732} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{1315020D-B809-4394-9BFD-2326E9717CE2} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{AA86B1B0-EB67-410F-821D-A9FFBAE250FE} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{7635CFDF-0514-4C12-8E84-3FA804925BFD} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+	EndGlobalSection
+EndGlobal

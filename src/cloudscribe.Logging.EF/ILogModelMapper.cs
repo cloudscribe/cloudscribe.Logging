@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-26
-// Last Modified:			2015-12-26
+// Last Modified:			2016-05-17
 // 
 
 using cloudscribe.Logging.Web;
-using Microsoft.Data.Entity.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace cloudscribe.Logging.EF
 {
