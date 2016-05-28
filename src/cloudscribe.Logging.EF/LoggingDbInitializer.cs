@@ -2,16 +2,17 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-26
-// Last Modified:			2015-12-26
+// Last Modified:			2016-05-28
 // 
 
 
+using cloudscribe.Logging.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.EF
+namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without a using
 {
     public static class LoggingDbInitializer
     {
