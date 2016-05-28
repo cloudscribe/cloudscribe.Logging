@@ -2,20 +2,21 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2015-12-26
+//	Last Modified:		    2016-05-28
 // 
 
-using Microsoft.Extensions.Logging;
+using cloudscribe.Logging.Web;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace cloudscribe.Logging.Web
+namespace Microsoft.Extensions.Logging
 {
     public static class DbLoggerFactoryExtensions
     {
         public static ILoggerFactory AddDbLogger(
             this ILoggerFactory factory,
             IServiceProvider serviceProvider,
-            ILogRepository logRepository,
+            //ILogRepository logRepository,
             LogLevel minimumLogLevel)
         {
             Func<string, LogLevel, bool> logFilter = delegate (string loggerName, LogLevel logLevel)
@@ -24,19 +25,19 @@ namespace cloudscribe.Logging.Web
                
                 return true;
             };
-
-            factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider, logRepository));
+            //var logRepository = serviceProvider.GetRequiredService<ILogRepository>();
+            factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider));
             return factory;
         }
 
         public static ILoggerFactory AddDbLogger(
             this ILoggerFactory factory,
             IServiceProvider serviceProvider,
-            ILogRepository logRepository,
+            //ILogRepository logRepository,
             Func<string, LogLevel, bool> logFilter)
         {
-           
-            factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider, logRepository));
+            //var logRepository = serviceProvider.GetRequiredService<ILogRepository>();
+            factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider));
             return factory;
         }
 

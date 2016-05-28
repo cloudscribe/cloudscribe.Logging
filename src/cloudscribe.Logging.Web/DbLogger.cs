@@ -115,7 +115,7 @@ namespace cloudscribe.Logging.Web
                 logger,
                 message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
             }
@@ -198,8 +198,8 @@ namespace cloudscribe.Logging.Web
 
         public bool IsEnabled(LogLevel logLevel)
         {
-            //Debug = 1,
-            //Trace = 2,
+            //Trace = 1,
+            //Debug = 2,
             //Information = 3,
             //Warning = 4,
             //Error = 5,
