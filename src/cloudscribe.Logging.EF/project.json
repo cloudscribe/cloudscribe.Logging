@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1-beta1",
+    "version": "1.0.1-beta2",
     "buildOptions": {
         "emitEntryPoint": true
     },
@@ -17,7 +17,7 @@
     },
 
     "dependencies": {
-        "cloudscribe.Logging.Web": "1.0.0-*",
+        "cloudscribe.Logging.Web": "1.0.1-*",
 		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
          "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
 		 "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
