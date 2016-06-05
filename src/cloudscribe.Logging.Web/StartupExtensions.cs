@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             options.FileProviders.Add(new EmbeddedFileProvider(
                     typeof(LogManager).GetTypeInfo().Assembly,
-                    "cloudscribe.Loggin.Web"
+                    "cloudscribe.Logging.Web"
                 ));
 
             return options;
