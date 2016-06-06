@@ -19,10 +19,9 @@ namespace cloudscribe.Logging.Web
             Paging = new PaginationSettings();
         }
 
-        //public string Heading { get; set; }
         public List<ILogItem> LogPage { get; set; }
         public PaginationSettings Paging { get; set; }
-        public TimeZoneInfo TimeZone { get; set; } = TimeZoneInfo.Utc;
+        public string TimeZoneId { get; set; } = "America/New_York";
 
     }
 }

@@ -1,8 +1,10 @@
 ﻿@model LogListViewModel
 @using cloudscribe.Core.Models
+@using cloudscribe.Web.Common
 @using cloudscribe.Logging.Web
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<LogManager> sr
+@inject ITimeZoneHelper tzHelper
 @functions
 {
     public string GetClassFromLogLevel(string logLevel)
@@ -18,12 +20,9 @@
             case "Information":
             default:
                 return "bg-info";
-
         }
-
     }
 }
-
 <h1>@ViewData["Heading"]</h1>
 <ul class="list-unstyled">
     @foreach (var item in Model.LogPage)
@@ -34,7 +33,7 @@
                 <input type="submit" value='@sr["Delete"]' class="btn btn-xs btn-default pull-left" />
             </form>
             <h2 class="logitem">
-                @item.LogDateUtc.ToLocalTime(Model.TimeZone);
+                @tzHelper.ConvertToLocalTime(item.LogDateUtc, Model.TimeZoneId).ToString()
                 <strong>@item.LogLevel</strong>
                 @item.IpAddress
                 @item.Logger

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
-//  Created:			    2011-12-23
-//	Last Modified:		    2016-05-12
+//  Created:			    2015-12-23
+//	Last Modified:		    2016-06-06
 // 
 
 
@@ -18,14 +18,14 @@ namespace cloudscribe.Logging.Web.Controllers
     {
         public SystemLogController(
             LogManager logManager,
-            ITimeZoneResolver timeZoneResolver)
+            ITimeZoneIdResolver timeZoneIdResolver)
         {
             this.logManager = logManager;
-            this.timeZoneResolver = timeZoneResolver;
+            this.timeZoneIdResolver = timeZoneIdResolver;
         }
 
         private LogManager logManager;
-        private ITimeZoneResolver timeZoneResolver;
+        private ITimeZoneIdResolver timeZoneIdResolver;
 
         [Authorize(Policy = "SystemLogPolicy")]
         public async Task<IActionResult> Index(
@@ -52,7 +52,7 @@ namespace cloudscribe.Logging.Web.Controllers
                 model.LogPage = await logManager.GetLogsAscending(pageNumber, itemsPerPage);
             }
 
-            model.TimeZone = await timeZoneResolver.GetUserTimeZone();
+            model.TimeZoneId = await timeZoneIdResolver.GetUserTimeZoneId();
 
             var count = await logManager.GetLogItemCount();
 
