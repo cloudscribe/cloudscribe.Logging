@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0-beta4",
+    "version": "1.0.0-rc20160628",
     "title": "cloudscribe.Logging.SqlCe",
     "description": "Implementation of cloudscribe ILogRepository for SqlServer Compact edition",
     "authors": [ "Joe Audette" ],
@@ -16,15 +16,15 @@
 
 
     "dependencies": {
-        "NETStandard.Library": "1.5.0-rc2-24027",
+        "NETStandard.Library": "1.6.0*",
         "Microsoft.SqlServer.Compact": "4.0.8876.1",
-        "System.Data.Common": "4.0.1-rc2-24027",
-        "cloudscribe.Logging.Web": "1.0.0-*",
+        "System.Data.Common": "4.0.1-*",
+        "cloudscribe.Logging.Web": "1.0.2-*",
         "cloudscribe.DbHelpers.SqlCe": "1.0.0-*"
     },
 
     "frameworks": {
-        "netstandard1.5": {
+        "netstandard1.6": {
             "imports": "net451",
             "frameworkAssemblies": {
                 "System.Data": ""
