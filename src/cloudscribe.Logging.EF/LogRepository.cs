@@ -2,12 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2016-05-17
+// Last Modified:			2016-07-01
 // 
 
 using cloudscribe.Logging.Web;
+using cloudscribe.Logging.Web.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +19,11 @@ namespace cloudscribe.Logging.EF
     public class LogRepository : ILogRepository
     {
         public LogRepository(
-            //IServiceProvider serviceProvider,
             DbContextOptions<LoggingDbContext> options
             )
         {
 
             dbContextOptions = options;
-            //this.serviceProvider = serviceProvider;
             
         }
 
@@ -48,16 +46,7 @@ namespace cloudscribe.Logging.EF
         private DbContextOptions<LoggingDbContext> dbContextOptions;
         //private IServiceProvider serviceProvider;
         
-        public void AddLogItem(
-            DateTime logDate,
-            string ipAddress,
-            string culture,
-            string url,
-            string shortUrl,
-            string thread,
-            string logLevel,
-            string logger,
-            string message)
+        public void AddLogItem(ILogItem log)
         {
             // since we are using EF to add to the log we need ot avoid
             // logging EF related things, otherwise every time we log we generate more log events
@@ -65,22 +54,10 @@ namespace cloudscribe.Logging.EF
             // might be better to use the normal mssql ado log repository instead
             // need to decouple logging repos from core repos
 
-            if(logger == "Microsoft.Data.Entity.Storage.Internal.RelationalCommandBuilderFactory") { return; }
-            if(logger == "Microsoft.Data.Entity.Query.Internal.QueryCompiler") { return; }
-            if(logger == "Microsoft.Data.Entity.DbContext") { return; }
-            // maybe should be even more aggresive here to filter out anything with "Entity"
+            if (log.Logger.Contains("EntityFrameworkCore")) return;
 
-            var logItem = new LogItem();
-            logItem.LogDateUtc = logDate;
-            logItem.IpAddress = ipAddress;
-            logItem.Culture = culture;
-            logItem.Url = url;
-            logItem.ShortUrl = shortUrl;
-            logItem.Thread = thread;
-            logItem.LogLevel = logLevel;
-            logItem.Logger = logger;
-            logItem.Message = message;
-
+            var logItem = LogItem.FromILogItem(log);
+            
             using (var context = new LoggingDbContext(dbContextOptions))
             {
                 context.Add(logItem);
@@ -98,91 +75,106 @@ namespace cloudscribe.Logging.EF
             //return logItem.Id;
         }
 
-        public async Task<int> GetCount(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> GetCount(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await dbContext.LogItems.CountAsync<LogItem>(cancellationToken);
+            return await dbContext.LogItems
+                .Where(l => (logLevel == "" || l.LogLevel == logLevel))
+                .CountAsync<LogItem>(cancellationToken);
         }
 
         
-        public async Task<List<ILogItem>> GetPageAscending(
+        public async Task<PagedQueryResult> GetPageAscending(
             int pageNumber,
             int pageSize,
+            string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken))
         {
             int offset = (pageSize * pageNumber) - pageSize;
 
             var query = dbContext.LogItems.OrderBy(x => x.LogDateUtc)
+                .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
                 .Select(p => p)
                 ;
 
-            return await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
-            
+            var result = new PagedQueryResult();
+
+            result.Items = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+            result.TotalItems = await GetCount(logLevel, cancellationToken);
+            return result;
         }
 
-        public async Task<List<ILogItem>> GetPageDescending(
+        public async Task<PagedQueryResult> GetPageDescending(
             int pageNumber,
             int pageSize,
+            string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken))
         {
             int offset = (pageSize * pageNumber) - pageSize;
 
             var query = dbContext.LogItems.OrderByDescending(x => x.LogDateUtc)
+                .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
                 .Select(p => p)
                 ;
-            
-            return await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+
+            var result = new PagedQueryResult();
+
+            result.Items = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+            result.TotalItems = await GetCount(logLevel, cancellationToken);
+            return result;
 
         }
 
-        public async Task DeleteAll(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteAll(
+            string logLevel = "",
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            dbContext.LogItems.RemoveAll();
+            var query = from l in dbContext.LogItems
+                        where (logLevel == "" || l.LogLevel == logLevel)
+                        select l;
+
+            dbContext.LogItems.RemoveRange(query);
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            //return rowsAffected > 0;
+
+           
         }
 
         public async Task Delete(
             Guid logItemId, 
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            //var result = false;
+
             var itemToRemove = await dbContext.LogItems.SingleOrDefaultAsync(x => x.Id.Equals(logItemId));
             if(itemToRemove != null)
             {
                 dbContext.LogItems.Remove(itemToRemove);
                 int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-                //result = rowsAffected > 0;
+                
             }
 
-            //return result;
-        }
-
-        public async Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            var query = from l in dbContext.LogItems
-                       where l.LogDateUtc < cutoffDateUtc
-                        select l;
-
-            dbContext.LogItems.RemoveRange(query);
-            int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            //return rowsAffected > 0;
             
         }
 
-        public async Task DeleteByLevel(string logLevel, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task DeleteOlderThan(
+            DateTime cutoffDateUtc,
+            string logLevel = "",
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var query = from l in dbContext.LogItems
-                        where l.LogLevel == logLevel
+                       where l.LogDateUtc < cutoffDateUtc
+                       && (logLevel == "" || l.LogLevel == logLevel)
                         select l;
 
             dbContext.LogItems.RemoveRange(query);
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            //return rowsAffected > 0;
+            
+            
         }
+
+        
 
 
     }

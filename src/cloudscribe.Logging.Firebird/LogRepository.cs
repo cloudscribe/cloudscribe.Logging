@@ -44,7 +44,8 @@ namespace cloudscribe.Logging.Firebird
             string thread,
             string logLevel,
             string logger,
-            string message)
+            string message,
+            string serializedState)
         {
             dbSystemLog.Create(
                 logDate,

@@ -1,9 +1,9 @@
 {
-    "version": "1.0.2-rc20160628",
+    "version": "1.0.2-rc20160702",
     "buildOptions": {
         "emitEntryPoint": true
     },
-    "description": "Entity Framework 7 implementation of cloudscribe ILogRepository",
+    "description": "Entity Framework Core implementation of cloudscribe ILogRepository",
     "authors": [ "Joe Audette" ],
     "packOptions": {
         "owners": [ "Source Tree Solutions" ],

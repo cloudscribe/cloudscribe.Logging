@@ -50,7 +50,8 @@ namespace cloudscribe.Logging.Sqlite
             string thread,
             string logLevel,
             string logger,
-            string message)
+            string message,
+            string serializedState)
         {
             StringBuilder sqlCommand = new StringBuilder();
             sqlCommand.Append("INSERT INTO mp_SystemLog (");

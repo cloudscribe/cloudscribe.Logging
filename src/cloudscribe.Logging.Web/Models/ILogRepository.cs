@@ -2,11 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2015-12-27
+//	Last Modified:		    2016-07-01
 // 
 
 // TODO: we should update all the async signatures to take a cancellationtoken
 
+using cloudscribe.Logging.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,30 +17,25 @@ namespace cloudscribe.Logging.Web
 {
     public interface ILogRepository
     {
-        void AddLogItem(
-            DateTime logDate,
-            string ipAddress,
-            string culture,
-            string url,
-            string shortUrl,
-            string thread,
-            string logLevel,
-            string logger,
-            string message);
+        void AddLogItem(ILogItem logItem);
 
-        Task<int> GetCount(CancellationToken cancellationToken);
-        Task<List<ILogItem>> GetPageAscending(
+        //Task<int> GetCount(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<PagedQueryResult> GetPageAscending(
             int pageNumber,
             int pageSize,
-            CancellationToken cancellationToken);
-        Task<List<ILogItem>> GetPageDescending(
+            string logLevel = "",
+            CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<PagedQueryResult> GetPageDescending(
             int pageNumber,
             int pageSize,
-            CancellationToken cancellationToken);
+            string logLevel = "",
+            CancellationToken cancellationToken = default(CancellationToken));
 
-        Task DeleteAll(CancellationToken cancellationToken);
-        Task Delete(Guid logItemId, CancellationToken cancellationToken);
-        Task DeleteOlderThan(DateTime cutoffDateUtc, CancellationToken cancellationToken);
-        Task DeleteByLevel(string logLevel, CancellationToken cancellationToken);
+        Task DeleteAll(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
+        Task Delete(Guid logItemId, CancellationToken cancellationToken = default(CancellationToken));
+        Task DeleteOlderThan(DateTime cutoffDateUtc, string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
+        
     }
 }

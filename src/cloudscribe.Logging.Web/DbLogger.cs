@@ -2,13 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2016-05-29
+//	Last Modified:		    2016-07-01
 // 
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Globalization;
@@ -88,12 +89,40 @@ namespace cloudscribe.Logging.Web
 
             contextAccessor = services.GetService<IHttpContextAccessor>();
 
-            string ipAddress = GetIpAddress();
-            string culture = CultureInfo.CurrentCulture.Name;
-            string url = GetRequestUrl();
-            string shortUrl = GetShortUrl(url);
-            string thread = System.Threading.Thread.CurrentThread.Name + " " + eventId.ToString();
-            string logLev = logLevel.ToString();
+            var logItem = new LogItem();
+            logItem.EventId = eventId.Id;
+            logItem.Message = message;
+            logItem.IpAddress = GetIpAddress();
+            logItem.Culture = CultureInfo.CurrentCulture.Name;
+            logItem.Url = GetRequestUrl();
+
+            // lets not log the log viewer
+            if (logItem.Url.StartsWith("/SystemLog")) return;
+            if (logItem.Url.StartsWith("/systemlog")) return;
+
+            logItem.ShortUrl = GetShortUrl(logItem.Url);
+            logItem.Thread = System.Threading.Thread.CurrentThread.Name ;
+            logItem.Logger = logger;
+            logItem.LogLevel = logLevel.ToString();
+            
+            try
+            {
+                logItem.StateJson = JsonConvert.SerializeObject(
+                state,
+                Formatting.None,
+                new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Include
+
+                }
+                );
+            }
+            catch(Exception)
+            {
+                // don't throw exceptions from logger
+                //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
+            }
+
             // an exception is expected here if the db has not yet been populated
             // or if the db is not accessible
             // we cannot allow logging to raise exceptions
@@ -101,16 +130,7 @@ namespace cloudscribe.Logging.Web
             // would be good if we could only swallow specific exceptions
             try
             {
-                logRepo.AddLogItem(
-                DateTime.UtcNow,
-                ipAddress,
-                culture,
-                url,
-                shortUrl,
-                thread,
-                logLev,
-                logger,
-                message);
+                logRepo.AddLogItem(logItem);
             }
             catch (Exception)
             {
@@ -118,80 +138,21 @@ namespace cloudscribe.Logging.Web
             }
         }
 
-        //public void Log(
-        //    LogLevel logLevel, 
-        //    int eventId, 
-        //    object state, 
-        //    Exception exception, 
-        //    Func<object, Exception, string> formatter)
+
+        //private string Serialize(TState obj)
         //{
-        //    if (!IsEnabled(logLevel))
-        //    {
-        //        return;
-        //    }
-        //    var message = string.Empty;
-        //    var values = state as ILogValues;
-        //    if (formatter != null)
-        //    {
-        //        message = formatter(state, exception);
-        //    }
-        //    else if (values != null)
-        //    {
-        //        var builder = new StringBuilder();
-        //        FormatLogValues(
-        //            builder,
-        //            values,
-        //            level: 1,
-        //            bullet: false);
-
-        //        message = builder.ToString();
-        //        if (exception != null)
+        //    return JsonConvert.SerializeObject(
+        //        obj,
+        //        Formatting.None,
+        //        new JsonSerializerSettings
         //        {
-        //            message += Environment.NewLine + exception;
+        //            DefaultValueHandling = DefaultValueHandling.Include
+        //            //, DateTimeZoneHandling = DateTimeZoneHandling.Utc  
         //        }
-        //    }
-        //    else
-        //    {
-        //        message = LogFormatter.Formatter(state, exception);
-        //    }
-        //    if (string.IsNullOrEmpty(message))
-        //    {
-        //        return;
-        //    }
-
-        //    contextAccessor = services.GetService<IHttpContextAccessor>();
-
-        //    string ipAddress = GetIpAddress();
-        //    string culture = CultureInfo.CurrentCulture.Name;
-        //    string url = GetRequestUrl();
-        //    string shortUrl = GetShortUrl(url);
-        //    string thread = System.Threading.Thread.CurrentThread.Name + " " + eventId.ToString();
-        //    string logLev = logLevel.ToString();
-        //    // an exception is expected here if the db has not yet been populated
-        //    // or if the db is not accessible
-        //    // we cannot allow logging to raise exceptions
-        //    // so we must swallow any exception here
-        //    // would be good if we could only swallow specific exceptions
-        //    try
-        //    {
-        //        logRepo.AddLogItem(
-        //        DateTime.UtcNow,
-        //        ipAddress,
-        //        culture,
-        //        url,
-        //        shortUrl,
-        //        thread,
-        //        logLev,
-        //        logger,
-        //        message);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
-        //    }
-
-
+        //        );
         //}
+
+
 
         public bool IsEnabled(LogLevel logLevel)
         {

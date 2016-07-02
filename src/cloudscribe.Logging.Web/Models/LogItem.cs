@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2015-12-26
+//	Last Modified:		    2016-07-01
 // 
 
 using System;
@@ -17,7 +17,7 @@ namespace cloudscribe.Logging.Web
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         public DateTime LogDateUtc { get; set; } = DateTime.UtcNow;
 
         private string ipAddress = string.Empty;
@@ -76,8 +76,35 @@ namespace cloudscribe.Logging.Web
             set { message = value; }
         }
 
+        private string stateJson = string.Empty;
+        public string StateJson
+        {
+            get { return stateJson ?? string.Empty; }
+            set { stateJson = value; }
+        }
 
-        
+        public int EventId { get; set; }
+
+        public static LogItem FromILogItem(ILogItem item)
+        {
+            if(item is LogItem) { return item as LogItem; }
+
+            var log = new LogItem();
+            log.Culture = item.Culture;
+            log.IpAddress = item.IpAddress;
+            log.LogDateUtc = item.LogDateUtc;
+            log.Logger = item.Logger;
+            log.LogLevel = item.LogLevel;
+            log.Message = item.Message;
+            log.ShortUrl = item.ShortUrl;
+            log.StateJson = item.StateJson;
+            log.Thread = item.Thread;
+            log.Url = item.Url;
+            log.EventId = item.EventId;
+
+            return log;
+        }
+
 
     }
 }

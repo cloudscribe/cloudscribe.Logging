@@ -8,9 +8,10 @@ using cloudscribe.Logging.EF;
 namespace cloudscribe.Logging.EF.Migrations
 {
     [DbContext(typeof(LoggingDbContext))]
-    partial class LoggingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160701180450_changes20160701")]
+    partial class changes20160701
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

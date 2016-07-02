@@ -2,11 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2016-06-06
+//	Last Modified:		    2016-07-02
 // 
 
 
 using cloudscribe.Core.Models;
+using cloudscribe.Logging.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,7 @@ namespace cloudscribe.Logging.Web.Controllers
 
         [Authorize(Policy = "SystemLogPolicy")]
         public async Task<IActionResult> Index(
+            string logLevel = "",
             int pageNumber = 1,
             int pageSize = -1,
             string sort = "desc")
@@ -43,22 +45,24 @@ namespace cloudscribe.Logging.Web.Controllers
             }
 
             var model = new LogListViewModel();
+            model.LogLevel = logLevel;
+            PagedQueryResult result;
             if (sort == "desc")
             {
-                model.LogPage = await logManager.GetLogsDescending(pageNumber, itemsPerPage);
+                result = await logManager.GetLogsDescending(pageNumber, itemsPerPage, logLevel);
             }
             else
             {
-                model.LogPage = await logManager.GetLogsAscending(pageNumber, itemsPerPage);
+                result = await logManager.GetLogsAscending(pageNumber, itemsPerPage, logLevel);
             }
 
             model.TimeZoneId = await timeZoneIdResolver.GetUserTimeZoneId();
 
-            var count = await logManager.GetLogItemCount();
+            model.LogPage = result.Items;
 
             model.Paging.CurrentPage = pageNumber;
             model.Paging.ItemsPerPage = itemsPerPage;
-            model.Paging.TotalItems = count;
+            model.Paging.TotalItems = result.TotalItems;
 
             return View(model);
 
@@ -77,9 +81,9 @@ namespace cloudscribe.Logging.Web.Controllers
         [Authorize(Policy = "SystemLogPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogDeleteAll()
+        public async Task<IActionResult> LogDeleteAll(string logLevel = "")
         {
-            await logManager.DeleteAllLogItems();
+            await logManager.DeleteAllLogItems(logLevel);
 
             return RedirectToAction("Index");
         }
