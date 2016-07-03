@@ -5,7 +5,6 @@
 // Last Modified:			2016-07-02
 // 
 
-
 using cloudscribe.Logging.Web;
 using cloudscribe.Logging.Web.Models;
 using Microsoft.Extensions.Logging;

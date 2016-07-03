@@ -55,5 +55,10 @@ namespace cloudscribe.Logging.Web
             await logRepo.DeleteAll(logLevel, CancellationToken.None);
         }
 
+        public async Task DeleteOlderThan(DateTime cutoffUtc, string logLevel = "")
+        {
+            await logRepo.DeleteOlderThan(cutoffUtc, logLevel, CancellationToken.None);
+        }
+
     }
 }

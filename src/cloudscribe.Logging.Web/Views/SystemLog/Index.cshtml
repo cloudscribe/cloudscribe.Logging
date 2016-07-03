@@ -94,3 +94,15 @@
     <input type="hidden" asp-for="@Model.LogLevel" />
     <input type="submit" value='@sr["Clear Log"]' class="btn btn-sm btn-danger " />
 </form>
+<form role="form" class="form-inline" asp-controller="SystemLog" asp-action="LogDeleteOlderThan">
+    <input type="hidden" asp-for="@Model.LogLevel" />
+    <input type="submit" value='@sr["Delete Older Than"]' class="btn btn-sm btn-danger " />
+    <select class="form-control" name="days" id="days">
+        <option>1</option>
+        <option>5</option>
+        <option>10</option>
+        <option>30</option>
+        <option>60</option>
+    </select>
+    @sr["Days"]
+</form>

@@ -17,7 +17,7 @@ namespace cloudscribe.Logging.Web
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         public DateTime LogDateUtc { get; set; } = DateTime.UtcNow;
 
         private string ipAddress = string.Empty;

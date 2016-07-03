@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2-rc20160702",
+    "version": "1.0.2-rc20160703",
     "buildOptions": {
         "emitEntryPoint": true
     },

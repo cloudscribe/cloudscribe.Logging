@@ -87,6 +87,16 @@ namespace cloudscribe.Logging.NoDb
             {
                 return file;
             }
+            //var typeDir = new DirectoryInfo(typeFolderPath);
+            //foreach (var levelDir in typeDir.GetDirectories())
+            //{
+            //    foreach (var dateDir in levelDir.GetDirectories())
+            //    {
+            //        var fp = Path.Combine(dateDir.FullName, fileName);
+            //        if (File.Exists(fp)) return fp;
+            //    }
+
+            //}
 
             // otherwise return the best path calculation based on info provided
             // ie to save a file the other ResolvePath method should be used and the

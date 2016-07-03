@@ -2,14 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2016-07-01
+// Last Modified:			2016-07-03
 // 
 
 using cloudscribe.Logging.Web;
 using cloudscribe.Logging.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -132,11 +131,21 @@ namespace cloudscribe.Logging.EF
             string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var query = from l in dbContext.LogItems
-                        where (logLevel == "" || l.LogLevel == logLevel)
+            
+            if(string.IsNullOrWhiteSpace(logLevel))
+            {
+                dbContext.LogItems.RemoveAll();
+            }
+            else
+            {
+                var query = from l in dbContext.LogItems
+                        where  l.LogLevel == logLevel
                         select l;
 
-            dbContext.LogItems.RemoveRange(query);
+                dbContext.LogItems.RemoveRange(query);
+            }
+
+            
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
 
            
@@ -163,18 +172,27 @@ namespace cloudscribe.Logging.EF
             string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var query = from l in dbContext.LogItems
-                       where l.LogDateUtc < cutoffDateUtc
-                       && (logLevel == "" || l.LogLevel == logLevel)
-                        select l;
+            if (string.IsNullOrWhiteSpace(logLevel))
+            {
+                var query = from l in dbContext.LogItems
+                            where l.LogDateUtc < cutoffDateUtc
+                            select l;
 
-            dbContext.LogItems.RemoveRange(query);
+                dbContext.LogItems.RemoveRange(query);
+            }
+            else
+            {
+                var query = from l in dbContext.LogItems
+                            where l.LogDateUtc < cutoffDateUtc
+                            && (l.LogLevel == logLevel)
+                            select l;
+
+                dbContext.LogItems.RemoveRange(query);
+            }
+                
             int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken);
-            
-            
+                 
         }
-
-        
 
 
     }

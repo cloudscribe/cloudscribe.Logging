@@ -88,5 +88,17 @@ namespace cloudscribe.Logging.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Policy = "SystemLogPolicy")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogDeleteOlderThan(string logLevel = "", int days = 5)
+        {
+            var cutoffUtc = DateTime.UtcNow.AddDays(-days);
+
+            await logManager.DeleteOlderThan(cutoffUtc, logLevel);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
