@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2016-07-03
+// Last Modified:			2016-07-29
 // 
 
 using cloudscribe.Logging.Web;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Logging.EF
 {
-    public class LogRepository : ILogRepository
+    public class LogRepository : ILogRepository, IDisposable
     {
         public LogRepository(
             DbContextOptions<LoggingDbContext> options
@@ -194,6 +194,49 @@ namespace cloudscribe.Logging.EF
                  
         }
 
+        #region IDisposable Support
+
+        private void ThrowIfDisposed()
+        {
+            if (disposedValue)
+            {
+                throw new ObjectDisposedException(GetType().Name);
+            }
+        }
+
+        private bool disposedValue = false; // To detect redundant calls
+
+        void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // dispose managed state (managed objects).
+                    if(dbc != null)
+                    {
+                        dbc.Dispose();
+                    }
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+
+        #endregion
 
     }
 }

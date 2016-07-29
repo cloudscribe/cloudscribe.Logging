@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2-rc20160703",
+    "version": "1.0.2-rc20160728",
     "buildOptions": {
         "emitEntryPoint": true
     },
@@ -36,7 +36,7 @@
 
     "tools": {
         "Microsoft.EntityFrameworkCore.Tools": {
-            "version": "1.0.0-preview2-final", 
+            "version": "1.0.0-preview2-final" 
         }
     },
 
