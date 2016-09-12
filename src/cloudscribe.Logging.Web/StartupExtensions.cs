@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using cloudscribe.Logging.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using cloudscribe.Logging.Web;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
 
@@ -26,5 +23,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return options;
         }
+
+        public static AuthorizationOptions AddCloudscribeLoggingDefaultPolicy(this AuthorizationOptions options)
+        {
+            options.AddPolicy(
+                    "SystemLogPolicy",
+                    authBuilder =>
+                    {
+                        authBuilder.RequireRole("ServerAdmins");
+                    });
+
+            return options;
+        }
+
     }
 }
