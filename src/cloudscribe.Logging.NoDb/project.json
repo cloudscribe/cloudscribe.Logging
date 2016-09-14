@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0-rc20160703",
+    "version": "1.0.0-rc20160914",
     "description": "NoDb implementation of cloudscribe ILogRepository",
     "authors": [ "Joe Audette" ],
     "packOptions": {
@@ -15,9 +15,9 @@
 
     "dependencies": {
         "NETStandard.Library": "1.6.0-*",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0-*",
+        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.*",
         "cloudscribe.Logging.Web": "1.0.2-*",
-        "NoDb": "1.0.0-*"
+        "NoDb": "1.0.*"
     },
 
     "frameworks": {

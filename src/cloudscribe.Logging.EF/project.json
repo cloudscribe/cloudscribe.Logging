@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2-rc20160728",
+    "version": "1.0.2-rc20160914",
     "buildOptions": {
         "emitEntryPoint": true
     },
@@ -18,20 +18,19 @@
 
     "dependencies": {
         "cloudscribe.Logging.Web": "1.0.2-*",
-		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-*",
-         "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
-		 "Microsoft.AspNetCore.Mvc": "1.0.0-*",
-		 "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
-        "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-*",
+		 "Microsoft.AspNetCore.Mvc": "1.0.*",
+		 "Microsoft.Extensions.Configuration.Json": "1.0.*",
+        "Microsoft.EntityFrameworkCore.SqlServer": "1.0.*",
         "Microsoft.EntityFrameworkCore.Tools": {
             "version": "1.0.0-preview2-final",
             "type": "build"
         },
         "System.ComponentModel": "4.0.1-*",
         "System.Collections": "4.0.11-*",
-        "Microsoft.EntityFrameworkCore": "1.0.0-*",
-        "Microsoft.Extensions.Caching.Abstractions": "1.0.0-*",
-        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-*"
+        "Microsoft.EntityFrameworkCore": "1.0.*",
+        "Microsoft.Extensions.Caching.Abstractions": "1.0.*",
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.*",
+        "Microsoft.AspNetCore.Hosting": "1.0.*"
     },
 
     "tools": {
