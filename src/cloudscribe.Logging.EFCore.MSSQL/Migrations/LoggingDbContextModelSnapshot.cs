@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using cloudscribe.Logging.EF;
+using System;
 
-namespace cloudscribe.Logging.EF.Migrations
+namespace cloudscribe.Logging.EFCore.MSSQL.Migrations
 {
     [DbContext(typeof(LoggingDbContext))]
     partial class LoggingDbContextModelSnapshot : ModelSnapshot

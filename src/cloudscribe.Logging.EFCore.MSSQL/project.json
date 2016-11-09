@@ -1,5 +1,5 @@
-{
-    "version": "1.0.2-rc20160914",
+﻿{
+    "version": "1.0.0-rc20161108",
     "buildOptions": {
         "emitEntryPoint": true
     },
@@ -18,8 +18,9 @@
 
     "dependencies": {
         "cloudscribe.Logging.Web": "1.0.2-*",
-		 "Microsoft.AspNetCore.Mvc": "1.0.*",
-		 "Microsoft.Extensions.Configuration.Json": "1.0.*",
+        "cloudscribe.Logging.EFCore.Common": "1.0.0-*",
+        "Microsoft.AspNetCore.Mvc": "1.0.*",
+        "Microsoft.Extensions.Configuration.Json": "1.0.*",
         "Microsoft.EntityFrameworkCore.SqlServer": "1.0.*",
         "Microsoft.EntityFrameworkCore.Tools": {
             "version": "1.0.0-preview2-final",
@@ -35,7 +36,7 @@
 
     "tools": {
         "Microsoft.EntityFrameworkCore.Tools": {
-            "version": "1.0.0-preview2-final" 
+            "version": "1.0.0-preview2-final"
         }
     },
 

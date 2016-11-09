@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2016-07-29
+// Last Modified:			2016-11-09
 // 
 
 using cloudscribe.Logging.Web;
@@ -13,53 +13,52 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.EF
+namespace cloudscribe.Logging.EFCore
 {
     public class LogRepository : ILogRepository, IDisposable
     {
         public LogRepository(
-            DbContextOptions<LoggingDbContext> options
+            ILoggingDbContextFactory contextFactory
             )
         {
-
-            dbContextOptions = options;
+            this.contextFactory = contextFactory;
             
         }
 
+        private ILoggingDbContextFactory contextFactory;
         // since most of the time this repo will be invoked for adding to the log 
         // we don't need this dbcontext most of the time
         // we do need it for querying the log but we can just create it lazily if it is needed
-        private LoggingDbContext dbc = null;
-        private LoggingDbContext dbContext
+        private ILoggingDbContext dbc = null;
+        private ILoggingDbContext dbContext
         {
             get
             {
                 if(dbc == null)
                 {
-                    dbc = new LoggingDbContext(dbContextOptions);
+                    dbc = contextFactory.CreateContext();
                 }
                 return dbc;
             }
         }
 
-        private DbContextOptions<LoggingDbContext> dbContextOptions;
-        //private IServiceProvider serviceProvider;
+       
         
         public void AddLogItem(ILogItem log)
         {
-            // since we are using EF to add to the log we need ot avoid
+            // since we are using EF to add to the log we need to avoid
             // logging EF related things, otherwise every time we log we generate more log events
             // continuously
             // might be better to use the normal mssql ado log repository instead
             // need to decouple logging repos from core repos
-
+            
             if (log.Logger.Contains("EntityFrameworkCore")) return;
 
             var logItem = LogItem.FromILogItem(log);
             
-            using (var context = new LoggingDbContext(dbContextOptions))
+            using (var context = contextFactory.CreateContext())
             {
-                context.Add(logItem);
+                context.LogItems.Add(logItem);
                 context.SaveChanges();
             }
 

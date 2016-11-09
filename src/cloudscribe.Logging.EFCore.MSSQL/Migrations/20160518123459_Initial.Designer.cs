@@ -3,18 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using cloudscribe.Logging.EF;
 
-namespace cloudscribe.Logging.EF.Migrations
+
+namespace cloudscribe.Logging.EFCore.MSSQL.Migrations
 {
     [DbContext(typeof(LoggingDbContext))]
-    [Migration("20160701180450_changes20160701")]
-    partial class changes20160701
+    [Migration("20160518123459_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
                 .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,8 +27,6 @@ namespace cloudscribe.Logging.EF.Migrations
 
                     b.Property<string>("Culture")
                         .HasAnnotation("MaxLength", 10);
-
-                    b.Property<int>("EventId");
 
                     b.Property<string>("IpAddress")
                         .HasAnnotation("MaxLength", 50);
@@ -49,8 +47,6 @@ namespace cloudscribe.Logging.EF.Migrations
 
                     b.Property<string>("ShortUrl")
                         .HasAnnotation("MaxLength", 255);
-
-                    b.Property<string>("StateJson");
 
                     b.Property<string>("Thread")
                         .HasAnnotation("MaxLength", 255);

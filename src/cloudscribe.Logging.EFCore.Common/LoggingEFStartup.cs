@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-26
-// Last Modified:			2016-06-04
+// Last Modified:			2016-11-09
 // 
 
 
-using cloudscribe.Logging.EF;
+using cloudscribe.Logging.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
             
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<LoggingDbContext>();
+                var db = serviceScope.ServiceProvider.GetService<ILoggingDbContext>();
                 
                 await db.Database.MigrateAsync();
                 
