@@ -15,7 +15,8 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:PostgresExtension:.uuid-ossp", "'uuid-ossp', '', ''")
                 .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'");
+               // .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'")
+                ;
 
             modelBuilder.Entity("cloudscribe.Logging.Web.LogItem", b =>
                 {

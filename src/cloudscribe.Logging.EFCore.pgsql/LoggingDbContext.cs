@@ -29,7 +29,7 @@ namespace cloudscribe.Logging.EFCore.pgsql
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasSequence<int>("LogIds")
+            modelBuilder.HasSequence<long>("LogIds")
                 .StartsAt(1)
                 .IncrementsBy(1);
 

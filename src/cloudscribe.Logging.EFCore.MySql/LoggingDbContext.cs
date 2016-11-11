@@ -7,7 +7,7 @@
 
 using cloudscribe.Logging.Web;
 using Microsoft.EntityFrameworkCore;
-using MySQL.Data.EntityFrameworkCore.Extensions;
+//using MySQL.Data.EntityFrameworkCore.Extensions;
 
 
 namespace cloudscribe.Logging.EFCore.MySql
@@ -30,9 +30,9 @@ namespace cloudscribe.Logging.EFCore.MySql
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasSequence<int>("LogIds")
-                .StartsAt(1)
-                .IncrementsBy(1);
+            //modelBuilder.HasSequence<int>("LogIds")
+            //    .StartsAt(1)
+            //    .IncrementsBy(1);
 
             modelBuilder.Entity<LogItem>(entity =>
             {

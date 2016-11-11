@@ -8,14 +8,13 @@ using cloudscribe.Logging.EFCore.MySql;
 namespace cloudscribe.Logging.EFCore.MySql.Migrations
 {
     [DbContext(typeof(LoggingDbContext))]
-    [Migration("20161110185728_Initial")]
+    [Migration("20161111151337_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'");
+                .HasAnnotation("ProductVersion", "1.0.1");
 
             modelBuilder.Entity("cloudscribe.Logging.Web.LogItem", b =>
                 {

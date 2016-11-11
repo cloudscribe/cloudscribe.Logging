@@ -8,14 +8,12 @@ namespace cloudscribe.Logging.EFCore.MySql.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence<int>(
-                name: "LogIds");
-
             migrationBuilder.CreateTable(
                 name: "cs_SystemLog",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
                     Culture = table.Column<string>(maxLength: 10, nullable: true),
                     EventId = table.Column<int>(nullable: false),
                     IpAddress = table.Column<string>(maxLength: 50, nullable: true),
@@ -36,9 +34,6 @@ namespace cloudscribe.Logging.EFCore.MySql.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropSequence(
-                name: "LogIds");
-
             migrationBuilder.DropTable(
                 name: "cs_SystemLog");
         }

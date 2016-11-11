@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0-rc20161108",
+    "version": "1.0.0-rc20161110",
     "buildOptions": {
         "emitEntryPoint": true
     },
@@ -27,11 +27,11 @@
         },
         "System.ComponentModel": "4.0.1-*",
         "System.Collections": "4.0.11-*",
-        "Microsoft.EntityFrameworkCore": "1.0.*",
+        "Microsoft.EntityFrameworkCore": "1.0.1-*",
         "Microsoft.Extensions.Caching.Abstractions": "1.0.*",
         "Microsoft.Extensions.Logging.Abstractions": "1.0.*",
         "Microsoft.AspNetCore.Hosting": "1.0.*",
-        "MySql.Data.EntityFrameworkCore": "7.0.6-IR31"
+        "Pomelo.EntityFrameworkCore.MySql": "1.0-*"
     },
 
     "tools": {

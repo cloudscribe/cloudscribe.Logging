@@ -10,8 +10,8 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
         {
             migrationBuilder.EnsurePostgresExtension("uuid-ossp");
 
-            migrationBuilder.CreateSequence<int>(
-                name: "LogIds");
+            //migrationBuilder.CreateSequence<long>(
+            //    name: "LogIds");
 
             migrationBuilder.CreateTable(
                 name: "cs_SystemLog",

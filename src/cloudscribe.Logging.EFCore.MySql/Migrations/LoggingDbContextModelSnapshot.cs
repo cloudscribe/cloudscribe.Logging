@@ -13,8 +13,7 @@ namespace cloudscribe.Logging.EFCore.MySql.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'");
+                .HasAnnotation("ProductVersion", "1.0.1");
 
             modelBuilder.Entity("cloudscribe.Logging.Web.LogItem", b =>
                 {

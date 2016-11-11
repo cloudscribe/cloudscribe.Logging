@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0-rc20161108",
+    "version": "1.0.0-rc20161109",
     "description": "Entity Framework Core implementation of cloudscribe ILogRepository",
     "authors": [ "Joe Audette" ],
     "packOptions": {
@@ -15,8 +15,8 @@
 
     "dependencies": {
         "NETStandard.Library": "1.6.0",
-        "Microsoft.EntityFrameworkCore": "1.0.*",
-        "Microsoft.EntityFrameworkCore.Relational": "1.0.0-*",
+        "Microsoft.EntityFrameworkCore": "1.0.1-*",
+        "Microsoft.EntityFrameworkCore.Relational": "1.0.1-*",
         "cloudscribe.Logging.Web": "1.0.2-*"
     },
 
