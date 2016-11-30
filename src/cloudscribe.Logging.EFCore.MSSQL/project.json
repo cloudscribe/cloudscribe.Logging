@@ -19,7 +19,6 @@
   "dependencies": {
     "cloudscribe.Logging.Web": "1.1.0-*",
     "cloudscribe.Logging.EFCore.Common": "1.1.0-*",
-    "Microsoft.AspNetCore.Mvc": "1.1.*",
     "Microsoft.Extensions.Configuration.Json": "1.1.*",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.*",
     "System.ComponentModel": "4.*",
