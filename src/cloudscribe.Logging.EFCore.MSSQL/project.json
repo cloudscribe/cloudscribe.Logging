@@ -24,6 +24,7 @@
     "System.ComponentModel": "4.*",
     "System.Collections": "4.*",
     "Microsoft.EntityFrameworkCore": "1.1.*",
+    "Microsoft.EntityFrameworkCore.Design": "1.1.*",
     "Microsoft.Extensions.Caching.Abstractions": "1.1.*",
     "Microsoft.Extensions.Logging.Abstractions": "1.1.*",
     "Microsoft.AspNetCore.Hosting": "1.1.*"

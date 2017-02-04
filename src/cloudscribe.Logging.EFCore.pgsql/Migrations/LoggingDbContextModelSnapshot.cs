@@ -13,10 +13,10 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("Npgsql:PostgresExtension:.uuid-ossp", "'uuid-ossp', '', ''")
-                .HasAnnotation("ProductVersion", "1.0.1")
-               // .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int32', 'False'")
-                ;
+                .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", "'uuid-ossp', '', ''")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
+                .HasAnnotation("Relational:Sequence:.LogIds", "'LogIds', '', '1', '1', '', '', 'Int64', 'False'");
 
             modelBuilder.Entity("cloudscribe.Logging.Web.LogItem", b =>
                 {
@@ -24,31 +24,31 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Culture")
-                        .HasAnnotation("MaxLength", 10);
+                        .HasMaxLength(10);
 
                     b.Property<int>("EventId");
 
                     b.Property<string>("IpAddress")
-                        .HasAnnotation("MaxLength", 50);
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("LogDateUtc")
                         .HasColumnName("LogDate");
 
                     b.Property<string>("LogLevel")
-                        .HasAnnotation("MaxLength", 20);
+                        .HasMaxLength(20);
 
                     b.Property<string>("Logger")
-                        .HasAnnotation("MaxLength", 255);
+                        .HasMaxLength(255);
 
                     b.Property<string>("Message");
 
                     b.Property<string>("ShortUrl")
-                        .HasAnnotation("MaxLength", 255);
+                        .HasMaxLength(255);
 
                     b.Property<string>("StateJson");
 
                     b.Property<string>("Thread")
-                        .HasAnnotation("MaxLength", 255);
+                        .HasMaxLength(255);
 
                     b.Property<string>("Url");
 

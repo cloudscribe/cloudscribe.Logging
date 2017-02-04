@@ -8,17 +8,17 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsurePostgresExtension("uuid-ossp");
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:uuid-ossp", "'uuid-ossp', '', ''");
 
-            //migrationBuilder.CreateSequence<long>(
-            //    name: "LogIds");
+            migrationBuilder.CreateSequence(
+                name: "LogIds");
 
             migrationBuilder.CreateTable(
                 name: "cs_SystemLog",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false)
-                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Id = table.Column<Guid>(nullable: false),
                     Culture = table.Column<string>(maxLength: 10, nullable: true),
                     EventId = table.Column<int>(nullable: false),
                     IpAddress = table.Column<string>(maxLength: 50, nullable: true),
@@ -39,11 +39,11 @@ namespace cloudscribe.Logging.EFCore.pgsql.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropSequence(
-                name: "LogIds");
-
             migrationBuilder.DropTable(
                 name: "cs_SystemLog");
+
+            migrationBuilder.DropSequence(
+                name: "LogIds");
         }
     }
 }
