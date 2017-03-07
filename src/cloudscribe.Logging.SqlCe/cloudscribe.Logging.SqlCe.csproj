@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Implementation of cloudscribe ILogRepository for SqlServer Compact edition</Description>
+    <AssemblyTitle>cloudscribe.Logging.SqlCe</AssemblyTitle>
+    <VersionPrefix>1.0.0-rc20160628</VersionPrefix>
+    <Authors>Joe Audette</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>cloudscribe.Logging.SqlCe</AssemblyName>
+    <PackageId>cloudscribe.Logging.SqlCe</PackageId>
+    <PackageTags>cloudscribe;logging;sqlce;SqlServerCe</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion>1.6.0*</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);net451</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Logging.Web\cloudscribe.Logging.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
+    <PackageReference Include="System.Data.Common" Version="4.1.0" />
+    <PackageReference Include="cloudscribe.DbHelpers.SqlCe" Version="1.0.0-*" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+    <Reference Include="System.Data" />
+  </ItemGroup>
+
+</Project>

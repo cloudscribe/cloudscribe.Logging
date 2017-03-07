@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Implementation of cloudscribe ILogRepository for pgsql</Description>
+    <VersionPrefix>1.0.0-rc20160628</VersionPrefix>
+    <Authors>Joe Audette</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>cloudscribe.Logging.pgsql</AssemblyName>
+    <PackageId>cloudscribe.Logging.pgsql</PackageId>
+    <PackageTags>cloudscribe;repositories;pgsql;npgsql;postgresql</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion>1.6.0-*</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Logging.Web\cloudscribe.Logging.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="cloudscribe.DbHelpers.Ado" Version="1.0.0-*" />
+    <PackageReference Include="npgsql" Version="3.1.0-*" />
+  </ItemGroup>
+
+</Project>
