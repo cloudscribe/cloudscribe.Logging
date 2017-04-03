@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <Description>MSSQL Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>1.1.0-rc20161129</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix>rc20170401</VersionSuffix>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <AssemblyName>cloudscribe.Logging.EFCore.MSSQL</AssemblyName>
@@ -22,13 +23,23 @@
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging.Web\cloudscribe.Logging.Web.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
+
+    <Content Remove="Properties\launchSettings.json" />
+    <Content Include="Properties\launchSettings.json" CopyToPublishDirectory="Never">
+      <Pack>false</Pack>
+    </Content>
+    <Content Remove="appsettings.json" CopyToPublishDirectory="Never" />
+    <Content Include="appsettings.json" CopyToPublishDirectory="Never">
+      <Pack>false</Pack>
+    </Content>
+    
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
-    <PackageReference Include="System.ComponentModel" Version="4.0.1" />
-    <PackageReference Include="System.Collections" Version="4.0.11" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="1.1.1" />
