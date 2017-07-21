@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.FileProviders;
+using System;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -14,7 +15,18 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
+        [Obsolete("AddEmbeddedViewsForCloudscribeLogging is deprecated, please use AddCloudscribeLoggingBootstrap3Views instead.")]
         public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeLogging(this RazorViewEngineOptions options)
+        {
+            options.FileProviders.Add(new EmbeddedFileProvider(
+                    typeof(LogManager).GetTypeInfo().Assembly,
+                    "cloudscribe.Logging.Web"
+                ));
+
+            return options;
+        }
+
+        public static RazorViewEngineOptions AddCloudscribeLoggingBootstrap3Views(this RazorViewEngineOptions options)
         {
             options.FileProviders.Add(new EmbeddedFileProvider(
                     typeof(LogManager).GetTypeInfo().Assembly,
