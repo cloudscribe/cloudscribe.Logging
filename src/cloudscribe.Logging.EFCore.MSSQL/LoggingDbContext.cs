@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-10
-// Last Modified:			2016-11-09
+// Last Modified:			2017-07-26
 // 
 
 using cloudscribe.Logging.Web;
@@ -39,14 +39,14 @@ namespace cloudscribe.Logging.EFCore.MSSQL
                 entity.HasKey(p => p.Id);
 
                 entity.Property(p => p.Id)
-                .ForSqlServerHasColumnType("uniqueidentifier")
-                .ForSqlServerHasDefaultValueSql("newid()")
+                .HasColumnType("uniqueidentifier")
+                .HasDefaultValueSql("newid()")
                    .IsRequired();
                 
                 entity.Property(p => p.LogDateUtc)
                 .HasColumnName("LogDate")
-                .ForSqlServerHasColumnType("datetime")
-                .ForSqlServerHasDefaultValueSql("getutcdate()")
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("getutcdate()")
                 ;
 
                 entity.Property(p => p.IpAddress)
