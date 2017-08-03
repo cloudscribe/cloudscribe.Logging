@@ -1,8 +1,7 @@
 ﻿using cloudscribe.Logging.EFCore;
 using cloudscribe.Logging.EFCore.MySql;
 using Microsoft.EntityFrameworkCore;
-//using MySQL.Data.EntityFrameworkCore;
-//using MySQL.Data.EntityFrameworkCore.Extensions;
+
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -16,8 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddEntityFrameworkMySql()
                 .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
                 {
-                    options.UseMySql(connectionString)
-                           .UseInternalServiceProvider(serviceProvider);
+                    options.UseMySql(connectionString);
 
                 });
 

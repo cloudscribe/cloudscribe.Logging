@@ -2,9 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-26
-// Last Modified:			2016-11-09
+// Last Modified:			2017-08-03
 // 
-
 
 using cloudscribe.Logging.EFCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +18,11 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
         {
             
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = serviceProvider.CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<ILoggingDbContext>();
-                
                 await db.Database.MigrateAsync();
-                
-                
+                   
             }
         }
     }

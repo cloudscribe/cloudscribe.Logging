@@ -14,9 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
                 {
-                    options.UseSqlServer(connectionString)
-                           .UseInternalServiceProvider(serviceProvider);
-
+                    options.UseSqlServer(connectionString);
                 });
 
             services.AddCloudscribeLoggingEFCommon();
