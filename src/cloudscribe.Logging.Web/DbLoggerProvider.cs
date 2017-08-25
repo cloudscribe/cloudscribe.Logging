@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2016-07-02
+//	Last Modified:		    2017-08-25
 // 
 
 using Microsoft.Extensions.Logging;
@@ -16,10 +16,8 @@ namespace cloudscribe.Logging.Web
         public DbLoggerProvider(
             Func<string, LogLevel, bool> filter,
             IServiceProvider serviceProvider
-            ,ILogRepository logRepository = null
             )
         {
-            logRepo = logRepository;
             services = serviceProvider;
             //this.minimumLevel = minimumLevel;
             if (filter == null)
@@ -30,19 +28,13 @@ namespace cloudscribe.Logging.Web
             _filter = filter;
         }
 
-        private ILogRepository logRepo;
         private IServiceProvider services;
         private readonly Func<string, LogLevel, bool> _filter;
         //private LogLevel minimumLevel;
 
         public ILogger CreateLogger(string name)
         {
-            if(logRepo == null)
-            {
-                logRepo = services.GetRequiredService<ILogRepository>();
-            }
-            
-            return new DbLogger(name, _filter, services, logRepo);
+            return new DbLogger(name, _filter, services);
         }
 
         public void Dispose()

@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2016-07-02
+//	Last Modified:		    2017-08-25
 // 
 
 using cloudscribe.Logging.Web;
@@ -16,7 +16,6 @@ namespace Microsoft.Extensions.Logging
         public static ILoggerFactory AddDbLogger(
             this ILoggerFactory factory,
             IServiceProvider serviceProvider,
-            //ILogRepository logRepository,
             LogLevel minimumLogLevel)
         {
             Func<string, LogLevel, bool> logFilter = delegate (string loggerName, LogLevel logLevel)
@@ -25,7 +24,7 @@ namespace Microsoft.Extensions.Logging
                
                 return true;
             };
-            //var logRepository = serviceProvider.GetRequiredService<ILogRepository>();
+
             factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider));
             return factory;
         }
@@ -33,24 +32,22 @@ namespace Microsoft.Extensions.Logging
         public static ILoggerFactory AddDbLogger(
             this ILoggerFactory factory,
             IServiceProvider serviceProvider,
-            //ILogRepository logRepository,
             Func<string, LogLevel, bool> logFilter)
         {
-            //var logRepository = serviceProvider.GetRequiredService<ILogRepository>();
             factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider));
             return factory;
         }
 
-        public static ILoggerFactory AddDbLogger(
-            this ILoggerFactory factory,
-            IServiceProvider serviceProvider,
-            Func<string, LogLevel, bool> logFilter
-            ,ILogRepository logRepository
-            )
-        {
-            factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider, logRepository));
-            return factory;
-        }
+        //public static ILoggerFactory AddDbLogger(
+        //    this ILoggerFactory factory,
+        //    IServiceProvider serviceProvider,
+        //    Func<string, LogLevel, bool> logFilter
+        //    //, IAddLogItem logRepository
+        //    )
+        //{
+        //    factory.AddProvider(new DbLoggerProvider(logFilter, serviceProvider));
+        //    return factory;
+        //}
 
     }
 }

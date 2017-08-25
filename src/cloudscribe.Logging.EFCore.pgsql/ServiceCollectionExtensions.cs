@@ -12,10 +12,9 @@ namespace Microsoft.Extensions.DependencyInjection
             )
         {
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
+                .AddDbContext<LoggingDbContext>(options =>
                 {
-                    options.UseNpgsql(connectionString)
-                           .UseInternalServiceProvider(serviceProvider);
+                    options.UseNpgsql(connectionString);
 
                 });
 

@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-19
-//	Last Modified:		    2016-07-01
+//	Last Modified:		    2017-08-25
 // 
 
 using Microsoft.AspNetCore.Http;
@@ -11,9 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Globalization;
-using System.Text;
 
 namespace cloudscribe.Logging.Web
 {
@@ -22,20 +20,18 @@ namespace cloudscribe.Logging.Web
         public DbLogger(
             string loggerName,
             Func<string, LogLevel, bool> filter,
-            IServiceProvider serviceProvider,
-            ILogRepository logRepository)
+            IServiceProvider serviceProvider
+            )
         {
-            logger = loggerName;
-            logRepo = logRepository;
-            services = serviceProvider;
+            _loggerName = loggerName;
+            _services = serviceProvider;
             Filter = filter ?? ((category, logLevel) => true);
         }
 
-        private ILogRepository logRepo;
-        private IHttpContextAccessor contextAccessor = null;
-        private IServiceProvider services;
-        private const int _indentation = 2;
-        private string logger = string.Empty;
+        private IHttpContextAccessor _contextAccessor = null;
+        private IServiceProvider _services;
+        //private const int _indentation = 2;
+        private string _loggerName = string.Empty;
         private Func<string, LogLevel, bool> _filter;
 
         public Func<string, LogLevel, bool> Filter
@@ -86,9 +82,7 @@ namespace cloudscribe.Logging.Web
             {
                 return;
             }
-
-            contextAccessor = services.GetService<IHttpContextAccessor>();
-
+            
             var logItem = new LogItem();
             logItem.EventId = eventId.Id;
             logItem.Message = message;
@@ -102,7 +96,7 @@ namespace cloudscribe.Logging.Web
 
             logItem.ShortUrl = GetShortUrl(logItem.Url);
             logItem.Thread = System.Threading.Thread.CurrentThread.Name ;
-            logItem.Logger = logger;
+            logItem.Logger = _loggerName;
             logItem.LogLevel = logLevel.ToString();
             
             try
@@ -128,31 +122,28 @@ namespace cloudscribe.Logging.Web
             // we cannot allow logging to raise exceptions
             // so we must swallow any exception here
             // would be good if we could only swallow specific exceptions
-            try
+            //var _logCommand = _services.GetRequiredService<IAddLogItem>();
+
+            using (var scope = _services.CreateScope())
             {
-                logRepo.AddLogItem(logItem);
+                var services = scope.ServiceProvider;
+
+                var _logCommand = services.GetService<IAddLogItem>();
+
+                try
+                {
+                    _logCommand.AddLogItem(logItem);
+                }
+                catch (Exception)
+                {
+                    //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
+                }
             }
-            catch (Exception)
-            {
-                //bool foo = true; // just a line to set a breakpoint so I can see the error when debugging
-            }
+
+            
         }
 
-
-        //private string Serialize(TState obj)
-        //{
-        //    return JsonConvert.SerializeObject(
-        //        obj,
-        //        Formatting.None,
-        //        new JsonSerializerSettings
-        //        {
-        //            DefaultValueHandling = DefaultValueHandling.Include
-        //            //, DateTimeZoneHandling = DateTimeZoneHandling.Utc  
-        //        }
-        //        );
-        //}
-
-
+        
 
         public bool IsEnabled(LogLevel logLevel)
         {
@@ -164,7 +155,7 @@ namespace cloudscribe.Logging.Web
             //Critical = 6,
 
             //return (logLevel >= minimumLevel);
-            return Filter(logger, logLevel);
+            return Filter(_loggerName, logLevel);
         }
 
         public IDisposable BeginScopeImpl(object state)
@@ -176,9 +167,9 @@ namespace cloudscribe.Logging.Web
 
         private string GetIpAddress()
         {
-            if((contextAccessor != null)&&(contextAccessor.HttpContext != null))
+            if((_contextAccessor != null)&&(_contextAccessor.HttpContext != null))
             {
-                var connection = contextAccessor.HttpContext.Features.Get<IHttpConnectionFeature>();
+                var connection = _contextAccessor.HttpContext.Features.Get<IHttpConnectionFeature>();
                 if(connection != null)
                 {
                     return connection.RemoteIpAddress.ToString();
@@ -202,9 +193,9 @@ namespace cloudscribe.Logging.Web
 
         private string GetRequestUrl()
         {
-            if ((contextAccessor != null) && (contextAccessor.HttpContext != null))
+            if ((_contextAccessor != null) && (_contextAccessor.HttpContext != null))
             {
-                return contextAccessor.HttpContext.Request.Path.ToString();
+                return _contextAccessor.HttpContext.Request.Path.ToString();
             }
 
             return string.Empty;
