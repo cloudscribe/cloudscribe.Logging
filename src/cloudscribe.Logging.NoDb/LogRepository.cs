@@ -44,12 +44,7 @@ namespace cloudscribe.Logging.NoDb
         private IStoragePathResolver<LogItem> pathResolver;
         private NoDbLogOptions options;
         
-        public void AddLogItem(ILogItem log)
-        {
-            var logItem = LogItem.FromILogItem(log);
-
-            Task t = commands.CreateAsync(options.ProjectId, logItem.Id.ToString(), logItem);
-        }
+       
 
         public async Task DeleteAll(
             string logLevel = "",

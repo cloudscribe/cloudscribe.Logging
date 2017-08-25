@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2016-07-01
+//	Last Modified:		    2017-08-25
 // 
 
 // TODO: we should update all the async signatures to take a cancellationtoken
@@ -17,7 +17,8 @@ namespace cloudscribe.Logging.Web
 {
     public interface ILogRepository
     {
-        void AddLogItem(ILogItem logItem);
+        //this should be removed, use IAddLogItem instead
+        //void AddLogItem(ILogItem logItem);
 
         //Task<int> GetCount(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
 
