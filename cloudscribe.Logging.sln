@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46FB9706-B599-4853-95FD-58E2D553C5F7}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging.EFCore.MySql", "src\cloudscribe.Logging.EFCore.MySql\cloudscribe.Logging.EFCore.MySql.csproj", "{BEAF528E-90EA-43B8-9E61-6340B8395EF8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging.EFCore.pgsql", "src\cloudscribe.Logging.EFCore.pgsql\cloudscribe.Logging.EFCore.pgsql.csproj", "{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Logging.EFCore.SQLite", "src\cloudscribe.Logging.EFCore.SQLite\cloudscribe.Logging.EFCore.SQLite.csproj", "{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +66,9 @@ Global
 		{8DA73C1A-8E7E-4832-B476-1503C6080490} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
 		{BEAF528E-90EA-43B8-9E61-6340B8395EF8} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
 		{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {250D3680-EF91-4B71-9B2A-37F6F1EF76EF}
 	EndGlobalSection
 EndGlobal
