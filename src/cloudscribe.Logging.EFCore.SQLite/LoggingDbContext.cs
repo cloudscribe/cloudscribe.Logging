@@ -20,9 +20,9 @@ namespace cloudscribe.Logging.EFCore.SQLite
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasSequence<long>("LogIds")
-                .StartsAt(1)
-                .IncrementsBy(1);
+            //modelBuilder.HasSequence<long>("LogIds")
+            //    .StartsAt(1)
+            //    .IncrementsBy(1);
             
             modelBuilder.Entity<LogItem>(entity =>
             {

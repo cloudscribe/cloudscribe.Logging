@@ -8,8 +8,8 @@ namespace cloudscribe.Logging.EFCore.SQLite.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence(
-                name: "LogIds");
+            //migrationBuilder.CreateSequence(
+            //    name: "LogIds");
 
             migrationBuilder.CreateTable(
                 name: "cs_SystemLog",
@@ -39,8 +39,8 @@ namespace cloudscribe.Logging.EFCore.SQLite.Migrations
             migrationBuilder.DropTable(
                 name: "cs_SystemLog");
 
-            migrationBuilder.DropSequence(
-                name: "LogIds");
+            //migrationBuilder.DropSequence(
+            //    name: "LogIds");
         }
     }
 }
