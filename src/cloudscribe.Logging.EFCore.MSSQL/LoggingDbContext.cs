@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-12-10
-// Last Modified:			2017-07-26
+// Last Modified:			2018-02-28
 // 
 
 using cloudscribe.Logging.Web;
@@ -29,9 +29,11 @@ namespace cloudscribe.Logging.EFCore.MSSQL
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasSequence<int>("LogIds")
-                .StartsAt(1)
-                .IncrementsBy(1);
+            //modelBuilder.HasSequence<int>("LogIds")
+            //    .StartsAt(1)
+            //    .IncrementsBy(1);
+
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<LogItem>(entity =>
             {
@@ -77,9 +79,8 @@ namespace cloudscribe.Logging.EFCore.MSSQL
                 //Message
             });
 
-            // should this be called before or after we do our thing?
-
-            base.OnModelCreating(modelBuilder);
+            
+            
 
         }
 
