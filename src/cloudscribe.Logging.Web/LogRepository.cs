@@ -5,7 +5,8 @@
 // Last Modified:			2017-08-25
 // 
 
-using cloudscribe.Logging.Web;
+using cloudscribe.Logging.Common.Models;
+using cloudscribe.Logging.EFCore;
 using cloudscribe.Logging.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.EFCore
+namespace cloudscribe.Logging.Web
 {
     public class LogRepository : ILogRepository
     {

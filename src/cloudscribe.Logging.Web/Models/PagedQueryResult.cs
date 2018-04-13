@@ -5,6 +5,7 @@
 // Last Modified:			2016-07-02
 //
 
+using cloudscribe.Logging.Common.Models;
 using System.Collections.Generic;
 
 namespace cloudscribe.Logging.Web.Models
