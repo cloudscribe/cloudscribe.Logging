@@ -37,7 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
+    
+    <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
   </ItemGroup>
 
  

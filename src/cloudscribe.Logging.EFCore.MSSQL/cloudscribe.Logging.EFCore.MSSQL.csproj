@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
+    <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
     <Content Remove="appsettings.json" CopyToPublishDirectory="Never" />
     <Content Include="appsettings.json" CopyToPublishDirectory="Never">
       <Pack>false</Pack>
