@@ -17,10 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cloudscribe.Logging.Web\cloudscribe.Logging.Web.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.*" />
   </ItemGroup>

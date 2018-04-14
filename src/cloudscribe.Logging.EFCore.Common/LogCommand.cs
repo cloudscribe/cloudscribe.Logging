@@ -5,7 +5,7 @@
 // Last Modified:			2017-08-25
 // 
 
-using cloudscribe.Logging.Web;
+using cloudscribe.Logging.Common.Models;
 
 namespace cloudscribe.Logging.EFCore.Common
 {

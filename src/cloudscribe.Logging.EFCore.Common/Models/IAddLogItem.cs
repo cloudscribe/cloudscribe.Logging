@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Logging.Web
+namespace cloudscribe.Logging.Common.Models
 {
     public interface IAddLogItem
     {

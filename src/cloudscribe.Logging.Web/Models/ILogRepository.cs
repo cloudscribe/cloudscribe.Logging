@@ -7,13 +7,11 @@
 
 // TODO: we should update all the async signatures to take a cancellationtoken
 
-using cloudscribe.Logging.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.Web
+namespace cloudscribe.Logging.Web.Models
 {
     public interface ILogRepository
     {

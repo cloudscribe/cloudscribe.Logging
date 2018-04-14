@@ -7,7 +7,7 @@
 
 using System;
 
-namespace cloudscribe.Logging.Web
+namespace cloudscribe.Logging.Common.Models
 {
     public interface ILogItem
     {

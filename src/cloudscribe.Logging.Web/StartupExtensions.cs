@@ -15,6 +15,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<LogManager>();
             services.AddScoped<IVersionProvider, VersionProvider>();
+            services.AddScoped<ILogRepository, LogRepository>();
+
             return services;
         }
 

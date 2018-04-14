@@ -7,7 +7,7 @@
 
 
 using cloudscribe.Logging.NoDb;
-using cloudscribe.Logging.Web;
+using cloudscribe.Logging.Common.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NoDb;
@@ -23,7 +23,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.Configure<NoDbLogOptions>(configuration.GetSection("NoDbLogOptions"));
             services.TryAddScoped<IStoragePathResolver<LogItem>, LogItemStoragePathResolver>();
             services.AddNoDb<LogItem>();
-            services.AddScoped<ILogRepository, LogRepository>();
 
             services.AddTransient<IAddLogItem, LogCommand>();
 
