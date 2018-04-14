@@ -1,4 +1,5 @@
-﻿using cloudscribe.Logging.Web;
+﻿using cloudscribe.Logging.Models;
+using cloudscribe.Logging.Web;
 using cloudscribe.Logging.Web.Models;
 using cloudscribe.Web.Common.Setup;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCloudscribeLogging(this IServiceCollection services)
         {
+            services.AddScoped<IWebRequestInfoProvider, WebRequestInfoProvider>();
             services.AddScoped<LogManager>();
             services.AddScoped<IVersionProvider, VersionProvider>();
             

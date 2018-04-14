@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
-//  Created:			    2011-08-19
-//	Last Modified:		    2017-08-25
+//  Created:			    2017-08-19
+//	Last Modified:		    2018-04-14
 // 
 
-using cloudscribe.Logging.Web;
+using cloudscribe.Logging;
 using System;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Logging
 {

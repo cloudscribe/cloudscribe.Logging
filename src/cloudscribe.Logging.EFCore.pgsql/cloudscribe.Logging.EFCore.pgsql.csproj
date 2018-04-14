@@ -11,19 +11,12 @@
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
-
-    <Content Remove="Properties\launchSettings.json" />
-    <Content Include="Properties\launchSettings.json" CopyToPublishDirectory="Never">
-      <Pack>false</Pack>
-    </Content>
     <Content Remove="appsettings.json" CopyToPublishDirectory="Never" />
     <Content Include="appsettings.json" CopyToPublishDirectory="Never">
       <Pack>false</Pack>
@@ -41,5 +34,7 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.*" />
   </ItemGroup>
+
+ 
 
 </Project>

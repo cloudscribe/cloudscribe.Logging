@@ -1,7 +1,9 @@
-﻿using cloudscribe.Logging.EFCore;
+﻿using cloudscribe.Logging;
+using cloudscribe.Logging.EFCore;
 using cloudscribe.Logging.EFCore.MySql;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -19,6 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 });
 
+            services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();
             services.AddScoped<ILoggingDbContextFactory, LoggingDbContextFactory>();
