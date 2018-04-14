@@ -5,9 +5,9 @@
     <VersionPrefix>2.1.2</VersionPrefix>
     <AssemblyVersion>2.1.2</AssemblyVersion>
     <Authors>Joe Audette</Authors>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>cloudscribe.Logging.EFCore.MSSQL</AssemblyName>
-    <PackageId>cloudscribe.Logging.EFCore.MSSQL</PackageId>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -32,14 +32,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.*" />
   </ItemGroup>
 
-  
-<!--
+
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0-*" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.*" />
   </ItemGroup>
-  -->
 
 </Project>
