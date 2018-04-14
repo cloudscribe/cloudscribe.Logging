@@ -5,15 +5,14 @@
 // Last Modified:			2017-08-25
 // 
 
-using cloudscribe.Logging.Web;
-using cloudscribe.Logging.Web.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.EFCore
+namespace cloudscribe.Logging.EFCore.Common
 {
     public class LogRepository : ILogRepository
     {

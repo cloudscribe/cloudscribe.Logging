@@ -1,4 +1,4 @@
-﻿using cloudscribe.Logging.Web;
+﻿using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace cloudscribe.Logging.EFCore.SQLite

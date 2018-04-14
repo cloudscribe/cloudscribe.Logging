@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
-using cloudscribe.Logging.Web.Models;
+using cloudscribe.Logging.Models;
 
 namespace cloudscribe.Logging.Web
 {

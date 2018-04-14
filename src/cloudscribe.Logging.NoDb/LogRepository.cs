@@ -5,13 +5,10 @@
 // Last Modified:			2016-07-02
 // 
 
-using cloudscribe.Logging.Web;
-using cloudscribe.Logging.Web.Models;
-using Microsoft.Extensions.Logging;
+using cloudscribe.Logging.Models;
 using Microsoft.Extensions.Options;
 using NoDb;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;

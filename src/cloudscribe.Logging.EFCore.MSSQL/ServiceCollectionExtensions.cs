@@ -1,6 +1,9 @@
-﻿using cloudscribe.Logging.EFCore;
+﻿using cloudscribe.Logging;
+using cloudscribe.Logging.EFCore;
 using cloudscribe.Logging.EFCore.MSSQL;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -17,12 +20,6 @@ namespace Microsoft.Extensions.DependencyInjection
             bool useSql2008Compatibility = false
             )
         {
-            //services.AddEntityFrameworkSqlServer()
-            //    .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
-            //    {
-            //        options.UseSqlServer(connectionString);
-            //    });
-
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
                 options.UseSqlServer(connectionString,
@@ -43,6 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
                             }
 
                         }));
+
+            services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
 
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();

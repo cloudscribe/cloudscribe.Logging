@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>NoDb implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionPrefix>2.1.1</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>cloudscribe.Logging.NoDb</AssemblyName>
@@ -17,14 +17,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cloudscribe.Logging.Web\cloudscribe.Logging.Web.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.*" />
 	<PackageReference Include="Microsoft.Extensions.Options" Version="2.0.*" />
     <PackageReference Include="System.Linq.Queryable" Version="4.3.*" />
     <PackageReference Include="NoDb" Version="1.1.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+ 
+    <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
   </ItemGroup>
 
 </Project>

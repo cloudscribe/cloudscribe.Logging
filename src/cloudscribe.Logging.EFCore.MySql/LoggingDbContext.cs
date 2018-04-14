@@ -5,7 +5,7 @@
 // Last Modified:			2016-11-10
 // 
 
-using cloudscribe.Logging.Web;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 //using MySQL.Data.EntityFrameworkCore.Extensions;
 

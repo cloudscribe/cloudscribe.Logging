@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging.EFCore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging.EFCore.pgsql", "src\cloudscribe.Logging.EFCore.pgsql\cloudscribe.Logging.EFCore.pgsql.csproj", "{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Logging.EFCore.SQLite", "src\cloudscribe.Logging.EFCore.SQLite\cloudscribe.Logging.EFCore.SQLite.csproj", "{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging.EFCore.SQLite", "src\cloudscribe.Logging.EFCore.SQLite\cloudscribe.Logging.EFCore.SQLite.csproj", "{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Logging", "src\cloudscribe.Logging\cloudscribe.Logging.csproj", "{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoWeb", "src\DemoWeb\DemoWeb.csproj", "{8779ED40-2540-4A12-A03A-187B940A8EDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,14 @@ Global
 		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8779ED40-2540-4A12-A03A-187B940A8EDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8779ED40-2540-4A12-A03A-187B940A8EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8779ED40-2540-4A12-A03A-187B940A8EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8779ED40-2540-4A12-A03A-187B940A8EDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +79,8 @@ Global
 		{BEAF528E-90EA-43B8-9E61-6340B8395EF8} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
 		{3EFC6E9A-3C47-4B77-B2CE-2DBAFEDCC897} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
 		{E30B3FF2-DF66-43D0-A445-28F02EBB5C34} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{1E64CA28-006E-4AD8-BAB4-FB8096C6AC4D} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
+		{8779ED40-2540-4A12-A03A-187B940A8EDC} = {46FB9706-B599-4853-95FD-58E2D553C5F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {250D3680-EF91-4B71-9B2A-37F6F1EF76EF}
