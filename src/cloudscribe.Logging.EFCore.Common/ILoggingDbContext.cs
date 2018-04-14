@@ -1,4 +1,4 @@
-﻿using cloudscribe.Logging.Common.Models;
+﻿using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;

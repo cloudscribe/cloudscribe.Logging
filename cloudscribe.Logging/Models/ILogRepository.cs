@@ -11,7 +11,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Logging.Web.Models
+namespace cloudscribe.Logging.Models
 {
     public interface ILogRepository
     {

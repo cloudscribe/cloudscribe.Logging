@@ -1,4 +1,4 @@
-﻿using cloudscribe.Logging.Common.Models;
+﻿using cloudscribe.Logging.Models;
 using cloudscribe.Logging.EFCore.Common;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +9,7 @@ namespace cloudscribe.Logging.EFCore
         
         public static IServiceCollection AddCloudscribeLoggingEFCommon(this IServiceCollection services)
         {
+            services.AddScoped<ILogRepository, LogRepository>();
             services.AddTransient<IAddLogItem, LogCommand>();
 
             return services;

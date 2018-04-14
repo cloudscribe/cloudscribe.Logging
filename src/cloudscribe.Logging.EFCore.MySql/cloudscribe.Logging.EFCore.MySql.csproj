@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
 
     <Content Remove="Properties\launchSettings.json" />

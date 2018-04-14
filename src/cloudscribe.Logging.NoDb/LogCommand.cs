@@ -5,7 +5,7 @@
 // Last Modified:			2017-08-25
 // 
 
-using cloudscribe.Logging.Common.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System.IO;

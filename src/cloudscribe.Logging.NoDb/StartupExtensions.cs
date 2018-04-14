@@ -7,7 +7,7 @@
 
 
 using cloudscribe.Logging.NoDb;
-using cloudscribe.Logging.Common.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NoDb;

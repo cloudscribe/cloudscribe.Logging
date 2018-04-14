@@ -7,7 +7,7 @@
 
 
 using cloudscribe.Web.Common;
-using cloudscribe.Logging.Web.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -5,7 +5,7 @@
 // Last Modified:			2018-02-28
 // 
 
-using cloudscribe.Logging.Common.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 
 

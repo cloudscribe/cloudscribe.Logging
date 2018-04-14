@@ -5,7 +5,7 @@
 // Last Modified:			2016-11-10
 // 
 
-using cloudscribe.Logging.Common.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace cloudscribe.Logging.EFCore.pgsql

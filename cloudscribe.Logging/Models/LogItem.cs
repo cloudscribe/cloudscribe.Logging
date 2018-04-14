@@ -8,7 +8,7 @@
 using System;
 
 
-namespace cloudscribe.Logging.Common.Models
+namespace cloudscribe.Logging.Models
 {
     public class LogItem : ILogItem
     {

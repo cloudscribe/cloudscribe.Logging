@@ -5,8 +5,7 @@
 // Last Modified:			2016-07-02
 // 
 
-using cloudscribe.Logging.Common.Models;
-using cloudscribe.Logging.Web.Models;
+using cloudscribe.Logging.Models;
 using Microsoft.Extensions.Options;
 using NoDb;
 using System;
