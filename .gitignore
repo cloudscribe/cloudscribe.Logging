@@ -196,3 +196,7 @@ FakesAssemblies/
 *.opt
 *appsettings.local.overrides.json
 *project.lock.json
+
+**/dp_keys/**
+src/Demo.WebApp/wwwroot/css/site.min.css
+src/Demo.WebApp/wwwroot/js/site.min.js
