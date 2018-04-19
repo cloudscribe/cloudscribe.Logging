@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-06-25
-// Last Modified:			2018-04-14
+// Last Modified:			2018-04-19
 // 
 
 
@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.Configure<NoDbLogOptions>(configuration.GetSection("NoDbLogOptions"));
             services.TryAddScoped<IStoragePathResolver<LogItem>, LogItemStoragePathResolver>();
             services.AddNoDb<LogItem>();
-
+            services.AddScoped<ILogRepository, LogRepository>();
             services.AddTransient<IAddLogItem, LogCommand>();
 
             return services;
