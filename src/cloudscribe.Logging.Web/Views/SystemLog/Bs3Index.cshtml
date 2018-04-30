@@ -1,59 +1,60 @@
 ﻿@model LogListViewModel
 @using cloudscribe.Web.Pagination
+@addTagHelper "*, cloudscribe.Web.Pagination"
+@using cloudscribe.Core.Models
 @using cloudscribe.Web.Common
 @using cloudscribe.Logging.Web
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<LogManager> sr
 @inject ITimeZoneHelper tzHelper
-@addTagHelper "*, cloudscribe.Web.Pagination"
 @functions
 {
-public string GetClassFromLogLevel(string logLevel)
-{
-    switch (logLevel)
+    public string GetClassFromLogLevel(string logLevel)
     {
-        case "Error":
-        case "Critical":
-            return "text-danger";
+        switch (logLevel)
+        {
+            case "Error":
+            case "Critical":
+                return "bg-danger";
 
-        case "Warning":
-            return "text-warning";
+            case "Warning":
+                return "bg-warning";
 
-        case "Information":
-        default:
-            return "text-info";
+            case "Information":
+            default:
+                return "bg-info";
+        }
     }
-}
 
-public string GetButtonClass(string logLevel, string buttonLogLevel)
-{
-    switch (logLevel)
+    public string GetButtonClass(string logLevel, string buttonLogLevel)
     {
-        case "Critical":
-        case "Error":
-            if (buttonLogLevel == logLevel)
-            {
-                return "btn btn-danger";
-            }
-            return "btn btn-default";
+        switch (logLevel)
+        {
+            case "Critical":
+            case "Error":
+                if (buttonLogLevel == logLevel)
+                {
+                    return "btn btn-danger";
+                }
+                return "btn btn-default";
 
-        case "Warning":
-            if (buttonLogLevel == logLevel)
-            {
-                return "btn btn-warning";
-            }
-            return "btn btn-default";
+            case "Warning":
+                if (buttonLogLevel == logLevel)
+                {
+                    return "btn btn-warning";
+                }
+                return "btn btn-default";
 
-        case "Information":
-        case "":
-        default:
-            if (buttonLogLevel == logLevel)
-            {
-                return "btn btn-info";
-            }
-            return "btn btn-default";
+            case "Information":
+            case "":
+            default:
+                if (buttonLogLevel == logLevel)
+                {
+                    return "btn btn-info";
+                }
+                return "btn btn-default";
+        }
     }
-}
 }
 <h1>@ViewData["Heading"]</h1>
 <a class="@GetButtonClass(Model.LogLevel, "Critical")" role="button" asp-controller="SystemLog" asp-action="Index" asp-route-logLevel="Critical">@sr["Critical"]</a>
@@ -66,36 +67,30 @@ public string GetButtonClass(string logLevel, string buttonLogLevel)
 <ul class="list-unstyled">
     @foreach (var item in Model.LogPage)
     {
-        <li class=" mb-1  logitem">
-            <form role="form" class="form-inline float-left" asp-controller="SystemLog" asp-action="LogItemDelete">
+        <li class="@GetClassFromLogLevel(item.LogLevel)">
+            <form role="form" class="form-inline" asp-controller="SystemLog" asp-action="LogItemDelete">
                 <input type="hidden" id="id" name="id" value="@item.Id" />
-                <input type="submit" value='@sr["Delete"]' class="btn btn-link p-0 pr-1" />
+                <input type="submit" value='@sr["Delete"]' class="btn btn-xs btn-default pull-left" />
             </form>
-            <h2 class="@GetClassFromLogLevel(item.LogLevel)  mt-1 pt-1 h6 border-botttom  ">
+            <h2 class="logitem">
                 @tzHelper.ConvertToLocalTime(item.LogDateUtc, Model.TimeZoneId).ToString()
                 <strong>@item.LogLevel</strong>
                 @item.IpAddress
                 @item.Logger
                 @item.ShortUrl
             </h2>
-            <div class="border-bottom">
+            <p>
                 @Html.Encode(item.Message)
-            </div>
+            </p>
         </li>
     }
 </ul>
-
-<cs-pager cs-paging-info="@Model.Paging"
-          asp-action="Index" asp-controller="SystemLog"
-          asp-route-logLevel="@Model.LogLevel"
-          asp-route-pagesize="@Model.Paging.ItemsPerPage"
-          cs-pager-ul-class="pagination d-flex flex-wrap"
-          cs-pager-li-current-class="page-item active"
-          cs-pager-li-other-class="page-item"
-          cs-pager-li-non-active-class="page-item disabled"
-          cs-pager-link-current-class="page-link"
-          cs-pager-link-other-class="page-link"></cs-pager>
-
+<div>
+    <cs-pager cs-paging-info="@Model.Paging"
+              asp-action="Index" asp-controller="SystemLog"
+              asp-route-logLevel="@Model.LogLevel"
+              asp-route-pagesize="@Model.Paging.ItemsPerPage"></cs-pager>
+</div>
 <form role="form" class="form-inline" asp-controller="SystemLog" asp-action="LogDeleteAll">
     <a asp-action="Index" class="btn btn-sm btn-default ">@sr["Refresh"]</a>
     <input type="hidden" asp-for="@Model.LogLevel" />

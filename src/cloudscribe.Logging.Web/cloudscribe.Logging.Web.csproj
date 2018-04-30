@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <VersionPrefix>2.1.2</VersionPrefix>
-    <AssemblyVersion>2.1.2</AssemblyVersion>
+    <VersionPrefix>2.1.3</VersionPrefix>
+    <AssemblyVersion>2.1.3</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>cloudscribe.Logging.Web</AssemblyName>
@@ -23,19 +23,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.*" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="2.0.*" />
     <PackageReference Include="cloudscribe.Web.Common" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.*" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.*" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.*" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="2.0.*" />
-
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.*" />
   </ItemGroup>
 
   
-
   <ItemGroup>
-    
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
   </ItemGroup>
 

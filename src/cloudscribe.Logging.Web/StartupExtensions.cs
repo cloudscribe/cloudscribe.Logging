@@ -43,6 +43,16 @@ namespace Microsoft.Extensions.DependencyInjection
             return options;
         }
 
+        public static RazorViewEngineOptions AddCloudscribeLoggingBootstrap4Views(this RazorViewEngineOptions options)
+        {
+            options.FileProviders.Add(new EmbeddedFileProvider(
+                    typeof(LogManager).GetTypeInfo().Assembly,
+                    "cloudscribe.Logging.Web"
+                ));
+
+            return options;
+        }
+
         public static AuthorizationOptions AddCloudscribeLoggingDefaultPolicy(this AuthorizationOptions options)
         {
             options.AddPolicy(
