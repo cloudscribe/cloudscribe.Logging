@@ -6,6 +6,7 @@
 @inject IStringLocalizer<LogManager> sr
 @inject ITimeZoneHelper tzHelper
 @addTagHelper "*, cloudscribe.Web.Pagination"
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @functions
 {
 public string GetClassFromLogLevel(string logLevel)
