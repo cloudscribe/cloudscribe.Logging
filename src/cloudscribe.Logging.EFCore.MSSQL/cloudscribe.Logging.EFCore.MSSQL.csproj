@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Description>MSSQL Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>2.1.3</VersionPrefix>
-    <AssemblyVersion>2.1.3</AssemblyVersion>
+    <VersionPrefix>3.0.0</VersionPrefix>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
@@ -17,18 +17,14 @@
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
-    <Content Remove="appsettings.json" CopyToPublishDirectory="Never" />
-    <Content Include="appsettings.json" CopyToPublishDirectory="Never">
-      <Pack>false</Pack>
-    </Content>
     
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.*" />
   </ItemGroup>
 
 

@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2017-05-26
+//	Last Modified:		    2018-06-09
 // 
 
 
@@ -44,8 +44,10 @@ namespace cloudscribe.Logging.Web.Controllers
                 itemsPerPage = pageSize;
             }
 
-            var model = new LogListViewModel();
-            model.LogLevel = logLevel;
+            var model = new LogListViewModel
+            {
+                LogLevel = logLevel
+            };
             PagedQueryResult result;
             if (sort == "desc")
             {
