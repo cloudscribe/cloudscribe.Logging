@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <Description>Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>2.1.1</VersionPrefix>
+    <VersionPrefix>3.0.0</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>cloudscribe.Logging.EFCore.Common</AssemblyName>
-    <PackageId>cloudscribe.Logging.EFCore.Common</PackageId>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -15,16 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.*" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
-    
   </ItemGroup>
-
-
-  
 
 </Project>

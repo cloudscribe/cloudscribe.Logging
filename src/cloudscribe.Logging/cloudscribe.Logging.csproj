@@ -1,13 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <VersionPrefix>1.0.0</VersionPrefix>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <VersionPrefix>3.0.0</VersionPrefix>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>cloudscribe.Logging</AssemblyName>
-    <PackageId>cloudscribe.Logging</PackageId>
     <PackageTags>cloudscribe;logging;database</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -16,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.*" />
     <PackageReference Include="NewtonSoft.Json" Version="11.0.*" />
   </ItemGroup>
 

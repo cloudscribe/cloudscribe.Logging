@@ -4,6 +4,8 @@ using cloudscribe.Logging.EFCore.pgsql;
 using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,15 +13,37 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCloudscribeLoggingEFStoragePostgreSql(
             this IServiceCollection services,
-            string connectionString
+            string connectionString,
+            int maxConnectionRetryCount = 0,
+            int maxConnectionRetryDelaySeconds = 30,
+            ICollection<string> transientErrorCodesToAdd = null
             )
         {
+            //services.AddEntityFrameworkNpgsql()
+            //    .AddDbContext<LoggingDbContext>(options =>
+            //    {
+            //        options.UseNpgsql(connectionString);
+
+            //    });
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<LoggingDbContext>(options =>
-                {
-                    options.UseNpgsql(connectionString);
+                    options.UseNpgsql(connectionString,
+                    npgsqlOptionsAction: sqlOptions =>
+                    {
+                        if (maxConnectionRetryCount > 0)
+                        {
+                            //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+                            sqlOptions.EnableRetryOnFailure(
+                                maxRetryCount: maxConnectionRetryCount,
+                                maxRetryDelay: TimeSpan.FromSeconds(maxConnectionRetryDelaySeconds),
+                                errorCodesToAdd: transientErrorCodesToAdd);
+                        }
 
-                });
+
+                    }));
+
+
 
             services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
             services.AddCloudscribeLoggingEFCommon();
