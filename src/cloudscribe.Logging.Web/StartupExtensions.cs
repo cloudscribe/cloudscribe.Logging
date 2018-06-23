@@ -3,56 +3,30 @@ using cloudscribe.Logging.Web;
 using cloudscribe.Logging.Web.Models;
 using cloudscribe.Web.Common.Setup;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.FileProviders;
-using System;
-using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupExtensions
     {
-        public static IServiceCollection AddCloudscribeLogging(this IServiceCollection services)
+        public static IServiceCollection AddCloudscribeLogging(
+            this IServiceCollection services,
+            IConfiguration config = null
+            )
         {
             services.AddScoped<IWebRequestInfoProvider, WebRequestInfoProvider>();
             services.AddScoped<LogManager>();
             services.AddScoped<IVersionProvider, VersionProvider>();
+
+            if(config != null)
+            {
+                services.Configure<DbLoggerConfig>(config.GetSection("DbLoggerConfig"));
+            }
             
 
             return services;
         }
-
-        //[Obsolete("AddEmbeddedViewsForCloudscribeLogging is deprecated, please use AddCloudscribeLoggingBootstrap3Views instead.")]
-        //public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeLogging(this RazorViewEngineOptions options)
-        //{
-        //    options.FileProviders.Add(new EmbeddedFileProvider(
-        //            typeof(LogManager).GetTypeInfo().Assembly,
-        //            "cloudscribe.Logging.Web"
-        //        ));
-
-        //    return options;
-        //}
-
-        //public static RazorViewEngineOptions AddCloudscribeLoggingBootstrap3Views(this RazorViewEngineOptions options)
-        //{
-        //    options.FileProviders.Add(new EmbeddedFileProvider(
-        //            typeof(LogManager).GetTypeInfo().Assembly,
-        //            "cloudscribe.Logging.Web"
-        //        ));
-
-        //    return options;
-        //}
-
-        //public static RazorViewEngineOptions AddCloudscribeLoggingBootstrap4Views(this RazorViewEngineOptions options)
-        //{
-        //    options.FileProviders.Add(new EmbeddedFileProvider(
-        //            typeof(LogManager).GetTypeInfo().Assembly,
-        //            "cloudscribe.Logging.Web"
-        //        ));
-
-        //    return options;
-        //}
-
+        
         public static AuthorizationOptions AddCloudscribeLoggingDefaultPolicy(this AuthorizationOptions options)
         {
             options.AddPolicy(

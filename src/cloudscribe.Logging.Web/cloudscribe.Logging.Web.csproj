@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <VersionPrefix>3.0.3</VersionPrefix>
-    <AssemblyVersion>3.0.3</AssemblyVersion>
+    <VersionPrefix>3.0.4</VersionPrefix>
+    <AssemblyVersion>3.0.4</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>cloudscribe.Logging.Web</AssemblyName>
-    <PackageId>cloudscribe.Logging.Web</PackageId>
     <PackageTags>cloudscribe;logging;database</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -15,28 +13,22 @@
     
   </PropertyGroup>
 
-  <!--<ItemGroup>
-    <EmbeddedResource Include="Views\**" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
-  </ItemGroup>-->
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.*" />
+    
     <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.*" />
     <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.*" />
-    
     <PackageReference Include="cloudscribe.Web.Common" Version="3.0.*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.1.*" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.1.*" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.1.0" />
   </ItemGroup>
 
-  
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
   </ItemGroup>
-
- 
 
 </Project>

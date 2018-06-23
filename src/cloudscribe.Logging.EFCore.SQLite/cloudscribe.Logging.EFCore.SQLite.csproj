@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>SQLite Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>3.0.1</VersionPrefix>
+    <VersionPrefix>3.0.2</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
