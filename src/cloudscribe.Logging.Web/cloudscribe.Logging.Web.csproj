@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <VersionPrefix>3.0.4</VersionPrefix>
-    <AssemblyVersion>3.0.4</AssemblyVersion>
+    <VersionPrefix>3.0.5</VersionPrefix>
+    <AssemblyVersion>3.0.5</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageTags>cloudscribe;logging;database</PackageTags>

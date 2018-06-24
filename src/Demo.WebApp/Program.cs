@@ -58,15 +58,16 @@ namespace Demo.WebApp
             IConfiguration config
             )
         {
+            var dbLoggerConfig = config.GetSection("DbLoggerConfig").Get<DbLoggerConfig>();
             LogLevel minimumLevel;
             string levelConfig;
             if (env.IsProduction())
             {
-                levelConfig = config["AppSettings:ProductionLogLevel"];
+                levelConfig = dbLoggerConfig.ProductionLogLevel;
             }
             else
             {
-                levelConfig = config["AppSettings:DevLogLevel"];
+                levelConfig = dbLoggerConfig.DevLogLevel;
             }
             switch (levelConfig)
             {
@@ -86,10 +87,7 @@ namespace Demo.WebApp
                     minimumLevel = LogLevel.Warning;
                     break;
             }
-
-
-            var dbLoggerConfig = config.GetSection("DbLoggerConfig").Get<DbLoggerConfig>();
-
+            
             //// a customizable filter for logging
             //// add exclusions in appsettings.json to remove noise in the logs
             bool logFilter(string loggerName, LogLevel logLevel)
