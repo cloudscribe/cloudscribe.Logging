@@ -22,6 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.Configure<DbLoggerConfig>(config.GetSection("DbLoggerConfig"));
             }
+            else
+            {
+                services.Configure<DbLoggerConfig>(logConfig => {
+
+                });
+            }
             
 
             return services;

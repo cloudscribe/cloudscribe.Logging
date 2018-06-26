@@ -7,7 +7,7 @@ namespace cloudscribe.Logging
     /// </summary>
     public class NoopWebRequestInfoProvider : IWebRequestInfoProvider
     {
-        public string GetIpAddress()
+        public string GetIpAddress(bool tryUseXForwardHeader = true)
         {
             return null;
         }

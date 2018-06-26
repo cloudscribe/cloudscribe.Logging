@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -47,9 +48,13 @@ namespace Microsoft.AspNetCore.Builder
             bool sslIsAvailable
             )
         {
+            //https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-2.1
             services.Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+                //options.KnownNetworks.Clear();
+                //options.KnownProxies.Clear();
             });
 
             services.Configure<MvcOptions>(options =>

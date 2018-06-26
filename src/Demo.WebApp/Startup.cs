@@ -75,6 +75,9 @@ namespace Demo.WebApp
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
+            //app.UseIISIntegration();
+            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,7 +88,9 @@ namespace Demo.WebApp
                 app.UseExceptionHandler("/oops/error");
             }
 
-            app.UseForwardedHeaders();
+            
+
+
             app.UseStaticFiles();
 
             //app.UseSession();

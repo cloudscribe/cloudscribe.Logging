@@ -97,6 +97,8 @@ namespace cloudscribe.Logging
                     Url = _webInfoProvider.GetRequestUrl()
                 };
 
+                
+
                 if (!string.IsNullOrEmpty(logItem.Url))
                 {
                     // lets not log the log viewer
