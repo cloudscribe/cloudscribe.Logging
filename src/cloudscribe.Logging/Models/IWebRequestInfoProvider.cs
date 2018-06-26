@@ -2,7 +2,7 @@
 {
     public interface IWebRequestInfoProvider
     {
-        string GetIpAddress();
+        string GetIpAddress(bool tryUseXForwardHeader = true);
         string GetRequestUrl();
         
     }
