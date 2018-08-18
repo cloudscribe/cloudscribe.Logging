@@ -23,12 +23,19 @@ namespace cloudscribe.Logging.EFCore.Common
         public void AddLogItem(ILogItem log)
         {
             // since we are using EF to add to the log we need to avoid
-            // logging EF related things, otherwise every time we log we generate more log events
+            // logging EF related things below warning, otherwise every time we log we generate more log events
             // continuously
             // might be better to use the normal mssql ado log repository instead
             // need to decouple logging repos from core repos
 
-            if (log.Logger.Contains("EntityFrameworkCore")) return;
+            if (log.Logger.Contains("EntityFrameworkCore"))
+            {
+                if(log.LogLevel != "Error" && log.LogLevel != "Warning" && log.LogLevel != "Critical")
+                {
+                    return;
+                }
+                
+            }
 
             var logItem = LogItem.FromILogItem(log);
 
