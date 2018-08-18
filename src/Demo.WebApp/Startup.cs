@@ -92,6 +92,7 @@ namespace Demo.WebApp
 
 
             app.UseStaticFiles();
+            app.UseCloudscribeCommonStaticFiles();
 
             //app.UseSession();
 
