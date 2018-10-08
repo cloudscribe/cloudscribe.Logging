@@ -39,13 +39,15 @@ namespace Microsoft.Extensions.DependencyInjection
                                 sqlOptions.UseRowNumberForPaging();
                             }
 
-                        }));
+                        }),
+                        optionsLifetime: ServiceLifetime.Singleton
+                        );
 
             services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
 
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();
-            services.AddScoped<ILoggingDbContextFactory, LoggingDbContextFactory>();
+            services.AddSingleton<ILoggingDbContextFactory, LoggingDbContextFactory>();
 
             return services;
         }

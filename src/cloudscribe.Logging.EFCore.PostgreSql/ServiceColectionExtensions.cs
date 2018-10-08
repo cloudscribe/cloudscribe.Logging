@@ -1,6 +1,6 @@
 ﻿using cloudscribe.Logging;
 using cloudscribe.Logging.EFCore;
-using cloudscribe.Logging.EFCore.pgsql;
+using cloudscribe.Logging.EFCore.PostgreSql;
 using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             ICollection<string> transientErrorCodesToAdd = null
             )
         {
-          
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<LoggingDbContext>(options =>
                     options.UseNpgsql(connectionString,
