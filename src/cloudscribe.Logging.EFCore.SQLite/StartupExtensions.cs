@@ -19,12 +19,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     options.UseSqlite(connectionString);
 
-                });
+                },
+                optionsLifetime: ServiceLifetime.Singleton
+                );
 
             services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();
-            services.AddScoped<ILoggingDbContextFactory, LoggingDbContextFactory>();
+            services.AddSingleton<ILoggingDbContextFactory, LoggingDbContextFactory>();
 
             return services;
         }
