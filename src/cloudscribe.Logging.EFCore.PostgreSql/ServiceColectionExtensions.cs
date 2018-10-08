@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddCloudscribeLoggingEFStoragePostgreSql(
+        public static IServiceCollection AddCloudscribeLoggingPostgreSqlStorage(
             this IServiceCollection services,
             string connectionString,
             int maxConnectionRetryCount = 0,
