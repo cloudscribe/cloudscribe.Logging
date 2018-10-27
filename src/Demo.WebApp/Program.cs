@@ -46,9 +46,12 @@ namespace Demo.WebApp
 
         private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
         {
+            var deletPostsOlderThanDays = 30;
+            LoggingEFStartup.InitializeDatabaseAsync(scopedServices, deletPostsOlderThanDays).Wait();
+
             CoreEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
             
-            LoggingEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
+           
         }
 
         private static void ConfigureLogging(
