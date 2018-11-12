@@ -1,7 +1,7 @@
 ﻿using cloudscribe.Logging.Models;
 using cloudscribe.Logging.Web;
 using cloudscribe.Logging.Web.Models;
-using cloudscribe.Web.Common.Setup;
+using cloudscribe.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
