@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NoDb;
 using cloudscribe.Logging;
+using cloudscribe.Versioning;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -27,6 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddNoDb<LogItem>();
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddTransient<IAddLogItem, LogCommand>();
+            services.AddScoped<IVersionProvider, VersionProvider>();
 
             return services;
         }
