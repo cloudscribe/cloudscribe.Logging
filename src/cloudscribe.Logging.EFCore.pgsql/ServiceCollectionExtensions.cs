@@ -2,6 +2,7 @@
 using cloudscribe.Logging.EFCore;
 using cloudscribe.Logging.EFCore.pgsql;
 using cloudscribe.Logging.Models;
+using cloudscribe.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -45,6 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();
             services.AddSingleton<ILoggingDbContextFactory, LoggingDbContextFactory>();
+            services.AddScoped<IVersionProvider, VersionProvider>();
 
             return services;
         }
