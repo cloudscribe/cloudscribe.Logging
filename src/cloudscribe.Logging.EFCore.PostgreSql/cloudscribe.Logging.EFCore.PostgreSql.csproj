@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>PostgreSql Entity Framework Core implementation of cloudscribe ILogRepository, using snake case tables and fields</Description>
-    <VersionPrefix>3.0.9</VersionPrefix>
+    <VersionPrefix>3.0.10</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>

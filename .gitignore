@@ -200,3 +200,6 @@ FakesAssemblies/
 **/dp_keys/**
 src/Demo.WebApp/wwwroot/css/site.min.css
 src/Demo.WebApp/wwwroot/js/site.min.js
+src/Demo.WebApp/appsettings.Development.json
+src/Demo.WebApp/appdata.db
+src/Demo.WebApp/appsettings.Development.json

@@ -1,5 +1,6 @@
 ﻿using cloudscribe.Logging;
 using cloudscribe.Logging.EFCore;
+using cloudscribe.Logging.EFCore.Common;
 using cloudscribe.Logging.EFCore.MSSQL;
 using cloudscribe.Logging.Models;
 using cloudscribe.Versioning;
@@ -49,6 +50,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddCloudscribeLoggingEFCommon();
             services.AddScoped<ILoggingDbContext, LoggingDbContext>();
             services.AddSingleton<ILoggingDbContextFactory, LoggingDbContextFactory>();
+            services.AddScoped<ITruncateLog, Truncator>();
             services.AddScoped<IVersionProvider, VersionProvider>();
 
             return services;

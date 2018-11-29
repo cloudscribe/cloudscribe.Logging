@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2018-10-08
+// Last Modified:			2018-11-29
 // 
 
 using cloudscribe.Logging.Models;
@@ -16,14 +16,20 @@ namespace cloudscribe.Logging.EFCore.Common
 {
     public class LogRepository : ILogRepository
     {
-        public LogRepository(ILoggingDbContextFactory loggingDbContextFactory)
+        public LogRepository(
+            ILoggingDbContextFactory loggingDbContextFactory,
+            ITruncateLog truncateLog
+            )
         {
             _contextFactory = loggingDbContextFactory;
+            _truncator = truncateLog;
 
         }
 
         private readonly ILoggingDbContextFactory _contextFactory;
-        
+        private readonly ITruncateLog _truncator;
+
+
         public async Task<int> GetCount(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -106,7 +112,8 @@ namespace cloudscribe.Logging.EFCore.Common
             {
                 if (string.IsNullOrWhiteSpace(logLevel))
                 {
-                    db.LogItems.RemoveAll();
+                    //db.LogItems.RemoveAll();
+                    await _truncator.TruncateLog();
                 }
                 else
                 {
@@ -115,10 +122,11 @@ namespace cloudscribe.Logging.EFCore.Common
                                 select l;
 
                     db.LogItems.RemoveRange(query);
+                    int rowsAffected = await db.SaveChangesAsync(cancellationToken);
                 }
 
 
-                int rowsAffected = await db.SaveChangesAsync(cancellationToken);
+                
             }
 
             
