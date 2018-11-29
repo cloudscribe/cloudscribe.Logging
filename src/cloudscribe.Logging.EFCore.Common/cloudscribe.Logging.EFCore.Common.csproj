@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>3.0.6</VersionPrefix>
+    <VersionPrefix>3.0.7</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>

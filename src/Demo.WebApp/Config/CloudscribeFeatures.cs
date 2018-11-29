@@ -9,10 +9,53 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration config
             )
         {
-            var connectionString = config.GetConnectionString("EntityFrameworkConnection");
+            var storage = config["DataSettings:DbPlatform"];
+            var efProvider = config["DataSettings:EFProvider"];
 
-            services.AddCloudscribeCoreEFStorageMSSQL(connectionString);
-            services.AddCloudscribeLoggingEFStorageMSSQL(connectionString);
+            switch (storage)
+            {
+                case "NoDb":
+                    services.AddCloudscribeCoreNoDbStorage();
+                    services.AddCloudscribeLoggingNoDbStorage(config);
+                    break;
+
+                case "ef":
+                default:
+
+                    switch (efProvider)
+                    {
+                        case "sqlite":
+                            var slConnection = config["DataSettings:SqliteConnectionString"];
+                            services.AddCloudscribeCoreEFStorageSQLite(slConnection);
+                            services.AddCloudscribeLoggingEFStorageSQLite(slConnection);
+                            break;
+
+                        case "pgsql":
+                            var pgsConnection = config["DataSettings:PostgreSqlConnectionString"];
+                            services.AddCloudscribeCorePostgreSqlStorage(pgsConnection);
+                            services.AddCloudscribeLoggingPostgreSqlStorage(pgsConnection);
+                            break;
+
+                        case "mysql":
+                            var mysqlConnection = config["DataSettings:MySqlConnectionString"];
+                            services.AddCloudscribeCoreEFStorageMySql(mysqlConnection);
+                            services.AddCloudscribeLoggingEFStorageMySQL(mysqlConnection);
+                            break;
+
+                        case "mssql":
+                        default:
+                            var mssqlConnectionString = config["DataSettings:MSSQLConnectionString"];
+                            services.AddCloudscribeCoreEFStorageMSSQL(mssqlConnectionString);
+                            services.AddCloudscribeLoggingEFStorageMSSQL(mssqlConnectionString);
+
+                            break;
+
+                    }
+
+                    break;
+            }
+
+            
             
 
             return services;
