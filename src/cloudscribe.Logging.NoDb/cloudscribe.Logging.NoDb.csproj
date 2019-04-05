@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>NoDb implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>3.0.5</VersionPrefix>
+    <VersionPrefix>3.0.6</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
