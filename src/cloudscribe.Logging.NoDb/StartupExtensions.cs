@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-06-25
-// Last Modified:			2018-04-19
+// Last Modified:			2019-06-28
 // 
 
 
@@ -19,16 +19,31 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class StartupExtensions
     {
 
-        public static IServiceCollection AddCloudscribeLoggingNoDbStorage(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCloudscribeLoggingNoDbStorage(
+            this IServiceCollection services, 
+            IConfiguration configuration,
+            bool useSingletons = false
+            )
         {
-
-            services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
             services.Configure<NoDbLogOptions>(configuration.GetSection("NoDbLogOptions"));
-            services.TryAddScoped<IStoragePathResolver<LogItem>, LogItemStoragePathResolver>();
-            services.AddNoDb<LogItem>();
-            services.AddScoped<ILogRepository, LogRepository>();
             services.AddTransient<IAddLogItem, LogCommand>();
             services.AddScoped<IVersionProvider, VersionProvider>();
+            services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
+
+            if (useSingletons)
+            {
+                services.TryAddSingleton<IStoragePathResolver<LogItem>, LogItemStoragePathResolver>();
+                services.AddNoDbSingleton<LogItem>();
+                services.AddSingleton<ILogRepository, LogRepository>();
+            }
+            else
+            {
+                services.TryAddScoped<IStoragePathResolver<LogItem>, LogItemStoragePathResolver>();
+                services.AddNoDb<LogItem>();
+                services.AddScoped<ILogRepository, LogRepository>();
+            }
+            
+           
 
             return services;
         }
