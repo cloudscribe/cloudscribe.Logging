@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <Description>Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <VersionPrefix>3.0.8</VersionPrefix>
+    <Version>4.0.0-preview20190831</Version>
     <Authors>Joe Audette</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0-*" />
     <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.4" />
   </ItemGroup>
 

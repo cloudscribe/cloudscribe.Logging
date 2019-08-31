@@ -26,7 +26,7 @@ namespace cloudscribe.Logging.Models
             string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken));
 
-        Task<PagedQueryResult> GetPageDescending(
+        Task<PagedResult<ILogItem>> GetPageDescending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
