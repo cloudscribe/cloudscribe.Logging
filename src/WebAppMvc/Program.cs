@@ -1,26 +1,31 @@
-﻿using cloudscribe.Logging.Models;
-using Microsoft.AspNetCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using cloudscribe.Logging.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Demo.WebApp
+namespace WebAppMvc
 {
     public class Program
     {
+        //public static void Main(string[] args)
+        //{
+        //    CreateHostBuilder(args).Build().Run();
+        //}
+
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-           
-            
+
+
             using (var scope = host.Services.CreateScope())
             {
-                var scopedServices = scope.ServiceProvider; 
+                var scopedServices = scope.ServiceProvider;
                 try
                 {
                     EnsureDataStorageIsReady(scopedServices);
@@ -41,27 +46,25 @@ namespace Demo.WebApp
             host.Run();
         }
 
-        //public static IWebHost BuildWebHost(string[] args) =>
-        //    WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>()
-        //        .Build();
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+
+
 
         private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
         {
             var deletPostsOlderThanDays = 30;
             LoggingEFStartup.InitializeDatabaseAsync(scopedServices, deletPostsOlderThanDays).Wait();
 
-            CoreEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
-            
            
+
+
         }
+
 
         private static void ConfigureLogging(
             IWebHostEnvironment env,
@@ -99,7 +102,7 @@ namespace Demo.WebApp
                     minimumLevel = LogLevel.Warning;
                     break;
             }
-            
+
             //// a customizable filter for logging
             //// add exclusions in appsettings.json to remove noise in the logs
             bool logFilter(string loggerName, LogLevel logLevel)
@@ -124,7 +127,7 @@ namespace Demo.WebApp
             loggerFactory.AddDbLogger(serviceProvider, logFilter);
         }
 
+
+
     }
-
-
 }

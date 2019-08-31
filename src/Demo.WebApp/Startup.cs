@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 
@@ -12,26 +14,31 @@ namespace Demo.WebApp
     public class Startup
     {
         public Startup(
-            IConfiguration configuration, 
-            IHostingEnvironment env,
-            ILogger<Startup> logger
+            IConfiguration configuration,
+            IWebHostEnvironment env
+            //,
+            //ILogger<Startup> logger
             )
         {
             Configuration = configuration;
             Environment = env;
-            _log = logger;
+           // _log = logger;
 
             SslIsAvailable = Configuration.GetValue<bool>("AppSettings:UseSsl");
         }
 
         private IConfiguration Configuration { get; set; }
-        private IHostingEnvironment Environment { get; set; }
+        private IWebHostEnvironment Environment { get; set; }
         private bool SslIsAvailable { get; set; }
-        private ILogger _log;
+       // private ILogger _log;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
             //// **** VERY IMPORTANT *****
             // This is a custom extension method in Config/DataProtection.cs
             // These settings require your review to correctly configur data protection for your environment
@@ -68,8 +75,8 @@ namespace Demo.WebApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
-            IHostingEnvironment env,
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
@@ -81,15 +88,16 @@ namespace Demo.WebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
+
             }
             else
             {
                 app.UseExceptionHandler("/oops/error");
             }
 
-            
 
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseCloudscribeCommonStaticFiles();
@@ -100,21 +108,41 @@ namespace Demo.WebApp
 
             var multiTenantOptions = multiTenantOptionsAccessor.Value;
 
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+
             app.UseCloudscribeCore(
                     loggerFactory,
                     multiTenantOptions,
                     SslIsAvailable);
 
-
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
-                //*** IMPORTANT ***
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 // this is in Config/RoutingAndMvc.cs
                 // you can change or add routes there
-                routes.UseCustomRoutes(useFolders);
+                var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
+                endpoints.UseCustomRoutes(useFolders);
+
+                endpoints.MapRazorPages();
             });
-   
+
+
+            //app.UseMvc(routes =>
+            //{
+            //    var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
+            //    //*** IMPORTANT ***
+            //    // this is in Config/RoutingAndMvc.cs
+            //    // you can change or add routes there
+            //    routes.UseCustomRoutes(useFolders);
+            //});
+
         }
 
         
