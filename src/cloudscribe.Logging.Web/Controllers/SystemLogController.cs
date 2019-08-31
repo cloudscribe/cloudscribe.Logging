@@ -1,8 +1,7 @@
-﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2018-11-11
+//	Last Modified:		    2019-08-31
 // 
 
 using cloudscribe.Logging.Models;
@@ -11,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using cloudscribe.DateTimeUtils;
+using cloudscribe.Pagination.Models;
 
 namespace cloudscribe.Logging.Web.Controllers
 {
@@ -47,7 +47,7 @@ namespace cloudscribe.Logging.Web.Controllers
             {
                 LogLevel = logLevel
             };
-            PagedQueryResult result;
+            PagedResult<ILogItem> result;
             if (sort == "desc")
             {
                 result = await logManager.GetLogsDescending(pageNumber, itemsPerPage, logLevel);
@@ -59,11 +59,7 @@ namespace cloudscribe.Logging.Web.Controllers
 
             model.TimeZoneId = await timeZoneIdResolver.GetUserTimeZoneId();
 
-            model.LogPage = result.Items;
-
-            model.Paging.CurrentPage = pageNumber;
-            model.Paging.ItemsPerPage = itemsPerPage;
-            model.Paging.TotalItems = result.TotalItems;
+            model.LogPage = result;
 
             return View(model);
 

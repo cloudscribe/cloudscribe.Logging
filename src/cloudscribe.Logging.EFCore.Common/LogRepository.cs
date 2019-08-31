@@ -1,11 +1,11 @@
-﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed under the Apache License, Version 2.0
 // Author:					Joe Audette
 // Created:					2015-11-16
-// Last Modified:			2018-11-29
+// Last Modified:			2019-08-31
 // 
 
 using cloudscribe.Logging.Models;
+using cloudscribe.Pagination.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -45,7 +45,7 @@ namespace cloudscribe.Logging.EFCore.Common
         }
 
         
-        public async Task<PagedQueryResult> GetPageAscending(
+        public async Task<PagedResult<ILogItem>> GetPageAscending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
@@ -64,9 +64,13 @@ namespace cloudscribe.Logging.EFCore.Common
                 .Select(p => p)
                 ;
 
-                var result = new PagedQueryResult();
+                var result = new PagedResult<ILogItem>()
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
 
-                result.Items = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+                result.Data = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
                 result.TotalItems = await GetCount(logLevel, cancellationToken);
                 return result;
             }
@@ -74,7 +78,7 @@ namespace cloudscribe.Logging.EFCore.Common
                 
         }
 
-        public async Task<PagedQueryResult> GetPageDescending(
+        public async Task<PagedResult<ILogItem>> GetPageDescending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
@@ -93,9 +97,13 @@ namespace cloudscribe.Logging.EFCore.Common
                 .Select(p => p)
                 ;
 
-                var result = new PagedQueryResult();
+                var result = new PagedResult<ILogItem>()
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
 
-                result.Items = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+                result.Data = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
                 result.TotalItems = await GetCount(logLevel, cancellationToken);
                 return result;
             }

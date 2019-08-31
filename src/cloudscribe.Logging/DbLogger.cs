@@ -124,6 +124,8 @@ namespace cloudscribe.Logging
 
                         }
                         );
+
+                        //logItem.StateJson = JsonSerializer.ToString<TState>(state);
                     }
                     catch (Exception)
                     {

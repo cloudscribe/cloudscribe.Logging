@@ -2,15 +2,15 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2015-12-23
-//	Last Modified:		    2016-07-01
+//	Last Modified:		    2019-08-31
 // 
 
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using cloudscribe.Logging.Models;
+using cloudscribe.Pagination.Models;
 using Microsoft.AspNetCore.Http;
 using System;
-using cloudscribe.Logging.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace cloudscribe.Logging.Web
 {
@@ -35,12 +35,12 @@ namespace cloudscribe.Logging.Web
         //    return await logRepo.GetCount(logLevel, CancellationToken);
         //}
 
-        public async Task<PagedQueryResult> GetLogsDescending(int pageNumber, int pageSize, string logLevel = "")
+        public async Task<PagedResult<ILogItem>> GetLogsDescending(int pageNumber, int pageSize, string logLevel = "")
         {
             return await logRepo.GetPageDescending(pageNumber, pageSize, logLevel, CancellationToken);
         }
 
-        public async Task<PagedQueryResult> GetLogsAscending(int pageNumber, int pageSize, string logLevel = "")
+        public async Task<PagedResult<ILogItem>> GetLogsAscending(int pageNumber, int pageSize, string logLevel = "")
         {
             return await logRepo.GetPageAscending(pageNumber, pageSize, logLevel, CancellationToken);
         }

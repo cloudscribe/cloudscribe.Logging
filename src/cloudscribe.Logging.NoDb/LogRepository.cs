@@ -2,10 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-07-02
-// Last Modified:			2016-07-02
+// Last Modified:			2019-08-31
 // 
 
 using cloudscribe.Logging.Models;
+using cloudscribe.Pagination.Models;
 using Microsoft.Extensions.Options;
 using NoDb;
 using System;
@@ -172,7 +173,7 @@ namespace cloudscribe.Logging.NoDb
             return folderDate.Date < cutoffUtc.Date;
         }
 
-        public virtual async Task<PagedQueryResult> GetPageAscending(
+        public virtual async Task<PagedResult<ILogItem>> GetPageAscending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
@@ -183,7 +184,12 @@ namespace cloudscribe.Logging.NoDb
             ThrowIfDisposed();
             
             var pathToFolder = await pathResolver.ResolvePath(options.ProjectId).ConfigureAwait(false);
-            var result = new PagedQueryResult();
+            var result = new PagedResult<ILogItem>()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
             if (!Directory.Exists(pathToFolder)) return result;
 
             if (!string.IsNullOrWhiteSpace(logLevel))
@@ -220,7 +226,7 @@ namespace cloudscribe.Logging.NoDb
 
                 var key = Path.GetFileNameWithoutExtension(file.Name);
                 var obj = LoadObject(file.FullName, key);
-                result.Items.Add(obj);
+                result.Data.Add(obj);
                 added += 1;
                 result.TotalItems += 1;
             }
@@ -229,7 +235,7 @@ namespace cloudscribe.Logging.NoDb
 
         }
 
-        public virtual async Task<PagedQueryResult> GetPageDescending(
+        public virtual async Task<PagedResult<ILogItem>> GetPageDescending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
@@ -241,7 +247,12 @@ namespace cloudscribe.Logging.NoDb
 
             var pathToFolder = await pathResolver.ResolvePath(options.ProjectId).ConfigureAwait(false);
 
-            var result = new PagedQueryResult();
+            var result = new PagedResult<ILogItem>()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
             if (!Directory.Exists(pathToFolder)) return result;
 
             if (!string.IsNullOrWhiteSpace(logLevel))
@@ -278,7 +289,7 @@ namespace cloudscribe.Logging.NoDb
 
                 var key = Path.GetFileNameWithoutExtension(file.Name);
                 var obj = LoadObject(file.FullName, key);
-                result.Items.Add(obj);
+                result.Data.Add(obj);
                 added += 1;
                 result.TotalItems += 1;
             }

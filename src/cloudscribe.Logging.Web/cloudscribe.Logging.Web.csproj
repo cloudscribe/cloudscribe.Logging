@@ -20,9 +20,16 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;0436</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;0436</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     
-    <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.6" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="3.0.0-*" />
     <PackageReference Include="cloudscribe.DateTimeUtils" Version="1.0.0" />
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
 

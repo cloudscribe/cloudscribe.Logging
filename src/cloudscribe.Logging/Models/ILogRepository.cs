@@ -1,12 +1,11 @@
-﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed under the Apache License, Version 2.0
 //	Author:                 Joe Audette
 //  Created:			    2011-08-18
-//	Last Modified:		    2017-08-25
+//	Last Modified:		    2019-08-31
 // 
 
-// TODO: we should update all the async signatures to take a cancellationtoken
 
+using cloudscribe.Pagination.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,12 +14,8 @@ namespace cloudscribe.Logging.Models
 {
     public interface ILogRepository
     {
-        //this should be removed, use IAddLogItem instead
-        //void AddLogItem(ILogItem logItem);
-
-        //Task<int> GetCount(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
-
-        Task<PagedQueryResult> GetPageAscending(
+       
+        Task<PagedResult<ILogItem>> GetPageAscending(
             int pageNumber,
             int pageSize,
             string logLevel = "",
