@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <Version>4.0.0-preview20190831</Version>
+    <Version>4.0.0</Version>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -29,16 +29,16 @@
 
   <ItemGroup>
     
-    <PackageReference Include="cloudscribe.Web.Pagination" Version="3.0.0-*" />
-    <PackageReference Include="cloudscribe.DateTimeUtils" Version="1.0.0" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="3.0.0" />
+    <PackageReference Include="cloudscribe.DateTimeUtils" Version="3.0.0" />
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
 
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
    
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.0.0-*" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.0.0" />
     
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0-*" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
   </ItemGroup>
 
  
