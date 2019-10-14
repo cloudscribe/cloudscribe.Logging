@@ -2,10 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-11-10
-// Last Modified:			2018-10-08
+// Last Modified:			2019-09-30
 // 
 
-using cloudscribe.EFCore.PostgreSql.Conventions;
+
 using cloudscribe.Logging.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,28 +36,35 @@ namespace cloudscribe.Logging.EFCore.PostgreSql
 
             modelBuilder.Entity<LogItem>(entity =>
             {
-                entity.ToTable("cs_SystemLog");
-                entity.HasKey(p => p.Id);
+                entity.ToTable("cs_system_log");
+                entity.HasKey(p => p.Id).HasName("pk_cs_system_log");
 
-                entity.Property(p => p.Id).IsRequired();
+                entity.Property(p => p.Id).HasColumnName("id").IsRequired();
 
-                entity.Property(p => p.LogDateUtc).HasColumnName("LogDate");
+                entity.Property(p => p.LogDateUtc).HasColumnName("log_date");
 
-                entity.Property(p => p.IpAddress).HasMaxLength(50);
+                entity.Property(p => p.IpAddress).HasColumnName("ip_address").HasMaxLength(50);
 
-                entity.Property(p => p.Culture).HasMaxLength(10);
+                entity.Property(p => p.Culture).HasColumnName("culture").HasMaxLength(10);
 
-                entity.Property(p => p.ShortUrl).HasMaxLength(255);
+                entity.Property(p => p.Url).HasColumnName("url");
 
-                entity.Property(p => p.Thread).HasMaxLength(255);
+                entity.Property(p => p.ShortUrl).HasColumnName("short_url").HasMaxLength(255);
 
-                entity.Property(p => p.LogLevel).HasMaxLength(20);
+                entity.Property(p => p.Thread).HasColumnName("thread").HasMaxLength(255);
 
-                entity.Property(p => p.Logger).HasMaxLength(255);
+                entity.Property(p => p.LogLevel).HasColumnName("log_level").HasMaxLength(20);
+
+                entity.Property(p => p.Logger).HasColumnName("logger").HasMaxLength(255);
+
+                entity.Property(p => p.Message).HasColumnName("message");
+
+                entity.Property(p => p.StateJson).HasColumnName("state_json");
+                entity.Property(p => p.EventId).HasColumnName("event_id");
 
             });
 
-            modelBuilder.ApplySnakeCaseConventions();
+          
 
         }
 
