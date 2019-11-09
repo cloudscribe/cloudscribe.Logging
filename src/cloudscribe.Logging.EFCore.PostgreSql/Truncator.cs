@@ -17,7 +17,7 @@ namespace cloudscribe.Logging.EFCore.PostgreSql
         {
             using (var db = _contextFactory.CreateContext())
             {
-                await db.Database.ExecuteSqlCommandAsync("TRUNCATE TABLE cs_system_log; ");
+                await db.Database.ExecuteSqlRawAsync("TRUNCATE TABLE cs_system_log; ");
             }
         }
     }

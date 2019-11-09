@@ -3,6 +3,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,8 @@ namespace Demo.WebApp
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
+            var host = CreateHostBuilder(args).Build();
+           
             
             using (var scope = host.Services.CreateScope())
             {
@@ -31,7 +33,7 @@ namespace Demo.WebApp
                 }
             }
 
-            var env = host.Services.GetRequiredService<IHostingEnvironment>();
+            var env = host.Services.GetRequiredService<IWebHostEnvironment>();
             var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
             var config = host.Services.GetRequiredService<IConfiguration>();
             ConfigureLogging(env, loggerFactory, host.Services, config);
@@ -39,10 +41,17 @@ namespace Demo.WebApp
             host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        //public static IWebHost BuildWebHost(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //        .UseStartup<Startup>()
+        //        .Build();
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 
         private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
         {
@@ -55,7 +64,7 @@ namespace Demo.WebApp
         }
 
         private static void ConfigureLogging(
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IServiceProvider serviceProvider,
             IConfiguration config

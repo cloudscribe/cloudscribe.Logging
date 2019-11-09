@@ -7,36 +7,36 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class RoutingAndMvc
     {
-        public static IRouteBuilder UseCustomRoutes(this IRouteBuilder routes, bool useFolders)
+        public static IEndpointRouteBuilder UseCustomRoutes(this IEndpointRouteBuilder routes, bool useFolders)
         {
-            routes.AddCloudscribeFileManagerRoutes();
+            //routes.AddCloudscribeFileManagerRoutes();
             if (useFolders)
             {
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "foldererrorhandler",
-                    template: "{sitefolder}/oops/error/{statusCode?}",
+                    pattern: "{sitefolder}/oops/error/{statusCode?}",
                     defaults: new { controller = "Oops", action = "Error" },
                     constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
                 );
 
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "folderdefault",
-                    template: "{sitefolder}/{controller}/{action}/{id?}",
+                    pattern: "{sitefolder}/{controller}/{action}/{id?}",
                     defaults: new { action = "Index" },
                     constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
                     );
             }
-            routes.MapRoute(
+            routes.MapControllerRoute(
                 name: "errorhandler",
-                template: "oops/error/{statusCode?}",
+                pattern: "oops/error/{statusCode?}",
                 defaults: new { controller = "Oops", action = "Error" }
                 );
 
 
 
-            routes.MapRoute(
+            routes.MapControllerRoute(
                 name: "def",
-                template: "{controller}/{action}"
+                pattern: "{controller}/{action}"
                 , defaults: new { controller = "Home", action = "Index" }
                 );
             

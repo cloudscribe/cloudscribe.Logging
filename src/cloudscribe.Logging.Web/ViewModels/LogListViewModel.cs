@@ -1,13 +1,11 @@
-﻿// Copyright (c) Source Tree Solutions, LLC. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //	Author:                 Joe Audette
 //  Created:			    2011-08-21
-//	Last Modified:		    2016-07-01
+//	Last Modified:		    2019-08-31
 // 
 
 using cloudscribe.Logging.Models;
-using cloudscribe.Web.Pagination;
-using System.Collections.Generic;
+using cloudscribe.Pagination.Models;
 
 namespace cloudscribe.Logging.Web
 {
@@ -15,13 +13,12 @@ namespace cloudscribe.Logging.Web
     {
         public LogListViewModel()
         {
-            LogPage = new List<ILogItem>();
-            Paging = new PaginationSettings();
+            LogPage = new PagedResult<ILogItem>();
         }
 
         public string LogLevel { get; set; } = string.Empty;
-        public List<ILogItem> LogPage { get; set; }
-        public PaginationSettings Paging { get; set; }
+        public PagedResult<ILogItem> LogPage { get; set; }
+        
         public string TimeZoneId { get; set; } = "America/New_York";
 
     }
