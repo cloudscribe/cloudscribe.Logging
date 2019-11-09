@@ -6,7 +6,7 @@
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
@@ -14,6 +14,10 @@
     <RepositoryType>git</RepositoryType>
     
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />

@@ -11,9 +11,6 @@
     <None Update="wwwroot\**\*;navigation.xml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
-
-    <Content Remove="appsettings.Development.json" CopyToPublishDirectory="Never" />
-    <Content Include="appsettings.Development.json" CopyToPublishDirectory="Never" />
     <Content Remove="wwwroot\lib\**\*" CopyToPublishDirectory="Never" />
     <Content Include="wwwroot\lib\**\*" CopyToPublishDirectory="Never" />
 
@@ -28,16 +25,16 @@
 
   <ItemGroup Label="Package References">
 
-    <PackageReference Include="cloudscribe.Core.Web" Version="3.1.30" />
-    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="3.1.12" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="3.0.9" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MySql" Version="3.0.9" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.PostgreSql" Version="3.0.9" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.SQLite" Version="3.0.10" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.9" />
+    <PackageReference Include="cloudscribe.Core.Web" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MySql" Version="4.0.0-*" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.PostgreSql" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.SQLite" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="4.0.0" />
     
-    <PackageReference Include="cloudscribe.Web.Localization" Version="2.0.0" />
-    <PackageReference Include="cloudscribe.Web.StaticFiles" Version="1.0.8" />
+    <PackageReference Include="cloudscribe.Web.Localization" Version="3.0.0" />
+    <PackageReference Include="cloudscribe.Web.StaticFiles" Version="3.0.0" />
     
     
     
