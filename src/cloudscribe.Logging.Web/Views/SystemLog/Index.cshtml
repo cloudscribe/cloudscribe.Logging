@@ -71,10 +71,10 @@ public string GetButtonClass(string logLevel, string buttonLogLevel)
         {
         <li class="mb-1 logitem border-bottom">
 
-            <form role="form" class="form-inline float-left" asp-controller="SystemLog" asp-action="LogItemDelete">
+            @*<form role="form" class="form-inline float-left" asp-controller="SystemLog" asp-action="LogItemDelete">
                 <input type="hidden" id="id" name="id" value="@item.Id" />
                 <input type="submit" value='@sr["Delete"]' class="btn btn-sm btn-danger p-1 mr-2" />
-            </form>
+            </form>*@
 
             <p class="@GetClassFromLogLevel(item.LogLevel) mt-1 pt-1">
                 @tzHelper.ConvertToLocalTime(item.LogDateUtc, Model.TimeZoneId).ToString()
