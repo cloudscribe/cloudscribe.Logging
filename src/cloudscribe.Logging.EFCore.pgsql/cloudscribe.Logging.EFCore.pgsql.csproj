@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>PostgreSql Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
@@ -22,16 +22,13 @@
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.Logging.EFCore.Common\cloudscribe.Logging.EFCore.Common.csproj" />
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
-    
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
   </ItemGroup>
-
- 
 
 </Project>

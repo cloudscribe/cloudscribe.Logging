@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>NoDb implementation of cloudscribe ILogRepository</Description>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
- 
     <ProjectReference Include="..\cloudscribe.Logging\cloudscribe.Logging.csproj" />
   </ItemGroup>
 
