@@ -22,7 +22,10 @@ namespace Microsoft.Extensions.DependencyInjection
             )
         {
 
-            services.AddEntityFrameworkNpgsql()
+            // AddEntityFrameworkNpgsql call should be deprecated:
+            // https://www.npgsql.org/efcore/api/Microsoft.Extensions.DependencyInjection.NpgsqlServiceCollectionExtensions.html
+
+            services // .AddEntityFrameworkNpgsql()
                 .AddDbContext<LoggingDbContext>(options =>
                     options.UseNpgsql(connectionString,
                     npgsqlOptionsAction: sqlOptions =>
