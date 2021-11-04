@@ -32,14 +32,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.DateTimeUtils" Version="3.0.0" />
+    
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
 
-    <!--<PackageReference Include="cloudscribe.Web.Pagination" Version="3.1.0" />
+    <!--<PackageReference Include="cloudscribe.DateTimeUtils" Version="3.0.0" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />-->
+    <PackageReference Include="cloudscribe.DateTimeUtils" Version="5.0.0" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.0" />
