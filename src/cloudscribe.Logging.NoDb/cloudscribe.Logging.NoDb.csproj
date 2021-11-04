@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <Description>NoDb implementation of cloudscribe ILogRepository</Description>
-    <Version>4.1.0</Version>
+    <Version>5.0.0</Version>
+    <TargetFramework>net5.0</TargetFramework>
     <Authors>Joe Audette</Authors>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
@@ -14,13 +14,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="\"/>
+    <None Include="icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
+    
+    <!--<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />-->
+
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
     <PackageReference Include="NoDb" Version="1.2.2" />
   </ItemGroup>

@@ -19,8 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddEntityFrameworkMySql()
                 .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
                 {
-                    options.UseMySql(connectionString);
-
+                    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)); // breaking change Net5.0
                 },
                 optionsLifetime: ServiceLifetime.Singleton
                 );
