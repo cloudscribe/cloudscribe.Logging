@@ -20,9 +20,6 @@
   <ItemGroup>
     <PackageReference Include="cloudscribe.Versioning" Version="1.0.0" />
     
-    <!--<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />-->
-
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     
