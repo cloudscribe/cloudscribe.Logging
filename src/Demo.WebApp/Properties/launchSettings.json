@@ -9,12 +9,12 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:45714/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "commandName": "IISExpress",
+        "launchBrowser": true,
+        "launchUrl": "http://localhost:44368/",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     },
     "IIS Express Production": {
       "commandName": "IISExpress",
@@ -40,7 +40,5 @@
       },
       "applicationUrl": "http://localhost:45713/"
     }
-
-
   }
 }
