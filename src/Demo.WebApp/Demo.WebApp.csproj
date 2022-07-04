@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>Demo.WebApp-903DD7B4-EED4-4F85-A8BD-F9EE1049BFF3</UserSecretsId>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
@@ -25,16 +25,16 @@
 
   <ItemGroup Label="Package References">
 
-    <PackageReference Include="cloudscribe.Core.Web" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MySql" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.PostgreSql" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.SQLite" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="5.0.0" />
+    <PackageReference Include="cloudscribe.Core.Web" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MySql" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.PostgreSql" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.SQLite" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="6.0.0" />
 
-    <PackageReference Include="cloudscribe.Web.Localization" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Web.StaticFiles" Version="5.0.0" />
+    <PackageReference Include="cloudscribe.Web.Localization" Version="6.0.0" />
+    <PackageReference Include="cloudscribe.Web.StaticFiles" Version="6.0.0" />
     
   </ItemGroup>
 
