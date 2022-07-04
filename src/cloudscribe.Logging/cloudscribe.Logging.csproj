@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     
     <PackageReference Include="cloudscribe.Pagination.Models" Version="1.1.0" />
-    <PackageReference Include="NewtonSoft.Json" Version="11.0.2" />
+    <PackageReference Include="NewtonSoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
