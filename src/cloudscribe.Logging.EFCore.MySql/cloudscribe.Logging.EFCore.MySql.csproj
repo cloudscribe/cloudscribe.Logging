@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>MySQL Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
     <TargetFramework>net6.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>

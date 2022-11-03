@@ -17,7 +17,7 @@ namespace cloudscribe.Logging.EFCore.MySql
         {
             using (var db = _contextFactory.CreateContext())
             {
-                await db.Database.ExecuteSqlRawAsync("TRUNCATE TABLE cs_systemlog; ");
+                await db.Database.ExecuteSqlRawAsync("TRUNCATE TABLE cs_SystemLog; ");
             }
         }
     }
