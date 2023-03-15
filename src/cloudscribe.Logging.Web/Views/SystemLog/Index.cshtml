@@ -98,7 +98,7 @@
                 @item.ShortUrl
             </p>
             <p>
-                @item.Message
+                @Html.Raw(Html.Encode(@item.Message).Replace(Html.Encode("\n"), "<br/>"))
             </p>
 
         </li>
