@@ -3,7 +3,7 @@ solution: cloudscribe.Logging.sln
 sudo: false
 dist: xenial
 mono: none
-dotnet: 3.0.100
+dotnet: 6.0.0
 env:
   global:
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
