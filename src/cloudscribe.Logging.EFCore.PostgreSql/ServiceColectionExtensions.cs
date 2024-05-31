@@ -25,11 +25,13 @@ namespace Microsoft.Extensions.DependencyInjection
             // AddEntityFrameworkNpgsql call should be deprecated:
             // https://www.npgsql.org/efcore/api/Microsoft.Extensions.DependencyInjection.NpgsqlServiceCollectionExtensions.html
 
-            services // .AddEntityFrameworkNpgsql()
+            services 
                 .AddDbContext<LoggingDbContext>(options =>
                     options.UseNpgsql(connectionString,
                     npgsqlOptionsAction: sqlOptions =>
                     {
+                        sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);  // pagination likely here
+
                         if (maxConnectionRetryCount > 0)
                         {
                             //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
@@ -43,8 +45,6 @@ namespace Microsoft.Extensions.DependencyInjection
                     }),
                     optionsLifetime: ServiceLifetime.Singleton
                     );
-
-
 
             services.TryAddScoped<IWebRequestInfoProvider, NoopWebRequestInfoProvider>();
             services.AddCloudscribeLoggingEFCommon();
