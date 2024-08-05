@@ -18,18 +18,19 @@ namespace Microsoft.Extensions.DependencyInjection
             string connectionString,
             int maxConnectionRetryCount = 0,
             int maxConnectionRetryDelaySeconds = 30,
-            ICollection<int> transientSqlErrorNumbersToAdd = null,
-            bool useSql2008Compatibility = false
+            ICollection<int> transientSqlErrorNumbersToAdd = null
             )
         {
             //   deprecated call in EF Core3:  .AddEntityFrameworkSqlServer()
             //   https://github.com/aspnet/EntityFrameworkCore/issues/12905
 
-            services // .AddEntityFrameworkSqlServer()
+            services 
                 .AddDbContext<LoggingDbContext>((serviceProvider, options) =>
                 options.UseSqlServer(connectionString,
                         sqlServerOptionsAction: sqlOptions =>
                         {
+                            sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);  // pagination likely here
+
                             if (maxConnectionRetryCount > 0)
                             {
                                 //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
@@ -38,12 +39,6 @@ namespace Microsoft.Extensions.DependencyInjection
                                     maxRetryDelay: TimeSpan.FromSeconds(maxConnectionRetryDelaySeconds),
                                     errorNumbersToAdd: transientSqlErrorNumbersToAdd);
                             }
-
-                            //if (useSql2008Compatibility)
-                            //{
-                            //    sqlOptions.UseRowNumberForPaging();
-                            //}
-
                         }),
                         optionsLifetime: ServiceLifetime.Singleton
                         );

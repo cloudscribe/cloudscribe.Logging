@@ -20,7 +20,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddDbContext<LoggingDbContext>(options =>
                 {
                     options.UseSqlite(connectionString);
-
                 },
                 optionsLifetime: ServiceLifetime.Singleton
                 );
