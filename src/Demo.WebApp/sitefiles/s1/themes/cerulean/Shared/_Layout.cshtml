@@ -31,23 +31,20 @@
     <google-analytics profile-id="@Tenant.GoogleAnalyticsProfileId" user-id="@User.GetUserId()"></google-analytics>
 </head>
 <body class="@ViewData["BodyClass"]">
-    <header class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="~/@(Tenant?.SiteFolderName ?? "")" class="navbar-brand">@(Tenant?.SiteName ?? "Sample")</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="~/@(Tenant?.SiteFolderName ?? "")" class="navbar-brand">@(Tenant?.SiteName ?? "Sample")</a>
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
             </div>
-            <nav class="navbar-collapse collapse">
-                @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
-                @await Html.PartialAsync("_LoginPartial")
-            </nav>
         </div>
-    </header>
+    </nav>
     @RenderSection("Toolbar", required: false)
     <div class="container body-content">
         @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })

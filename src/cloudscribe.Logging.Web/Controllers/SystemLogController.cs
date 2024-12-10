@@ -11,6 +11,7 @@ using System;
 using System.Threading.Tasks;
 using cloudscribe.DateTimeUtils;
 using cloudscribe.Pagination.Models;
+using System.Text;
 
 namespace cloudscribe.Logging.Web.Controllers
 {
@@ -32,23 +33,28 @@ namespace cloudscribe.Logging.Web.Controllers
             string logLevel = "",
             int pageNumber = 1,
             int pageSize = -1,
-            string sort = "desc")
+            string sort = "desc",
+            string searchTerm = "")
         {
             ViewData["Title"] = "System Log";
             ViewData["Heading"] = "System Log";
-
             int itemsPerPage = logManager.LogPageSize;
-            if (pageSize > 0)
-            {
-                itemsPerPage = pageSize;
-            }
-
             var model = new LogListViewModel
             {
                 LogLevel = logLevel
             };
             PagedResult<ILogItem> result;
-            if (sort == "desc")
+
+            if (pageSize > 0)
+            {
+                itemsPerPage = pageSize;
+            }
+
+            if (searchTerm != null && searchTerm != "")
+            {
+                result = await logManager.GetPagedSearchResults(pageNumber, itemsPerPage, searchTerm, logLevel);
+            }
+            else if (sort == "desc")
             {
                 result = await logManager.GetLogsDescending(pageNumber, itemsPerPage, logLevel);
             }
@@ -58,11 +64,9 @@ namespace cloudscribe.Logging.Web.Controllers
             }
 
             model.TimeZoneId = await timeZoneIdResolver.GetUserTimeZoneId();
-
             model.LogPage = result;
 
             return View(model);
-
         }
 
         [Authorize(Policy = "SystemLogPolicy")]
@@ -97,5 +101,78 @@ namespace cloudscribe.Logging.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Policy = "SystemLogPolicy")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<FileResult> Export()
+        {
+            try
+            {
+                var result = await logManager.GetExportData();
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append("ID" + ',');
+                sb.Append("LOG DATE UTC" + ',');
+                sb.Append("IP ADDRESS" + ',');
+                sb.Append("CULTURE" + ',');
+                sb.Append("URL" + ',');
+                sb.Append("THREAD" + ',');
+                sb.Append("LOG LEVEL" + ',');
+                sb.Append("LOGGER" + ',');
+                sb.Append("MESSAGE" + ',');
+                sb.Append("STATE" + ',');
+                sb.Append("EVENT ID" + ',');
+                sb.Append("\r\n");
+
+                for (int j = 0; j < result.Count; j++)
+                {
+                    sb.Append(result[j].Id.ToString() + ',');
+                    sb.Append(result[j].LogDateUtc.ToString() + ',');
+                    sb.Append(result[j].IpAddress.ToString() + ',');
+                    sb.Append(result[j].Culture.ToString() + ',');
+                    sb.Append(result[j].Url.ToString() + ',');
+                    sb.Append(result[j].Thread.ToString() + ',');
+                    sb.Append(result[j].LogLevel.ToString() + ',');
+                    sb.Append(result[j].Logger.ToString() + ',');
+                    sb.Append(result[j].Message.ToString() + ',');
+                    sb.Append(result[j].StateJson.ToString() + ',');
+                    sb.Append(result[j].EventId.ToString() + ',');
+                }
+                sb.Append("\r\n");
+
+                return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "LoggingExport.csv");
+            }
+            catch (Exception)
+            {
+                //swallow error, don't throw from logger.
+            }
+            return null;
+        }
+
+        [Authorize(Policy = "SystemLogPolicy")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(int pageNumber = 1, int pageSize = -1, string searchTerm = "", string logLevel = "")
+        {
+            int itemsPerPage = logManager.LogPageSize;
+            PagedResult<ILogItem> result;
+
+            if (pageSize > 0)
+            {
+                itemsPerPage = pageSize;
+            }
+
+            var model = new LogListViewModel
+            {
+                LogLevel = logLevel,
+                SearchTerm = searchTerm
+            };
+
+            result = await logManager.GetPagedSearchResults(pageNumber, itemsPerPage, searchTerm, logLevel);
+            model.TimeZoneId = await timeZoneIdResolver.GetUserTimeZoneId();
+            model.LogPage = result;
+
+            return View("Index", model);
+        }
     }
 }
