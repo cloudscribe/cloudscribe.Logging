@@ -10,6 +10,7 @@ using cloudscribe.Pagination.Models;
 using Microsoft.Extensions.Options;
 using NoDb;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -96,7 +97,6 @@ namespace cloudscribe.Logging.NoDb
                 { }
                 
             }
-
         }
 
         public async Task Delete(
@@ -110,7 +110,6 @@ namespace cloudscribe.Logging.NoDb
                 options.ProjectId,
                 logItemId.ToString(),
                 cancellationToken).ConfigureAwait(false);
-            
         }
 
         public async Task DeleteOlderThan(
@@ -326,6 +325,35 @@ namespace cloudscribe.Logging.NoDb
             _disposed = true;
         }
 
+        public async Task<List<LogItem>> GetExportData(string logLevel = "", CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
 
+            var result = new List<LogItem>();
+            var pathToFolder = await pathResolver.ResolvePath(options.ProjectId).ConfigureAwait(false);
+            var dir = new DirectoryInfo(pathToFolder);
+
+            if (!Directory.Exists(pathToFolder)) return result;
+
+            if (!string.IsNullOrWhiteSpace(logLevel))
+            {
+                pathToFolder = Path.Combine(pathToFolder, logLevel);
+                if (!Directory.Exists(pathToFolder)) return result;
+            }
+
+            foreach (FileInfo file in dir.GetFiles("*" + serializer.ExpectedFileExtension, SearchOption.AllDirectories).OrderByDescending(f => f.CreationTimeUtc))
+            {
+                var key = Path.GetFileNameWithoutExtension(file.Name);
+                var obj = LoadObject(file.FullName, key);
+            }
+
+            return result;
+        }
+
+        public Task<PagedResult<ILogItem>> GetPagedSearchResults(int pageNumber, int pageSize, string searchTerm, string logLevel = "", CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

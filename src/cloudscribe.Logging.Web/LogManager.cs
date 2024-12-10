@@ -9,6 +9,7 @@ using cloudscribe.Logging.Models;
 using cloudscribe.Pagination.Models;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,7 +46,17 @@ namespace cloudscribe.Logging.Web
             return await logRepo.GetPageAscending(pageNumber, pageSize, logLevel, CancellationToken);
         }
 
-        public async Task DeleteLogItem(Guid id)
+        public Task<List<LogItem>> GetExportData(string logLevel = "")
+        {
+            return logRepo.GetExportData(logLevel, CancellationToken);
+        }
+
+        public async Task<PagedResult<ILogItem>> GetPagedSearchResults(int pageNumber, int pageSize, string searchTerm, string logLevel = "", CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await logRepo.GetPagedSearchResults(pageNumber, pageSize, searchTerm, logLevel, cancellationToken);
+        }
+
+            public async Task DeleteLogItem(Guid id)
         {
             await logRepo.Delete(id, CancellationToken.None);
         }

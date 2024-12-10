@@ -80,6 +80,16 @@
         <a class="@GetButtonClass(Model.LogLevel, "")" role="button" asp-controller="SystemLog" asp-action="Index">@sr["All"]</a>
     </div>
 </div>
+<div class="row align-items-left gx-1 mb-2">
+    <div class="col w-auto">
+        <p>Search within: URL and Message</p>
+        <form method="post" asp-controller="SystemLog" asp-action="Search" class="ps-1">
+            <input type="text" id="searchTerm" asp-for="@Model.SearchTerm" />
+            <input type="hidden" asp-for="@Model.LogLevel" />
+            <input type="submit" id="btnExportSubmit" value='@sr["Search"]' class="btn btn-sm btn-secondary" />
+        </form>
+    </div>
+</div>
 <ul class="list-unstyled">
     @foreach (var item in Model.LogPage.Data)
     {
@@ -116,13 +126,19 @@
           cs-pager-li-other-class="page-item"
           cs-pager-li-non-active-class="page-item disabled"
           cs-pager-link-current-class="page-link"
-          cs-pager-link-other-class="page-link"></cs-pager>
+          cs-pager-link-other-class="page-link"
+          asp-route-searchTerm="@Model.SearchTerm"></cs-pager>
 
-<form role="form" asp-controller="SystemLog" asp-action="LogDeleteAll">
-    <a asp-action="Index" class="btn btn-sm btn-primary">@sr["Refresh"]</a>
-    <input type="hidden" asp-for="@Model.LogLevel" />
-    <input type="submit" value='@sr["Clear Log"]' class="btn btn-sm btn-danger " />
-</form>
+<div class="d-flex flex-row">
+    <form role="form" asp-controller="SystemLog" asp-action="LogDeleteAll">
+        <a asp-action="Index" class="btn btn-sm btn-primary">@sr["Refresh"]</a>
+        <input type="hidden" asp-for="@Model.LogLevel" />
+        <input type="submit" value='@sr["Clear Log"]' class="btn btn-sm btn-danger " />
+    </form>
+    <form method="post" asp-controller="SystemLog" asp-action="Export" class="ps-1">
+        <input type="submit" id="btnExportSubmit" value='@sr["Export All Data As CSV"]' class="btn btn-sm btn-secondary" />
+    </form>
+</div>
 
 <form role="form" class="mt-2" asp-controller="SystemLog" asp-action="LogDeleteOlderThan">
     <div class="row align-items-left gx-2">
