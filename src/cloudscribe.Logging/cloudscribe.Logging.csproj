@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <Version>8.1.0</Version>
+    <Version>8.2.0</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <PackageTags>cloudscribe;logging;database</PackageTags>
@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     
-    <PackageReference Include="cloudscribe.Pagination.Models" Version="8.1.0" />
+    <PackageReference Include="cloudscribe.Pagination.Models" Version="8.2.0" />
     <PackageReference Include="NewtonSoft.Json" Version="13.0.3" />
   </ItemGroup>
 
