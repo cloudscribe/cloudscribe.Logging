@@ -20,6 +20,6 @@ namespace cloudscribe.Logging.Web
         public PagedResult<ILogItem> LogPage { get; set; }
         
         public string TimeZoneId { get; set; } = "America/New_York";
-
+        public string SearchTerm { get; set; }
     }
 }

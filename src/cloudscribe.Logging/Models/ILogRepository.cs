@@ -7,6 +7,7 @@
 
 using cloudscribe.Pagination.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,6 +28,8 @@ namespace cloudscribe.Logging.Models
             string logLevel = "",
             CancellationToken cancellationToken = default(CancellationToken));
 
+        Task<List<LogItem>> GetExportData(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
+        Task<PagedResult<ILogItem>> GetPagedSearchResults(int pageNumber, int pageSize, string searchTerm, string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
         Task DeleteAll(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
         Task Delete(Guid logItemId, CancellationToken cancellationToken = default(CancellationToken));
         Task DeleteOlderThan(DateTime cutoffDateUtc, string logLevel = "", CancellationToken cancellationToken = default(CancellationToken));
