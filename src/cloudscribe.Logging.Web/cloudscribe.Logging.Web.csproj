@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>An implementation of ILogger and ILoggerProvider that logs to the database using a pluggable model supporting multiple data platforms. Also proivides an MVC controller for viewing and managing the log data.</Description>
-    <Version>8.3.0</Version>
+    <Version>8.4.0</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -11,6 +11,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Logging</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/cloudscribe/cloudscribe.Logging.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     
@@ -18,6 +19,7 @@
 
   <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath="\" />
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +34,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Versioning" Version="8.3.0" />
-    <PackageReference Include="cloudscribe.DateTimeUtils" Version="8.3.0" />
-    <PackageReference Include="cloudscribe.Web.Pagination" Version="8.3.0" />
+    <PackageReference Include="cloudscribe.Versioning" Version="8.4.0" />
+    <PackageReference Include="cloudscribe.DateTimeUtils" Version="8.4.0" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="8.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.0" />
