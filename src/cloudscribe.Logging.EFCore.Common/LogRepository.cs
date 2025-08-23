@@ -8,6 +8,7 @@ using cloudscribe.Logging.Models;
 using cloudscribe.Pagination.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,8 +41,6 @@ namespace cloudscribe.Logging.EFCore.Common
                    .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                    .CountAsync<LogItem>(cancellationToken);
             }
-
-               
         }
 
         
@@ -61,8 +60,7 @@ namespace cloudscribe.Logging.EFCore.Common
                 .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
-                .Select(p => p)
-                ;
+                .Select(p => p);
 
                 var result = new PagedResult<ILogItem>()
                 {
@@ -74,8 +72,6 @@ namespace cloudscribe.Logging.EFCore.Common
                 result.TotalItems = await GetCount(logLevel, cancellationToken);
                 return result;
             }
-
-                
         }
 
         public async Task<PagedResult<ILogItem>> GetPageDescending(
@@ -94,8 +90,7 @@ namespace cloudscribe.Logging.EFCore.Common
                 .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
-                .Select(p => p)
-                ;
+                .Select(p => p);
 
                 var result = new PagedResult<ILogItem>()
                 {
@@ -107,9 +102,51 @@ namespace cloudscribe.Logging.EFCore.Common
                 result.TotalItems = await GetCount(logLevel, cancellationToken);
                 return result;
             }
+        }
 
-            
+        public async Task<List<LogItem>> GetExportData(string logLevel = "", CancellationToken cancellationToken = default(CancellationToken))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
 
+            using (var db = _contextFactory.CreateContext())
+            {
+                var query = db.LogItems.OrderByDescending(x => x.LogDateUtc)
+                    .Where(l => logLevel == "" || l.LogLevel == logLevel)
+                    .Select(p => p);
+
+                var result = await query.ToListAsync<LogItem>(cancellationToken);
+
+                return result;
+            }
+        }
+
+        public async Task<PagedResult<ILogItem>> GetPagedSearchResults(int pageNumber, int pageSize, string searchTerm, string logLevel = "", CancellationToken cancellationToken = default(CancellationToken))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            int offset = (pageSize * pageNumber) - pageSize;
+
+            using (var db = _contextFactory.CreateContext())
+            {
+                var query = db.LogItems.OrderByDescending(x => x.LogDateUtc)
+                    .Where(l => l.Url.ToString().Contains(searchTerm) || l.Message.ToString().Contains(searchTerm))
+                    .Skip(offset)
+                    .Take(pageSize)
+                    .Select(p => p);
+
+                var result = new PagedResult<ILogItem>()
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
+
+                result.Data = await query.AsNoTracking().ToListAsync<ILogItem>(cancellationToken);
+                result.TotalItems = await db.LogItems
+                   .Where(l => l.Url.ToString().Contains(searchTerm) || l.Message.ToString().Contains(searchTerm) && (logLevel == "" || l.LogLevel == logLevel))
+                   .CountAsync<LogItem>(cancellationToken);
+
+                return result;
+            }
         }
 
         public async Task DeleteAll(
@@ -120,7 +157,6 @@ namespace cloudscribe.Logging.EFCore.Common
             {
                 if (string.IsNullOrWhiteSpace(logLevel))
                 {
-                    //db.LogItems.RemoveAll();
                     await _truncator.TruncateLog();
                 }
                 else
@@ -132,14 +168,7 @@ namespace cloudscribe.Logging.EFCore.Common
                     db.LogItems.RemoveRange(query);
                     int rowsAffected = await db.SaveChangesAsync(cancellationToken);
                 }
-
-
-                
             }
-
-            
-
-           
         }
 
         public async Task Delete(
@@ -156,7 +185,6 @@ namespace cloudscribe.Logging.EFCore.Common
 
                 }
             }
-            
         }
 
         public async Task DeleteOlderThan(
@@ -187,11 +215,6 @@ namespace cloudscribe.Logging.EFCore.Common
 
                 int rowsAffected = await db.SaveChangesAsync(cancellationToken);
             }
-            
-                 
         }
-
-        
-
     }
 }
