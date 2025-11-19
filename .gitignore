@@ -203,3 +203,8 @@ src/Demo.WebApp/wwwroot/js/site.min.js
 src/Demo.WebApp/appsettings.Development.json
 src/Demo.WebApp/appdata.db
 src/Demo.WebApp/appsettings.Development.json
+
+# Claude working files
+CLAUDE.md
+CLAUDE_*.md
+.claude/
