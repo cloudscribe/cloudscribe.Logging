@@ -1,19 +1,18 @@
 ﻿using cloudscribe.Logging.Models;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Demo.WebApp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
            
@@ -23,7 +22,7 @@ namespace Demo.WebApp
                 var scopedServices = scope.ServiceProvider; 
                 try
                 {
-                    EnsureDataStorageIsReady(scopedServices);
+                    await EnsureDataStorageIsReadyAsync(scopedServices);
 
                 }
                 catch (Exception ex)
@@ -53,14 +52,14 @@ namespace Demo.WebApp
                 webBuilder.UseStartup<Startup>();
             });
 
-        private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
+        // .NET 10 migration: Changed from synchronous to async to avoid blocking calls (.Wait() is deprecated)
+        // See: https://learn.microsoft.com/en-us/dotnet/core/compatibility/aspnet-core/9.0/synchronous-main
+        private static async Task EnsureDataStorageIsReadyAsync(IServiceProvider scopedServices)
         {
             var deletPostsOlderThanDays = 30;
-            LoggingEFStartup.InitializeDatabaseAsync(scopedServices, deletPostsOlderThanDays).Wait();
+            await LoggingEFStartup.InitializeDatabaseAsync(scopedServices, deletPostsOlderThanDays);
 
-            CoreEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
-            
-           
+            await CoreEFStartup.InitializeDatabaseAsync(scopedServices);
         }
 
         private static void ConfigureLogging(
