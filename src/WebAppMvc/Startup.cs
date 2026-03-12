@@ -105,7 +105,10 @@ namespace WebAppMvc
             services.AddScoped<cloudscribe.DateTimeUtils.ITimeZoneHelper, cloudscribe.DateTimeUtils.TimeZoneHelper>();
 
             services.AddHttpContextAccessor();
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            // .NET 10: IActionContextAccessor is deprecated. Remove this registration.
+            // If needed, inject IHttpContextAccessor instead and access HttpContext directly.
+            // See: https://aka.ms/aspnet/deprecate/006
+            //services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 
             services.AddCloudscribeLogging();
