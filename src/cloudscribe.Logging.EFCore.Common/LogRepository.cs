@@ -58,11 +58,11 @@ namespace cloudscribe.Logging.EFCore.Common
             using (var db = _contextFactory.CreateContext())
             {
                 var query = db.LogItems.OrderBy(x => x.LogDateUtc)
+                .AsSingleQuery()
                 .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
-                .Select(p => p)
-                ;
+                .Select(p => p);
 
                 var result = new PagedResult<ILogItem>()
                 {
@@ -91,11 +91,11 @@ namespace cloudscribe.Logging.EFCore.Common
             using (var db = _contextFactory.CreateContext())
             {
                 var query = db.LogItems.OrderByDescending(x => x.LogDateUtc)
+                .AsSingleQuery()
                 .Where(l => (logLevel == "" || l.LogLevel == logLevel))
                 .Skip(offset)
                 .Take(pageSize)
-                .Select(p => p)
-                ;
+                .Select(p => p);
 
                 var result = new PagedResult<ILogItem>()
                 {
