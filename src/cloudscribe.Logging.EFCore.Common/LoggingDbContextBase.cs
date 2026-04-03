@@ -20,6 +20,15 @@ namespace cloudscribe.Logging.EFCore
         }
 
         public DbSet<LogItem> LogItems { get; set; }
-        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Suppress pending model changes warning in .NET 10
+            // EF Core 10 detects minor model differences that don't require actual schema changes
+            optionsBuilder.ConfigureWarnings(warnings =>
+                warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
+            
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }
