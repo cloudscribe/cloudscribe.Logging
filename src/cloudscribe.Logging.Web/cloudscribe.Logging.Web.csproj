@@ -34,8 +34,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Versioning" Version="10.0.0" />
-    <PackageReference Include="cloudscribe.DateTimeUtils" Version="10.0.0" />
+    <PackageReference Include="cloudscribe.Versioning" Version="10.1.0" />
+    <PackageReference Include="cloudscribe.DateTimeUtils" Version="10.1.0" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="10.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="10.0.0" />
