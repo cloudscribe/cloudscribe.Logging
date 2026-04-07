@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>SQLite Entity Framework Core implementation of cloudscribe ILogRepository</Description>
-    <Version>10.0.0</Version>
+    <Version>10.1.0</Version>
     <TargetFramework>net10.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <PackageTags>cloudscribe;repositories;logging</PackageTags>
